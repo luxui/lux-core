@@ -1,0 +1,46 @@
+{
+  "name": "@luxui/core",
+  "version": "0.1.0",
+  "description": "Admin UI as a Siren hypermedia client.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "test:cover": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/luxui/core.git"
+  },
+  "keywords": [
+    "hypermedia",
+    "javascript",
+    "js",
+    "reactjs",
+    "siren",
+    "client"
+  ],
+  "author": "Joshua T Kalis <JoshKalis@QickenLoans.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luxui/core/issues"
+  },
+  "homepage": "https://github.com/luxui/core#readme",
+  "devDependencies": {
+    "jest-cli": "^16.0.2"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}
