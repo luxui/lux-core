@@ -1,0 +1,16 @@
+exports[`Default layout - footer should match the snapshot 1`] = `
+<footer
+  role="contentinfo">
+  <p>
+    © 
+    2016
+     
+    <a
+      className="link--plain"
+      href="http://quickenloans.com">
+      Quicken Loans
+    </a>
+  </p>
+   
+</footer>
+`;

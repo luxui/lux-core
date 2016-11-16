@@ -1,3 +1,6 @@
+.babelrc
+lux.js
+
 # Logs
 logs
 *.log
