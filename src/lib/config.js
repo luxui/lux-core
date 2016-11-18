@@ -1,45 +1,60 @@
 import { isFunction, isString } from './is';
-import pageLocation from './pageLocation';
+// import pageLocation from './pageLocation';
 
 const state = {};
 
 function configuration(config) {
-  if (state.isValid) {
+  // if the configuration has already been set
+  if (state.config && state.config.isValid) {
     if (config) {
-      throw new Error('Attempting to re-configure application.');
+      throw new Error('Attempting to re-configure is not allowed.');
     }
 
-    return state;
+    return state.config;
   }
 
-  const { api, routing } = (config || {});
+  // caller is asking for current state of the configuration
+  if (!config) {
 
-  /* istanbul ignore else */
+    return state.config || {};
+  }
+
+  // begin validation "filters"
+  const { api, initialPath, root, routing } = config;
+
   if (!api) {
     throw configurationError('api');
   }
 
-  /* istanbul ignore else */
   if (!isString(api)) {
     throw configurationError('api', 'is not a string');
   }
 
   /* istanbul ignore else */
+  if (initialPath && !isString(initialPath)) {
+    throw configurationError('initialPath', 'is not a string');
+  }
+
+  /* istanbul ignore else */
+  if (root && !isString(root)) {
+    throw configurationError('root', 'is not a string');
+  }
+
   if (!routing) {
     throw configurationError('routing');
   }
 
-  /* istanbul ignore else */
   if (!isFunction(routing)) {
     throw configurationError('routing', 'is not a function');
   }
 
-  config.url = config.url || pageLocation(location);
-
-  state.isValid = true;
+  // set the state of the configuration
+  config.isValid = true;
+  config.root = document.getElementById(config.root || 'root');
   state.config = config;
 
-  return state;
+  // reuse the logic at the top of the function for returning a value
+  return configuration();
 }
 
 function configurationError(prop, problem = 'not provided in config object') {

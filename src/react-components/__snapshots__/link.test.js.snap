@@ -1,0 +1,7 @@
+exports[`Lux - Link should match the snapshot 1`] = `
+<a
+  href="/hello"
+  onClick={[Function]}>
+  Hello
+</a>
+`;

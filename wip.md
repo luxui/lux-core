@@ -5,10 +5,12 @@ Work in progress
   - [x] compile (build) on install
   - [ ] incorporate Redux for ALL state
   - [ ] migrate POC code-base in
-    + [ ] only require use-land code to implement custom route handlers not
+    + [ ] only require user-land code to implement custom route handlers not
     Lux-defined route-handlers
+  - [ ] Polyfill
+    + [ ] fetch
+    + [ ] Promise
 
 ## Maybe
 
   - [ ] compare output from: webpack, and rollup
-  - [ ] move ReactDOM.render() into user-land code
