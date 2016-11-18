@@ -16,7 +16,6 @@ function clickHandler(event) {
 
     const newPath = endpoint(clickedLink.href);
 
-    /* istanbul ignore else */
     if (newPath !== endpoint(window.location)) {
       lux(newPath);
       history.pushState(null, '', newPath);
@@ -36,6 +35,29 @@ function isModifiedClick(event) {
     : false;
 }
 
+/**
+ * Link provides a consistent way to create links (anchor tags) which work with
+ * the Lux framework for no-refresh navigation with graceful fallback. When
+ * using Link all properties added to the Link component will be transferred to
+ * the resulting anchor tag.
+ *
+ * @param {object} props
+ *        All React properties for the instance of the component.
+ *
+ * @returns ReactComponent
+ *
+ * @example
+ * // page.js (jsx)
+ * <Link href="/home">Go Home</Link>
+ *
+ * // will result in: <a href="/home">Go Home</a>
+ *
+ * @example
+ * // home.js (jsx)
+ * <Link className="auth-link" href="/sign-in">Sign-in</Link>
+ *
+ * // will result in: <a class="auth-link" href="/sign-in">Sign-in</a>
+ */
 function Link(props) {
   const attrs = { ...props };
   const { children } = props;
