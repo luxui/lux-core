@@ -54,6 +54,7 @@ import render from './render';
 function lux(pathOrConfig, data) {
   if (config().isValid) {
     if (pathOrConfig && isString(pathOrConfig)) {
+      // typical execution path; pathOrConfig is a path to an application page
       render(pathOrConfig, data);
     } else {
       render('/error', new Error(`Paths must be strings: ${pathOrConfig}.`));
@@ -64,7 +65,8 @@ function lux(pathOrConfig, data) {
       config(pathOrConfig);
       // config is "good" render initial page
       render(config().initialPath, data);
-      // register html5 history; a.k.a. don't break "back" button
+      // listen for history changes and re-render;
+      // a.k.a. don't break "back" button
       /* istanbul ignore next */
       window.onpopstate = () => { render(); };
     } catch (e) {

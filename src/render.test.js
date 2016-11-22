@@ -1,8 +1,8 @@
 jest.mock('react-dom');
 import ReactDOM from 'react-dom';
 
-jest.mock('./call');
-import call from './call';
+jest.mock('./apiClient');
+import apiClient from './apiClient';
 
 import render from './render';
 
@@ -13,17 +13,17 @@ describe('Lux - render', function () {
 
   it('should not make an API call if data is provided', function () {
     render('/test', { name: 'Lux' });
-    expect(call.mock.calls.length).toEqual(0);
+    expect(apiClient.mock.calls.length).toEqual(0);
   });
 
   it('should make an API call if no data is provided', function () {
     render('/test');
-    expect(call).lastCalledWith('/test');
+    expect(apiClient).lastCalledWith('/test');
   });
 
   it('should default to "blank" if no path is provided', function () {
     render();
-    expect(call).lastCalledWith('blank');
+    expect(apiClient).lastCalledWith('blank');
   });
 
   it('should call ReactDOM.render', function () {
