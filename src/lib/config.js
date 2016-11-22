@@ -3,6 +3,25 @@ import { isFunction, isString } from './is';
 
 const state = {};
 
+/**
+ * @typedef LuxConfig
+ * @type {object}
+ *
+ * @property {string} root
+ *           The root URL for the API backing the application.
+ * @property {function} [routing]
+ *           Additional routing functions for custom handling of "pages".
+ */
+
+/**
+ * Validation and retrieval API for (Lux) application configuration.
+ *
+ * @param  {LuxConfig} config
+ *         The configuration object for initializing the Lux application.
+ *
+ * @return {LuxConfig}
+ *         The configuration object of the Lux application.
+ */
 function configuration(config) {
   // if the configuration has already been set
   if (state.config && state.config.isValid) {

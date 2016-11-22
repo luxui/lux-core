@@ -1,6 +1,9 @@
 Work in progress
 ================
 
+  - [ ] migrate router
+  - [ ] make sure all library files have a JSDoc block
+  - [ ] make sure that all JSDoc blocks have example code
   - [x] unit testing
   - [x] compile (build) on install
   - [ ] incorporate Redux for ALL state

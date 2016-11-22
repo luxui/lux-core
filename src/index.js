@@ -4,16 +4,6 @@ import { isString } from './lib/is';
 import render from './render';
 
 /**
- * @typedef Config
- * @type {object}
- *
- * @property {string} root
- *           The root URL for the API backing the application.
- * @property {function} [routing]
- *           Additional routing functions for custom handling of "pages".
- */
-
-/**
  * @typedef Path
  * @type {string}
  *
@@ -31,7 +21,7 @@ import render from './render';
  * subsequent calls will attempt to route (render a page) based on the `path`
  * provided and any `data`.
  *
- * @param  {(Config|Path)} pathOrConfig
+ * @param  {(LuxConfig|Path)} pathOrConfig
  * @param  {object} data
  *         Any JavaScript object that should be used in favor of fetching data
  *         from the API.

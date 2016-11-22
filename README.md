@@ -33,6 +33,10 @@ import lux from '@luxui/core';
 lux({ api: 'http://api.root' });
 ```
 
+### Authentication
+
+Lux uses the `authorization` header for supplying session tokens in API requests.
+
 ---
 
 ## Lux Customization
