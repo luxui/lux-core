@@ -11,9 +11,7 @@ describe('Lux - Configuration', function () {
 
   it('should throw an error if the `api` is omitted', function () {
     expect(function () {
-      config({
-        routing() {},
-      });
+      config({});
     }).toThrow();
   });
 
@@ -43,37 +41,24 @@ describe('Lux - Configuration', function () {
     }).toThrow();
   });
 
-  it('should throw an error if the `routing` is omitted', function () {
-    expect(function () {
-      config({
-        api: 'http://api.root',
-      });
-    }).toThrow();
-  });
-
-  it('should throw an error if the `routing` is not a function', function () {
-    expect(function () {
-      config({
-        api: 'http://api.root',
-        routing: 1234,
-      });
-    }).toThrow();
-  });
-
   it('should return a state object', function () {
-    config({
+    const keys = Object.keys(config({
       api: 'http://api.root',
-      routing() {},
-    });
+    }));
 
-    expect(config().isValid).toBe(true);
+    expect(keys.sort()).toEqual(['api', 'initialPath', 'isValid', 'root']);
+  });
+
+  it('should return the default initialPath', function () {
+    const { initialPath } = config();
+
+    expect(initialPath).toBe('/');
   });
 
   it('should throw an error if attempting to re-configure', function () {
     expect(function () {
       config({
         api: 'http://api.root',
-        routing() {},
       });
     }).toThrow();
   });

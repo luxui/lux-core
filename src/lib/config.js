@@ -1,4 +1,4 @@
-import { isFunction, isString } from './is';
+import { isString } from './is';
 // import pageLocation from './pageLocation';
 
 const state = {};
@@ -39,7 +39,7 @@ function configuration(config) {
   }
 
   // begin validation "filters"
-  const { api, initialPath, root, routing } = config;
+  const { api, initialPath, root } = config;
 
   if (!api) {
     throw configurationError('api');
@@ -54,20 +54,12 @@ function configuration(config) {
     throw configurationError('initialPath', 'is not a string');
   }
 
-  /* istanbul ignore else */
   if (root && !isString(root)) {
     throw configurationError('root', 'is not a string');
   }
 
-  if (!routing) {
-    throw configurationError('routing');
-  }
-
-  if (!isFunction(routing)) {
-    throw configurationError('routing', 'is not a function');
-  }
-
   // set the state of the configuration
+  config.initialPath = config.initialPath || '/';
   config.isValid = true;
   config.root = document.getElementById(config.root || 'root');
   state.config = config;

@@ -8,7 +8,7 @@ export default {
   dest: 'lux.js',
   entry: 'src/index.js',
   format: 'umd',
-  moduleName: 'DataLayer',
+  moduleName: 'Lux',
   plugins: [
     resolver(),
     json(),

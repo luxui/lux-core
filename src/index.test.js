@@ -1,39 +1,74 @@
-import lux from './index';
+jest.mock('./lib/config');
+import config from './lib/config';
 
 jest.mock('./render');
 import render from './render';
+
+import lux from './index';
 
 describe('Lux - Core', function () {
   it('should exist; and should be a function', function () {
     expect(typeof lux).toMatch(/function/i);
   });
 
-  it('should call render routing to `/error` with the error as data', function () {
-    lux({
-      api: '//hello.world',
+  describe('[pre-configuration]', function () {
+    it('should route to `/error` passing the error as data; when configuration is not valid', function () {
+      const noConfig = 'No configuration provided.';
+
+      config.mockImpl(function () {
+        throw new Error(noConfig);
+      });
+      config.mockReturnValueOnce({});
+
+      lux();
+
+      expect(render).lastCalledWith('/error', Error(noConfig));
     });
 
-    expect(render).lastCalledWith('/error', Error('Required property `routing` not provided in config object.'));
+    it('should route to `/initialPath` passing no data; when configuration is valid', function () {
+      config.mockReturnValueOnce({});
+      config.mockReturnValueOnce({
+        initialPath: '/initialPath',
+        isValid: true,
+      });
+
+      lux({});
+
+      expect(render).lastCalledWith('/initialPath', undefined);
+    });
   });
 
-  it('should call render with no arguments supplied', function () {
-    lux({
-      api: '//hello.world',
-      routing() {},
+  describe('[post-configuration]', function () {
+    it('should route to (configured) `initialPath` passing no data; when no path is provided', function () {
+      config.mockReturnValueOnce({
+        initialPath: '/',
+        isValid: true,
+      });
+
+      lux();
+
+      expect(render).lastCalledWith('/', undefined);
     });
 
-    expect(render).lastCalledWith(undefined, undefined);
-  });
+    it('should route to the provided path passing no data', function () {
+      config.mockReturnValueOnce({
+        initialPath: '/',
+        isValid: true,
+      });
 
-  it('should call render with no arguments supplied; after valid configuration is setup', function () {
-    lux();
+      lux('/home');
 
-    expect(render).lastCalledWith('/error', Error('Paths must be strings: undefined.'));
-  });
+      expect(render).lastCalledWith('/home', undefined);
+    });
 
-  it('should call render with "/home"', function () {
-    lux('/home');
+    it('should route to `/error` passing the error as data; when configuration is valid but an non-string is passed as a path', function () {
+      config.mockReturnValueOnce({
+        isValid: true,
+      });
 
-    expect(render).lastCalledWith('/home', undefined);
+      lux(1234);
+
+      expect(render).lastCalledWith('/error', Error('Paths must be strings: number provided.'));
+    });
   });
 });

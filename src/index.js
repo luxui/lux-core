@@ -3,6 +3,8 @@ import { isString } from './lib/is';
 
 import render from './render';
 
+export * from './routing';
+
 /**
  * @typedef Path
  * @type {string}
@@ -42,27 +44,36 @@ import render from './render';
  * lux('/home');
  */
 function lux(pathOrConfig, data) {
-  if (config().isValid) {
-    if (pathOrConfig && isString(pathOrConfig)) {
-      // typical execution path; pathOrConfig is a path to an application page
-      render(pathOrConfig, data);
+  const { initialPath, isValid } = config();
+  let path;
+
+  if (isValid) {
+    if (pathOrConfig) {
+      if (isString(pathOrConfig)) {
+        // typical execution path; pathOrConfig is a path to an application page
+        path = pathOrConfig;
+      } else {
+        const type = typeof pathOrConfig;
+
+        path = '/error';
+        data = new Error(`Paths must be strings: ${type} provided.`);
+      }
     } else {
-      render('/error', new Error(`Paths must be strings: ${pathOrConfig}.`));
+      path = initialPath;
     }
   } else {
     try {
       // attempt initialization
-      config(pathOrConfig);
-      // config is "good" render initial page
-      render(config().initialPath, data);
-      // listen for history changes and re-render;
-      // a.k.a. don't break "back" button
-      /* istanbul ignore next */
-      window.onpopstate = () => { render(); };
-    } catch (e) {
-      render('/error', e);
+      path = config(pathOrConfig).initialPath;
+      // listen for history changes and re-render; don't "break" back button
+      window.onpopstate = render.bind(null, null, null); // block two args
+    } catch (configurationError) {
+      path = '/error';
+      data = configurationError;
     }
   }
+
+  render(path, data);
 }
 
 export default lux;
