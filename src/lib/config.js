@@ -1,26 +1,32 @@
+/**
+ * @module lib/config
+ * @memberof module:lux/lib
+ */
+
 import { isString } from './is';
-// import pageLocation from './pageLocation';
 
 const state = {};
 
 /**
- * @typedef LuxConfig
- * @type {object}
+ * @typedef {object} LuxConfig
+ * @global
  *
- * @property {string} root
- *           The root URL for the API backing the application.
- * @property {function} [routing]
- *           Additional routing functions for custom handling of "pages".
+ * @property {string} api - The API root URI.
+ *
+ * @property {(LuxPath|string)} [initialPath='/'] - Initialize the application
+ * with a specific path.
+ *
+ * @property {string} [root='root'] - The `id` of the DOM element to be the
+ * root of the application.
  */
 
 /**
  * Validation and retrieval API for (Lux) application configuration.
  *
- * @param  {LuxConfig} config
- *         The configuration object for initializing the Lux application.
+ * @param  {LuxConfig} config - The configuration object for initializing the
+ * Lux application.
  *
- * @return {LuxConfig}
- *         The configuration object of the Lux application.
+ * @return {LuxConfig} - The configuration object of the Lux application.
  */
 function configuration(config) {
   // if the configuration has already been set

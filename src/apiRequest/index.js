@@ -1,10 +1,15 @@
+/**
+ * @module apiRequest
+ * @memberof module:lux
+ */
+
 import 'whatwg-fetch';
 
 import responseModel from './responseModel';
-import storage from '../lib/localStorage';
+import storage from '../lib/storage';
 
 /**
- * The API Client (`apiClient`) provides a simple and consistent interface for
+ * The API Client (`apiRequest`) provides a simple and consistent interface for
  * making requests to the API. All arguments are optional and will use "sane"
  * defaults; as indicated below. This function is an abstraction of the fetch
  * API with one addition, adding the `authorization` header value for supplying
@@ -14,23 +19,20 @@ import storage from '../lib/localStorage';
  * error from the server the request will be retried if the first request
  * included a session token.
  *
- * @param  {String} [URI='/']
- *         The URI of the resource to retrieve.
- * @param  {Object} [options={}]
- *         Additional options for the request; this object is transparently
- *         (mostly) passed to the fetch API. Augmentations:
+ * @param  {String} [URI='/'] - The URI of the resource to retrieve.
+ * @param  {Object} [options={}] - Additional options for the request; this
+ * object is transparently (mostly) passed to the fetch API. Augmentations:
  *
- *           1. HTTP methods are upper-cased
- *           2. Request body is stringified
- *           3. A sesion token is added to `headers.authorization`
+ *   1. HTTP methods are upper-cased
+ *   2. Request body is stringified
+ *   3. A sesion token is added to `headers.authorization`
  *
- * @return {Promise}
- *         The returned Promise object will have the resulting json response
- *         resolved so that callers will not need to repeatedly call
- *         `.then(response => response.json())`.
+ * @return {Promise} - The returned Promise object will have the resulting json
+ * response resolved so that callers will not need to repeatedly call
+ * `.then(response => response.json())`.
  *
  * @example
- * apiClient('http://example.com/')
+ * apiRequest('http://example.com/')
  *   .then(response => doSomethingWith(response));
  *
  * @example
@@ -39,10 +41,10 @@ import storage from '../lib/localStorage';
  *   method: 'POST',
  * };
  *
- * apiClient('http://example.com/rest/resource', options)
+ * apiRequest('http://example.com/rest/resource', options)
  *   .then(response => doSomethingWith(response));
  */
-function apiClient(URI = '/', options = {}) {
+function apiRequest(URI = '/', options = {}) {
   options.method = (options.method || 'GET').toUpperCase();
 
   const authToken = storage('authToken');
@@ -89,4 +91,4 @@ function retryFactory(URI, options) {
   return retry;
 }
 
-export default apiClient;
+export default apiRequest;

@@ -1,35 +1,34 @@
+/**
+ * @module lux
+ */
+
 import config from './lib/config';
 import { isString } from './lib/is';
 
 import render from './render';
 
-export * from './routing';
-
-/**
- * @typedef Path
- * @type {string}
- *
- * @description
- * Path string should always start with '/', but can include querystring
- * parameters; the pathname and querystring parameters will be passed along in
- * the API calls.
- */
+import apiRequest from './apiRequest';
+import routing from './routing';
+import luxPath from './lib/luxPath';
+import storage from './lib/storage';
 
 /**
  * The `lux` function is the entry-point to configuration, and routing
- * (rendering pages), for applications built within Lux. No routing will be
+ * (page rendering), for applications built within Lux. No routing will be
  * available until a valid configuration is supplied; otherwise it will throw
  * errors and render only an error page. Once configured correctly all
  * subsequent calls will attempt to route (render a page) based on the `path`
  * provided and any `data`.
  *
- * @param  {(LuxConfig|Path)} pathOrConfig
- * @param  {object} data
- *         Any JavaScript object that should be used in favor of fetching data
- *         from the API.
+ * @param  {(LuxConfig|LuxPath)} pathOrConfig - First a valid configuration is
+ * required; after which will be assumed to be a page-route.
  *
- * @return {undefined}
- *         No return value.
+ * @param  {object} data - Any JavaScript object that should be used in favor
+ * of fetching data from the API. _This is mostly a placeholder for future
+ * feature development._
+ *
+ * @return - No return value.
+ *
  *
  * @example
  * import lux from '@luxui/core';
@@ -50,7 +49,7 @@ function lux(pathOrConfig, data) {
   if (isValid) {
     if (pathOrConfig) {
       if (isString(pathOrConfig)) {
-        // typical execution path; pathOrConfig is a path to an application page
+        // typical execution path; a path to an application page
         path = pathOrConfig;
       } else {
         const type = typeof pathOrConfig;
@@ -77,3 +76,14 @@ function lux(pathOrConfig, data) {
 }
 
 export default lux;
+
+export {
+  /** @see apiRequest */
+  apiRequest,
+  /** @see luxPath */
+  luxPath,
+  /** @see routing */
+  routing,
+  /** @see storage */
+  storage,
+};

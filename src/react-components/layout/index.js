@@ -1,3 +1,5 @@
+/** @module react-components/Layout */
+
 import React from 'react'; // Even if this isn't used it needs to be imported!
 
 import Header from './header';

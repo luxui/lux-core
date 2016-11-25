@@ -1,4 +1,8 @@
-/** @module luxui/lib/debounce */
+/**
+ * @module lib/debounce
+ * @memberof module:lux/lib
+ * @private
+ */
 
 /**
  * Debounce user-entry events to prevent "spamming". The context of the initial
@@ -29,16 +33,14 @@
  *
  * $element.on('change', debouncedFn);
  *
- * @param  {Function} fn
- *         function to call once delay has elapsed
+ * @param  {function} fn - function to call once delay has elapsed
  *
- * @param  {Number}   [delay=300]
- *         time in miliseconds to delay the function call
+ * @param  {number}   [delay=300] - time in miliseconds to delay
  *
- * @param  {window}   [global=window]
- *         the global object with: #clearTimeout(), and #setTimeout()
+ * @param  {window}   [global=window] - the global object with:
+ * #clearTimeout(), and #setTimeout()
  *
- * @return {Function}
+ * @return {function}
  *         debounced function
  */
 function debounce(fn, delay = 300, global = window) {

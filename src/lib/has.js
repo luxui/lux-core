@@ -1,3 +1,9 @@
+/**
+ * @module lib/has
+ * @memberof module:lux/lib
+ * @private
+ */
+
 function all(prop, search, obj) {
 
   return search.every(term => one(prop, term, obj));

@@ -4,6 +4,8 @@
   "description": "Admin UI as a Siren hypermedia client.",
   "main": "lux.js",
   "scripts": {
+    "jsdoc": "jsdoc -c ./jsdoc.conf.json",
+    "prejsdoc": "rm -rf ./jsdoc",
     "postinstall": "rollup -c",
     "preinstall": "cp -f .babelrc-build .babelrc",
     "test": "jest --watch",

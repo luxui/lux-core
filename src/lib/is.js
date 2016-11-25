@@ -1,17 +1,25 @@
-/** @module luxui/lib/is */
+/**
+ * @module lib/is
+ * @memberof module:lux/lib
+ * @private
+ */
 
 /**
  * Function that returns true if the parameter matches the type of object the
  * function is expecting.
  *
- * @typedef {Function} IsFunction
+ * @typedef {function} IsFunction
  *
- * @param {any}
- *        A variable reference to evaluate against its type: Array, Function,
- *        Object, String, etc.
+ * @param {any} - A variable reference to evaluate against its type:
  *
- * @return {Boolean}
- *         The result of the test against the type the function is expecting.
+ *  - Array
+ *  - Function
+ *  - Object
+ *  - String
+ *  - etc.
+ *
+ * @return {bool} - The result of the test against the type the function is
+ * expecting.
  */
 
 
@@ -37,12 +45,10 @@ export {
   /**
    * Use the #toString() method of Object to get the true object type string.
    *
-   * @param {[any]}
-   *        Any variable reference.
+   * @param {*} - Any variable reference.
    *
-   * @return {String}
-   *         The result of call Object.prototype.toString.call passing in the
-   *         parameter of the function.
+   * @return {string} - The result of call Object.prototype.toString.call
+   * passing in the parameter of the function.
    */
   typeString
 };

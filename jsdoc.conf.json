@@ -1,0 +1,26 @@
+{
+  "opts": {
+    "destination": "./jsdoc/",
+    "package": "./package.json",
+    "readme": "./README.md",
+    "recurse": true
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "source": {
+    "include": [ "./src/" ],
+    "includePattern": ".+\\.js$",
+    "excludePattern": ".+\\.test\\.js$"
+  },
+  "tags": {
+    "dictionaries": [ "jsdoc", "closure" ]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "default": {
+      "includeDate": false
+    },
+    "monospaceLinks": false
+  }
+}

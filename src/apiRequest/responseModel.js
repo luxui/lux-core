@@ -1,3 +1,5 @@
+/** @memberof module:apiRequest */
+
 // not sure an exhastive list of acceptable status codes is necessary here
 const rHTTPStatuses = /^[1-5]\d\d/;
 
@@ -8,10 +10,11 @@ function format(response, error = false) {
   /**
    * @typedef ResponseModel
    * @type {object}
+   * @global
    *
-   * @param {object} data
-   * @param {(null|Error|string)} error
-   * @param {number} status
+   * @property {object} data
+   * @property {(null|Error|string)} error
+   * @property {number} status
    */
   return {
     data: response.data,

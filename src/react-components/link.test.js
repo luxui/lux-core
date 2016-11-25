@@ -1,8 +1,8 @@
 jest.mock('../index');
 import lux from '../index';
 
-jest.mock('../lib/endpoint');
-import endpoint from '../lib/endpoint';
+jest.mock('../lib/luxPath');
+import luxPath from '../lib/luxPath';
 
 import React from 'react';
 import renderer from 'react-test-renderer';
@@ -58,7 +58,7 @@ describe('Lux - Link', function () {
     });
 
     it('should not navigate if the link is the same as the current page', function () {
-      endpoint.mockReturnValue('/same');
+      luxPath.mockReturnValue('/same');
 
       const event = {
         button: 0,
@@ -74,7 +74,7 @@ describe('Lux - Link', function () {
     });
 
     it('should navigate if the link is different than the current page', function () {
-      endpoint
+      luxPath
         .mockReturnValueOnce('/once')
         .mockReturnValueOnce('/twice');
 
@@ -97,7 +97,7 @@ describe('Lux - Link', function () {
     it('should traverse up the DOM if Link contains children', function () {
       const link = '/nesting-link';
 
-      endpoint
+      luxPath
         .mockReturnValueOnce(link)
         .mockReturnValueOnce('/home');
 

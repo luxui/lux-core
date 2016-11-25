@@ -1,8 +1,8 @@
 jest.mock('./responseModel');
 import responseModel from './responseModel';
 
-jest.mock('../lib/localStorage');
-import storage from '../lib/localStorage';
+jest.mock('../lib/storage');
+import storage from '../lib/storage';
 
 import apiClient from './index';
 

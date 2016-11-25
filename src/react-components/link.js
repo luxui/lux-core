@@ -1,7 +1,9 @@
+/** @module react-components/Link */
+
 import React from 'react'; // Even if this isn't used it needs to be imported!
 
 import lux from '../index';
-import endpoint from '../lib/endpoint';
+import luxPath from '../lib/luxPath';
 import series from '../lib/functionSeries';
 
 function clickHandler(event) {
@@ -14,9 +16,9 @@ function clickHandler(event) {
       clickedLink = clickedLink.parentNode;
     }
 
-    const newPath = endpoint(clickedLink.href);
+    const newPath = luxPath(clickedLink.href);
 
-    if (newPath !== endpoint(window.location)) {
+    if (newPath !== luxPath(window.location)) {
       lux(newPath);
       history.pushState(null, '', newPath);
     }
@@ -41,8 +43,8 @@ function isModifiedClick(event) {
  * using Link all properties added to the Link component will be transferred to
  * the resulting anchor tag.
  *
- * @param {object} props
- *        All React properties for the instance of the component.
+ * @param {object} props - All React properties for the instance of the
+ * component.
  *
  * @returns ReactComponent
  *

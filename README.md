@@ -15,16 +15,25 @@ Lux expects RESTful resources to follow a common pattern of [collections](#colle
 
 ## Getting Started
 
-This guide will document and illustrate the steps need to get a project up and running with Luxui (Lux).
+The module `@luxui/core` exports the following:
+
+  - `lux` {function} (default export) - Handle the initial configuration and subsequent page rendering calls.
+  - `apiRequest` {function} - Wrapper function for `fetch` with:
+    + `JSON.stringify` values in `option.body`.
+    + If a session token is stored in `authToken` will be included in `authorization` header of request.
+    + Will return a consistent `ResponseModel`.
+  - `luxPath` {function} - Utility function for parsing a string (window.location typically) to extract the `pathname` and `search` properties in a consistent manner.
+  - `routing` {function} - Allow for registering additional routing matchers and handlers.
+  - `storage` {function} - Access to data Lux is storing:
+    + Initially nothing.
+    + Login uses `authToken` for storing a session token and will be included in `authorization` header of API requests.
 
 ### Initialization
 
-Projects using Lux will need to provide some configuration for the framework to be able to support a complete life-cycle of an application.
+Projects using Lux must provide a API root URI; this should be an absolute URI to the root resource of the API "backing" the application.
 
-  1. `api` - The root URI of the API. REQUIRED.
-  2. `routing` - The routing function will need to return an error handler. Optional.
-  3. Profit. REQUIRED.
-  4. [Customize](lux-customization). Optional.
+  1. `api` - The API root URI. REQUIRED.
+  2. [Customize](lux-customization). Optional.
 
 ```
 import lux from '@luxui/core';
@@ -33,9 +42,9 @@ import lux from '@luxui/core';
 lux({ api: 'http://api.root' });
 ```
 
-### Authentication
+### Authentication TODO: tutorial
 
-Lux uses the `authorization` header for supplying session tokens in API requests.
+Applications with resources "behind" a session login will need to create a custom login page and handler. The handler will need to store session information in the localStorage key `authToken`. The value in `authToken` will be passed in the `authentication` header of subsequent API requests until a `403` response if returned and then a second request without the `authentication` header included succeeds.
 
 ---
 
@@ -71,6 +80,8 @@ One example of "shared knowledge" is, an API provides a unique identifier for a 
 An API should abstract domain knowledge to encourage external integration so that many systems can leverage the abstractions in new and novel ways to solve for business needs. Building an API for only one specific UI limits the ability for an API to be useful to many *different* clients.
 
 lux attempts to have **no "shared knowledge"** between API and UI. All knowledge should be encoded into the API responses in some way.
+
+---
 
 ## RESTful resources
 

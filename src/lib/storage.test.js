@@ -1,4 +1,4 @@
-import lib from './localStorage';
+import lib from './storage';
 
 let cache;
 const mockStorage = {

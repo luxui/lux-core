@@ -1,4 +1,4 @@
-import endpoint from './endpoint';
+import luxPath from './luxPath';
 
 function locationMock(str) {
   const search = str.match(/\?.*/);
@@ -7,19 +7,19 @@ function locationMock(str) {
   return { pathname, search };
 }
 
-describe('Library: endpoint', function () {
+describe('Library: luxPath', function () {
   it('should be defined', function () {
-    expect(endpoint).toBeDefined();
+    expect(luxPath).toBeDefined();
   });
 
   it('should be a function', function () {
-    expect(typeof endpoint).toMatch(/function/i);
+    expect(typeof luxPath).toMatch(/function/i);
   });
 
   it('should return a string', function () {
     const pathname = '/path/to/resource';
     const location = locationMock(`${pathname}`);
-    const result = endpoint(location);
+    const result = luxPath(location);
 
     expect(typeof result).toBe('string');
   });
@@ -27,7 +27,7 @@ describe('Library: endpoint', function () {
   it('should return the pathname; if that is all that exists', function () {
     const pathname = '/path/to/resource';
     const location = locationMock(`${pathname}`);
-    const result = endpoint(location);
+    const result = luxPath(location);
 
     expect(result).toBe(pathname);
   });
@@ -35,7 +35,7 @@ describe('Library: endpoint', function () {
   it('should return the pathname and queryString; when both are present', function () {
     const pathname = '/path/to/resource';
     const location = locationMock(`${pathname}?abc=1234`);
-    const result = endpoint(location);
+    const result = luxPath(location);
 
     expect(result).toBe(`${pathname}?abc=1234`);
   });
@@ -43,7 +43,7 @@ describe('Library: endpoint', function () {
   it('should return the only queryString; when that\'s all there is', function () {
     const pathname = '';
     const location = locationMock(`${pathname}?abc=1234`);
-    const result = endpoint(location);
+    const result = luxPath(location);
 
     expect(result).toBe(`${pathname}?abc=1234`);
   });
@@ -51,7 +51,7 @@ describe('Library: endpoint', function () {
   it('should return empty string', function () {
     const pathname = '';
     const location = locationMock(`${pathname}`);
-    const result = endpoint(location);
+    const result = luxPath(location);
 
     expect(result).toBe('');
   });
