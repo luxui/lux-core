@@ -3,10 +3,11 @@
  * @memberof module:lux
  */
 
-const routingData = {
-  error: null,
-  table: [],
-};
+import { isString, isRegExp, isFunction } from './lib/is';
+
+const cache = {};
+let errorHandler = null;
+const routes = [];
 
 /**
  * @callback PathHandler
@@ -28,31 +29,91 @@ const routingData = {
  * @callback PathMatcherFn
  * @global
  *
- * @param {Path} path
+ * @param {Path} path - The path to test against.
+ *
+ * @returns {bool} - Returns `true` if the `path` parameter is a match; all
+ * other return values are assumed to be falsey.
  */
+
+function errorString(str) {
+
+  return `${str} provided to routing API.`;
+}
+
+function lookup(path) {
+  if (!cache[path]) {
+    const found = routes
+      // eslint-disable-next-line no-unused-vars
+      .filter(([_, matcherFn]) => matcherFn(path))[0];
+
+    cache[path] = found
+      ? found.pop()
+      : errorHandler;
+  }
+
+  return cache[path];
+}
+
+function register(matcher, handler) {
+  if (!handler || !isFunction(handler)) {
+    throw new Error(errorString('No "handler" function'));
+  }
+
+  if (!(isString(matcher) || isRegExp(matcher) || isFunction(matcher))) {
+    const type = typeof matcher;
+    throw new Error(errorString(`Invalid "PathMatcher" type (${type})`));
+  }
+
+  if (matcher === '/error') {
+    cache['/error'] = errorHandler = handler;
+
+    return;
+  }
+
+  const found = routes
+    .filter(([m]) => m === matcher.toString())[0];
+
+  if (found) {
+    // eslint-disable-next-line max-len
+    throw new Error(`Routing API already has a handler registerd for PathMatcher: ${matcher.toString()}.`);
+  } else if (isString(matcher)) {
+    routes
+      .push([matcher.toString(), path => matcher === path, handler]);
+  } else if (isRegExp(matcher)) {
+    routes
+      .push([matcher.toString(), path => matcher.test(path), handler]);
+  } else {
+    routes
+      .push([matcher.toString(), matcher, handler]);
+  }
+}
 
 /**
  * The `routing()` API will schedule callbacks as handlers for configured URIs.
  *
- * @param  {PathMatcher|PathMatcher[]}   matcher - The matching criteria for a
- * route.
+ * @param  {(LuxPath|PathMatcher|PathMatcher[])}   matcher - The matching
+ * criteria for a route.
  *
  * @param  {PathHandler} handler - The handler for a given URI.
  *
  * @return {PathHandler} - The handler for a matched URI.
  */
 function routing(matcher, handler) {
-  // TODO: validation
-  // # PathMatcher
-  //
-  //  Must be one of the following:
-  //
-  //    1. [ ] String {Path} - will be string (===) compared to the Path
-  //    2. [ ] RegExp - will be matched against the Path
-  //    3. [ ] Function - will receive the Path and ResponseModel; truthy
-  //    return value indicates match
-  //    4. [ ] Array[String|RegExp|Function]
-  routingData.table.push([matcher, handler]);
+  if (!matcher) {
+    throw new Error(errorString('No "PathMatcher" function'));
+  }
+
+  switch (arguments.length) {
+    case 1: // getter
+
+      return lookup(matcher);
+    case 2: // setter
+
+      return register(matcher, handler);
+    default:
+      throw new Error('Too many arguments provided to routing API.');
+  }
+
 }
 
 export default routing;
