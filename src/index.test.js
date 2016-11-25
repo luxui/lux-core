@@ -4,7 +4,12 @@ import config from './lib/config';
 jest.mock('./render');
 import render from './render';
 
-import lux from './index';
+import lux, {
+  apiRequest,
+  routing,
+  luxPath,
+  storage,
+} from './index';
 
 describe('Lux - Core', function () {
   it('should exist; and should be a function', function () {
@@ -69,6 +74,24 @@ describe('Lux - Core', function () {
       lux(1234);
 
       expect(render).lastCalledWith('/error', Error('Paths must be strings: number provided.'));
+    });
+  });
+
+  describe('[exports]', function () {
+    it('should expose apiRequest', function () {
+      expect(typeof apiRequest).toMatch(/function/i);
+    });
+
+    it('should expose routing', function () {
+      expect(typeof routing).toMatch(/function/i);
+    });
+
+    it('should expose luxPath', function () {
+      expect(typeof luxPath).toMatch(/function/i);
+    });
+
+    it('should expose storage', function () {
+      expect(typeof storage).toMatch(/function/i);
     });
   });
 });
