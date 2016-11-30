@@ -6,10 +6,11 @@
   "scripts": {
     "jsdoc": "jsdoc -c ./jsdoc.conf.json",
     "prejsdoc": "rm -rf ./jsdoc",
-    "postinstall": "rollup -c",
-    "preinstall": "cp -f .babelrc-build .babelrc",
+    "postinstall": "npm run rollup",
+    "rollup": "rollup -c",
+    "prerollup": "cp -f ./.babelrc-build ./.babelrc",
     "test": "jest --watch",
-    "pretest": "cp -f .babelrc-test .babelrc",
+    "pretest": "cp -f ./.babelrc-test ./.babelrc",
     "test:cover": "jest --coverage"
   },
   "repository": {

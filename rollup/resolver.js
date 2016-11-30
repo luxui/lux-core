@@ -14,8 +14,7 @@ function resolveId(importee, importer) {
 
   function promiseResolver(accept, reject) {
     try {
-      const asyncHandler = error => (error ? reject(null) : accept(indexFile));
-      fs.access(indexFile, asyncHandler);
+      fs.access(indexFile, error => accept(error ? null : indexFile));
     } catch (e) {
       reject(e);
     }

@@ -7,8 +7,7 @@ import resolver from './rollup/resolver';
 export default {
   dest: 'lux.js',
   entry: 'src/index.js',
-  format: 'umd',
-  moduleName: 'Lux',
+  format: 'es',
   plugins: [
     resolver(),
     json(),
