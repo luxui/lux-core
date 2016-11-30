@@ -56,11 +56,6 @@ function init({ api, initialPath, render } = configRequired()) {
     throw new Error(errorStr('initialPath', 'is not a string'));
   }
 
-  // // listen for history changes and re-render; don't "break" back button
-  // // TODO: move this to implementation repository; render() should not exist in @luxui/core
-  // window.onpopstate = render.bind(null, null); // block arg
-  // // TODO: detect when initialPath !== luxPath(window.location)?
-
   config.api = api;
   config.initialPath = initialPath || '/';
   config.isValid = true;
