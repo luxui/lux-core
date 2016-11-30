@@ -1,6 +1,5 @@
 /**
- * @module routing
- * @memberof module:lux
+ * @module lux/routing
  */
 
 import { isString, isRegExp, isFunction } from './lib/is';
@@ -12,26 +11,29 @@ const routes = [];
 /**
  * @callback PathHandler
  * @global
+ *
+ * @description
+ * PathHandlers are functions that run when a {@link PathMatcher} matches.
  */
 
 /**
  * @typedef PathMatcher
- * @type {PathMatcherFn|RegExp|string}
+ * @type {PathMatcherFn|RegExp|String}
  * @global
  *
  * @description
- * A PathMatcher will be evaluated against a {@type Path}. If the given Path is
- * found to be a match the PathHandler will run; only the first match will be
- * run.
+ * A PathMatcher will be evaluated against a {@link LuxPath}. If the given Path
+ * is found to be a match the {@link PathHandler} will run; only the first
+ * match will be run.
  */
 
 /**
  * @callback PathMatcherFn
  * @global
  *
- * @param {Path} path - The path to test against.
+ * @param {LuxPath} path - The path to test against.
  *
- * @returns {bool} - Returns `true` if the `path` parameter is a match; all
+ * @returns {Boolean} - Returns `true` if the `path` parameter is a match; all
  * other return values are assumed to be falsey.
  */
 

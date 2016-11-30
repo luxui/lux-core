@@ -1,5 +1,0 @@
-exports[`Default layout - header should match the snapshot 1`] = `
-<header
-  className="main-header"
-  role="banner" />
-`;

@@ -2,88 +2,127 @@
  * @module lux
  */
 
-import config from './lib/config';
 import { isString } from './lib/is';
-
-import render from './render';
+import responseModelHandler, { responseModelFormat } from './responseModel';
 
 import apiRequest from './apiRequest';
 import routing from './routing';
-import luxPath from './lib/luxPath';
-import storage from './lib/storage';
+import luxPath from './luxPath';
+import storage from './storage';
+
+const config = {};
+const errorInvalidConfig = new Error('Lux must be configured before routing.');
+const errorInvalidPath = new Error('Paths must be strings.');
+
+function configRequired() {
+  throw new Error('A configuration object - LuxConfig - is required.');
+}
 
 /**
- * The `lux` function is the entry-point to configuration, and routing
- * (page rendering), for applications built within Lux. No routing will be
- * available until a valid configuration is supplied; otherwise it will throw
- * errors and render only an error page. Once configured correctly all
- * subsequent calls will attempt to route (render a page) based on the `path`
- * provided and any `data`.
+ * Lux requires some configuration before routing will be possible; until valid
+ * configuration is provided routing will not work.
  *
- * @param  {(LuxConfig|LuxPath)} pathOrConfig - First a valid configuration is
- * required; after which will be assumed to be a page-route.
+ * @param  {String} api - The API root URI.
+ * @param  {Function} render - The rendering function which will interpret the
+ * API responses and display a UI.
  *
- * @param  {object} data - Any JavaScript object that should be used in favor
- * of fetching data from the API. _This is mostly a placeholder for future
- * feature development._
- *
- * @return - No return value.
- *
+ * @return {Promise} - The resolve function will receive the ResponseModel
+ * representation of the resource from the API. The render function will need
+ * to be able to build a UI based on that format.
  *
  * @example
- * import lux from '@luxui/core';
+ * import { init } from '@luxui/core';
  *
- * // initialize the application and load the first page based on the URL
- * lux({ root: 'http://example/com/api' });
- *
- * @example
- * import lux from '@luxui/core';
- *
- * // route to the path given if not already at that path
- * lux('/home');
+ * init({
+ *   api: 'http://example.com',
+ *   render: () => {}, // left to the the implementations: ReactJS, Riot, etc.
+ * });
  */
-function lux(pathOrConfig, data) {
-  const { initialPath, isValid } = config();
-  let path;
+function init({ api, initialPath, render } = configRequired()) {
+  function errorStr(prop, problem) {
 
-  if (isValid) {
-    if (pathOrConfig) {
-      if (isString(pathOrConfig)) {
-        // typical execution path; a path to an application page
-        path = pathOrConfig;
-      } else {
-        const type = typeof pathOrConfig;
-
-        path = '/error';
-        data = new Error(`Paths must be strings: ${type} provided.`);
-      }
-    } else {
-      path = initialPath;
-    }
-  } else {
-    try {
-      // attempt initialization
-      path = config(pathOrConfig).initialPath;
-      // listen for history changes and re-render; don't "break" back button
-      window.onpopstate = render.bind(null, null, null); // block two args
-    } catch (configurationError) {
-      path = '/error';
-      data = configurationError;
-    }
+    return `Configuration property \`${prop}\` ${problem}.`;
   }
 
-  render(path, data);
+  config.isValid = false;
+
+  if (!api) {
+    throw new Error(errorStr('api', 'not provided in config object'));
+  } else if (!isString(api)) {
+    throw new Error(errorStr('api', 'is not a string'));
+  }
+
+  if (initialPath && !isString(initialPath)) {
+    throw new Error(errorStr('initialPath', 'is not a string'));
+  }
+
+  // // listen for history changes and re-render; don't "break" back button
+  // // TODO: move this to implementation repository; render() should not exist in @luxui/core
+  // window.onpopstate = render.bind(null, null); // block arg
+  // // TODO: detect when initialPath !== luxPath(window.location)?
+
+  config.api = api;
+  config.initialPath = initialPath || '/';
+  config.isValid = true;
+  config.render = render;
+}
+
+/**
+ * The `lux` function is for routing to - and retrieving API resource - pages.
+ *
+ * @param  {LuxPath} [path] - The route to load. The `path` will default to the
+ * current `window.location` if none is provided.
+ *
+ * @param  {LuxConfig} [configObj] - If provided will allow for application
+ * "initialization/configuration" (`init()`) and "start" (`lux()`) in a single
+ * call (`lux('/', config)`) rather than the two individual invocations.
+ *
+ * @return {Promise}
+ *
+ * @example
+ * import lux from '@luxui/core';
+ *
+ * // after `init(config)`; start the application.
+ * lux();
+ *
+ * @example
+ * import lux from '@luxui/core';
+ *
+ * // route to the path given; if not already at that path
+ * lux('/home');
+ */
+function lux(path, configObj) {
+  const format = responseModelFormat;
+  let pending;
+
+  /* istanbul ignore else */
+  if (configObj) {
+    init(configObj);
+  }
+
+  if (!config.isValid) {
+    pending = new Promise(resolve => resolve(format({}, errorInvalidConfig)));
+  } else if (!path || isString(path)) {
+    pending = apiRequest(config.api + luxPath(path))
+      .then(responseModelHandler);
+  } else {
+    pending = new Promise(resolve => resolve(format({}, errorInvalidPath)));
+  }
+
+  return pending;
 }
 
 export default lux;
 
 export {
-  /** @see apiRequest */
+  /** @see module:lux/apiRequest */
   apiRequest,
-  /** @see luxPath */
+  /** @see module:lux~init */
+  init,
+  /** @see module:lux/luxPath */
   luxPath,
-  /** @see routing */
+  /** @see module:lux/routing */
   routing,
-  /** @see storage */
+  /** @see module:lux/storage */
   storage,
 };

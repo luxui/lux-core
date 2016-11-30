@@ -1,7 +1,7 @@
 LuxUI
 =====
 
-Lux is a [ReactJS] UI framework for hypermedia-based single-page web applications. This framework relies completely on the API responses for building the user experience and application flow. API responses are expected to adhere to [Siren+lux](SIREN+LUX) a subset of the [Siren] hypermedia specification.
+Lux is a hypermedia client for generating UIs from API responses. Lux relies completely on the API responses for building the user experience and application. API responses are expected to adhere to [Siren+lux](SIREN+LUX), a subset of the [Siren] hypermedia specification.
 
 Lux provides for [customization](#lux-customization) per application in:
 

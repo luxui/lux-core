@@ -1,12 +1,11 @@
 /**
- * @module apiRequest
- * @memberof module:lux
+ * @module lux/apiRequest
  */
 
 import 'whatwg-fetch';
 
 import responseModel from './responseModel';
-import storage from '../lib/storage';
+import storage from './storage';
 
 /**
  * The API Client (`apiRequest`) provides a simple and consistent interface for

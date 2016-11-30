@@ -1,6 +1,5 @@
 /**
- * @module lib/storage
- * @memberof module:lux/lib
+ * @module lux/storage
  */
 
 /**
@@ -8,8 +7,6 @@
  * an alternate solution.
  *
  * @example
- * const storage = storageFactory();
- *
  * // set a value in the store
  * storage('name', 'Joshua');
  *
@@ -19,15 +16,15 @@
  * // remove the value from the store
  * storage({ reset: 'name' });
  *
- * @param  {string|ResetConfig} key - The Primary controller of functionality;
+ * @param  {String|ResetConfig} key - The Primary controller of functionality;
  * as a String will indicate which key to interact with in localStorage, as an
  * Object will allow additional functionality.
  *
  * @param  {*} value - Any value localStorage will allow for storage.
  *
- * @param  {string} prefix - A value to prefix all storage keys.
+ * @param  {String} prefix - A value to prefix all storage keys.
  *
- * @param  {object} store - An API - which matches the browser's localStorage
+ * @param  {Object} store - An API - which matches the browser's localStorage
  * API - to persist values to.
  *
  * @return {*} - The value in storage.

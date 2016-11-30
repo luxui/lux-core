@@ -1,83 +1,20 @@
-jest.mock('./lib/config');
-import config from './lib/config';
-
-jest.mock('./render');
-import render from './render';
+jest.mock('./apiRequest');
+import apiRequestMock from './apiRequest';
 
 import lux, {
   apiRequest,
-  routing,
+  init,
   luxPath,
+  routing,
   storage,
 } from './index';
 
-describe('Lux - Core', function () {
-  it('should exist; and should be a function', function () {
-    expect(typeof lux).toMatch(/function/i);
-  });
-
-  describe('[pre-configuration]', function () {
-    it('should route to `/error` passing the error as data; when configuration is not valid', function () {
-      const noConfig = 'No configuration provided.';
-
-      config.mockImpl(function () {
-        throw new Error(noConfig);
-      });
-      config.mockReturnValueOnce({});
-
-      lux();
-
-      expect(render).lastCalledWith('/error', Error(noConfig));
+describe('lux-core', function () {
+  describe('[API]', function () {
+    it('should exist; and should be a function', function () {
+      expect(typeof lux).toMatch(/function/i);
     });
 
-    it('should route to `/initialPath` passing no data; when configuration is valid', function () {
-      config.mockReturnValueOnce({});
-      config.mockReturnValueOnce({
-        initialPath: '/initialPath',
-        isValid: true,
-      });
-
-      lux({});
-
-      expect(render).lastCalledWith('/initialPath', undefined);
-    });
-  });
-
-  describe('[post-configuration]', function () {
-    it('should route to (configured) `initialPath` passing no data; when no path is provided', function () {
-      config.mockReturnValueOnce({
-        initialPath: '/',
-        isValid: true,
-      });
-
-      lux();
-
-      expect(render).lastCalledWith('/', undefined);
-    });
-
-    it('should route to the provided path passing no data', function () {
-      config.mockReturnValueOnce({
-        initialPath: '/',
-        isValid: true,
-      });
-
-      lux('/home');
-
-      expect(render).lastCalledWith('/home', undefined);
-    });
-
-    it('should route to `/error` passing the error as data; when configuration is valid but an non-string is passed as a path', function () {
-      config.mockReturnValueOnce({
-        isValid: true,
-      });
-
-      lux(1234);
-
-      expect(render).lastCalledWith('/error', Error('Paths must be strings: number provided.'));
-    });
-  });
-
-  describe('[exports]', function () {
     it('should expose apiRequest', function () {
       expect(typeof apiRequest).toMatch(/function/i);
     });
@@ -92,6 +29,84 @@ describe('Lux - Core', function () {
 
     it('should expose storage', function () {
       expect(typeof storage).toMatch(/function/i);
+    });
+  });
+
+  describe('[Configuration]', function () {
+    it('should throw an Error when required a configuration object is omitted', function () {
+      const error = new Error('A configuration object - LuxConfig - is required.');
+      // const config = {}; // intentionally removed
+
+      expect(init).toThrow(error);
+    });
+
+    it('should throw an Error when required property `api` is omitted from configuration', function () {
+      const error = new Error('Configuration property `api` not provided in config object.');
+      const config = {};
+
+      expect(function () {
+        init(config);
+      }).toThrow(error);
+    });
+
+    it('should throw an Error when required property `api` is not a String', function () {
+      const error = new Error('Configuration property `api` is not a string.');
+      const config = {
+        api: 1234
+      };
+
+      expect(function () {
+        init(config);
+      }).toThrow(error);
+    });
+
+    it('should throw an Error if optional property `initialPath` is not a string', function () {
+      const error = new Error('Configuration property `initialPath` is not a string.');
+      const config = {
+        api: 'http://example.com',
+        initialPath: 1234,
+      };
+
+      expect(function () {
+        init(config);
+      }).toThrow(error);
+    });
+  });
+
+  describe('[Routing]', function () {
+    const random = Math.random().toString(32).slice(2);
+    const mockResponse = {
+      data: random,
+      headers: {
+        get: () => 'application/vnd.siren+json'
+      },
+      status: 200,
+    };
+
+    it('should fail resolve to an error if configuration is invalid', function () {
+      const error = new Error('Lux must be configured before routing.');
+
+      return lux('/')
+        .then(response => expect(response.error).toEqual(error));
+    });
+
+    it('should initialize and call `render()`', function () {
+      apiRequestMock
+        .mockReturnValueOnce(new Promise(resolve => resolve(mockResponse)));
+
+      const config = {
+        api: 'http://example.com',
+        render: ({ data }) => expect(data).toBe(random),
+      };
+
+      return lux('/', config);
+    });
+
+    it('should', function () {
+      const error = new Error('Paths must be strings.');
+
+      return lux(1234)
+        .then(response => expect(response.error).toEqual(error));
     });
   });
 });

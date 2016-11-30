@@ -1,9 +1,0 @@
-exports[`Default layout - main should match the snapshot 1`] = `
-<main
-  className="body-divider pbl"
-  role="main">
-  <p>
-    Default Page Render
-  </p>
-</main>
-`;

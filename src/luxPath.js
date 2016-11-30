@@ -1,14 +1,14 @@
 /**
- * @module lib/luxPath
- * @memberof module:lux/lib
+ * @module lux/luxPath
  */
 
 import urlParse from 'url-parse';
 
-import { isString } from './is';
+import { isString } from './lib/is';
 
 /**
- * @typedef {string} LuxPath
+ * @typedef LuxPath
+ * @type {String}
  * @global
  *
  * @description
@@ -18,15 +18,15 @@ import { isString } from './is';
  */
 
 /**
- * Consistent luxPath function - path(name) and search - should be considered
- * when retrieving the current luxPath; since this is not included in common
+ * Consistent LuxPath factory - path(name) and search - should be considered
+ * when retrieving the current LuxPath; since this is not included in common
  * APIs this function aims to provide the utility.
  *
- * @param  {string} loc - The URL to parse.
+ * @param  {String} loc - The URL to parse.
  *
- * @return {string} - The standardized luxPath value for the given URL.
+ * @return {LuxPath} - The standardized luxPath value for the given URL.
  */
-function luxPath(loc) {
+function luxPathFactory(loc) {
   const url = isString(loc) ? urlParse(loc) : loc;
   const path = url.pathname.replace(/\/+$/, '');
   const search = url.search || '';
@@ -34,4 +34,4 @@ function luxPath(loc) {
   return path + search;
 }
 
-export default luxPath;
+export default luxPathFactory;

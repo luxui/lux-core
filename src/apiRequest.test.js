@@ -1,23 +1,23 @@
 jest.mock('./responseModel');
 import responseModel from './responseModel';
 
-jest.mock('../lib/storage');
-import storage from '../lib/storage';
+jest.mock('./storage');
+import storage from './storage';
 
-import apiClient from './index';
+import apiRequest from './apiRequest';
 
 // this will have its own tests; no need to validate in these tests
 responseModel.mockImplementation(_ => _);
 
-describe('Lux - apiClient', function () {
+describe('Lux - apiRequest', function () {
   it('should exist; and should be a function', function () {
-    expect(typeof apiClient).toMatch(/function/i);
+    expect(typeof apiRequest).toMatch(/function/i);
   });
 
   it('should return a Promise', function () {
     fetch.mockResponseOnce(JSON.stringify({}));
 
-    return apiClient()
+    return apiRequest()
       .then(() => expect(true).toBe(true))
       .catch(() => expect('thrown').toBe('caught'));
   });
@@ -25,7 +25,7 @@ describe('Lux - apiClient', function () {
   it('should call fetch with capitalized methods', function () {
     fetch.mockResponseOnce(JSON.stringify({}));
 
-    return apiClient('/test-2', {method: 'post'})
+    return apiRequest('/test-2', {method: 'post'})
       .then(() => expect(fetch).lastCalledWith('/test-2', {headers: {}, method: 'POST'}));
   });
 
@@ -38,7 +38,7 @@ describe('Lux - apiClient', function () {
       method: 'POST',
     };
 
-    return apiClient('/test-3', options)
+    return apiRequest('/test-3', options)
       .then(() => expect(fetch).lastCalledWith('/test-3', options))
       .catch(() => expect('thrown').toBe('caught'));
   });
@@ -51,7 +51,7 @@ describe('Lux - apiClient', function () {
     storage.mockReturnValueOnce(token); // call to see if there is a value
     storage.mockReturnValueOnce(token); // call to use the value
 
-    return apiClient('/test-4', {method: 'GET'})
+    return apiRequest('/test-4', {method: 'GET'})
       .then(() => expect(fetch).lastCalledWith('/test-4', {headers: {authorization: token}, method: 'GET'}));
   });
 
@@ -62,7 +62,7 @@ describe('Lux - apiClient', function () {
       [JSON.stringify({ retry: 'successful' }), { status: 200 }],
     );
 
-    return apiClient('/retry')
+    return apiRequest('/retry')
       .then(response => expect(response.retry).toBe('successful'));
   });
 });
