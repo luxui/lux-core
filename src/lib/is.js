@@ -1,5 +1,5 @@
 /**
- * @module lib/is
+ * @module lux/lib/is
  * @memberof module:lux/lib
  * @private
  */

@@ -2,13 +2,13 @@
   "name": "@luxui/core",
   "version": "0.1.0",
   "description": "Admin UI as a Siren hypermedia client.",
-  "main": "lux.js",
+  "main": "dist/",
   "scripts": {
+    "bundle": "rollup -c --environment entry:index",
+    "prebundle": "cp -f ./.babelrc-build ./.babelrc",
     "jsdoc": "jsdoc -c ./jsdoc.conf.json",
     "prejsdoc": "rm -rf ./jsdoc",
-    "postinstall": "npm run rollup",
-    "rollup": "rollup -c",
-    "prerollup": "cp -f ./.babelrc-build ./.babelrc",
+    "postinstall": "npm run bundle",
     "test": "jest --watch",
     "pretest": "cp -f ./.babelrc-test ./.babelrc",
     "test:cover": "jest --coverage"
@@ -21,7 +21,6 @@
     "hypermedia",
     "javascript",
     "js",
-    "reactjs",
     "siren",
     "client"
   ],

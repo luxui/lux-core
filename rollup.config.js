@@ -1,3 +1,5 @@
+/* global process */
+
 import babel from 'rollup-plugin-babel';
 import eslint from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
@@ -5,8 +7,8 @@ import json from 'rollup-plugin-json';
 import resolver from './rollup/resolver';
 
 export default {
-  dest: 'lux.js',
-  entry: 'src/index.js',
+  dest: `dist/${process.env.entry}.js`,
+  entry: `src/${process.env.entry}.js`,
   format: 'es',
   plugins: [
     resolver(),

@@ -18,9 +18,9 @@ import { isString } from './lib/is';
  */
 
 /**
- * Consistent LuxPath factory - path(name) and search - should be considered
- * when retrieving the current LuxPath; since this is not included in common
- * APIs this function aims to provide the utility.
+ * Consistent LuxPath factory - path(name) and querystring - should be
+ * considered when retrieving the current LuxPath; since this is not included
+ * in common APIs this function aims to provide the utility.
  *
  * @param  {String} loc - The URL to parse.
  *
@@ -29,9 +29,9 @@ import { isString } from './lib/is';
 function luxPathFactory(loc) {
   const url = isString(loc) ? urlParse(loc) : loc;
   const path = url.pathname.replace(/\/+$/, '');
-  const search = url.search || '';
+  const query = url.query || '';
 
-  return path + search;
+  return path + query;
 }
 
 export default luxPathFactory;
