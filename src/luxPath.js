@@ -1,5 +1,6 @@
 /**
- * @module lux/luxPath
+ * @module luxPath
+ * @memberof lux
  */
 
 import urlParse from 'url-parse';

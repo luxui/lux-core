@@ -1,5 +1,6 @@
 /**
- * @module lux/apiRequest
+ * @module apiRequest
+ * @memberof lux
  */
 
 import 'whatwg-fetch';

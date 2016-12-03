@@ -1,5 +1,6 @@
 /**
- * @module lux/storage
+ * @module storage
+ * @memberof lux
  */
 
 /**

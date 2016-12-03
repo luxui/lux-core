@@ -1,5 +1,6 @@
 /**
- * @module lux/routing
+ * @module routing
+ * @memberof lux
  */
 
 import { isString, isRegExp, isFunction } from './lib/is';

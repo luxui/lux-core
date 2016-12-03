@@ -1,5 +1,6 @@
 /**
- * @module lux/ResponseModel
+ * @module ResponseModel
+ * @memberof lux
  */
 
 // not sure an exhastive list of acceptable status codes is necessary here

@@ -1,12 +1,51 @@
+/**
+ * @module lux
+ */
+
 import apiRequest from './apiRequest';
 import { isString } from './lib/is';
 import luxPath from './luxPath';
-import responseModelHandler, { responseModelFormat } from './responseModel';
+import { responseModelFormat } from './responseModel';
 
-let api;
+let apiRoot;
 const errorInvalidConfig = new Error('Lux must be configured before routing.');
 const errorInvalidPath = new Error('Paths must be strings.');
 const format = responseModelFormat;
+
+function configRequired() {
+  throw new Error('Lux requires an API root URI.');
+}
+
+function errorStr(prop, problem) {
+
+  return `Configuration property \`${prop}\` ${problem}.`;
+}
+
+/**
+ * Lux requires some configuration before routing will be possible; until valid
+ * configuration is provided routing will not work.
+ *
+ * @param  {String} api - The API root URI.
+ *
+ * @return {Promise} - The first Promise handler will receive the ResponseModel
+ * representation of the resource from the API; or an error.
+ *
+ * @example
+ * import { init } from '@luxui/core';
+ *
+ * init({
+ *   api: 'http://example.com',
+ * });
+ */
+function init({ api } = configRequired()) {
+  apiRoot = null;
+
+  if (!isString(api)) {
+    throw new Error(errorStr('api', 'is not a string'));
+  }
+
+  apiRoot = api;
+}
 
 /**
  * The `lux` function is for routing to - and retrieving API resource - pages.
@@ -28,15 +67,14 @@ const format = responseModelFormat;
  * // route to the path given; if not already at that path
  * lux('/home');
  */
-function luxCore(path) {
+function lux(path) {
   let pending;
 
-  if (!api) {
+  if (!apiRoot) {
     pending = new Promise(resolve =>
       resolve(format({}, errorInvalidConfig)));
   } else if (!path || isString(path)) {
-    pending = apiRequest(api + luxPath(path))
-      .then(responseModelHandler);
+    pending = apiRequest(apiRoot + luxPath(path));
   } else {
     pending = new Promise(resolve =>
       resolve(format({}, errorInvalidPath)));
@@ -45,17 +83,8 @@ function luxCore(path) {
   return pending;
 }
 
-function setAPI(apiRoot) {
-  if (isString(apiRoot)) {
-    api = apiRoot;
-  } else {
-    const type = typeof apiRoot;
-    throw new Error(`Attempting to set \`api\` to non-string: ${type}.`);
-  }
-}
-
-export default luxCore;
+export default lux;
 
 export {
-  setAPI
+  init
 };

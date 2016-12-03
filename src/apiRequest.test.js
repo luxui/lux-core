@@ -65,4 +65,12 @@ describe('Lux - apiRequest', function () {
     return apiRequest('/retry')
       .then(response => expect(response.retry).toBe('successful'));
   });
+
+  it('should call `responseModelHandler()`', function () {
+    const response = {model: 'response'};
+    fetch.mockResponseOnce(JSON.stringify(response));
+
+    return apiRequest('/shape')
+      .then(response => expect(responseModel).lastCalledWith(response));
+  });
 });
