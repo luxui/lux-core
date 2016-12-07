@@ -1,0 +1,8 @@
+{
+  "plugins": ["transform-async-to-generator"],
+  "presets": [
+    "babel-preset-react",
+    "es2015",
+    "stage-3"
+  ]
+}
