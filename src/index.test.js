@@ -1,7 +1,6 @@
 import lux, {
   apiRequest,
   init,
-  lib,
   luxPath,
   routing,
   storage,
@@ -18,10 +17,6 @@ describe('lux-core', function () {
 
   it('should expose init', function () {
     expect(typeof init).toMatch(/function/i);
-  });
-
-  it('should expose lib', function () {
-    expect(typeof lib).toMatch(/object/i);
   });
 
   it('should expose luxPath', function () {
