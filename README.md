@@ -1,18 +1,56 @@
-# luxUI
+LuxUI
+=====
 
-luxUI (or more simply lux) is a [ReactJS] UI framework for hypermedia-based single-page web applications. This framework relies completely on the API responses for building the user experience and application flow. API responses are expected to adhere to [Siren+lux](#sirenlux) a subset of the [Siren] hypermedia specification.
+Lux is a hypermedia client for generating UIs from API responses. Lux relies completely on the API responses for building the user experience and application. API responses are expected to adhere to [Siren+lux](SIREN+LUX), a subset of the [Siren] hypermedia specification.
 
 Lux provides for [customization](#lux-customization) per application in:
 
   - [Non-resource-backed pages](#nonresourcebacked-pages),
-  - [Template injection](template-injection), and
-  - [Field display components](#field-display-components).
+  - Customizable [Field display components](#field-display-components), and
+  - (coming soon) [Layout injection](template-injection).
 
 Lux expects RESTful resources to follow a common pattern of [collections](#collections) and [items](#items).
 
+---
+
+## Getting Started
+
+The module `@luxui/core` exports the following:
+
+  - `lux` {function} (default export) - Handle the initial configuration and subsequent page rendering calls.
+  - `apiRequest` {function} - Wrapper function for `fetch` with:
+    + `JSON.stringify` values in `option.body`.
+    + If a session token is stored in `authToken` will be included in `authorization` header of request.
+    + Will return a consistent `ResponseModel`.
+  - `luxPath` {function} - Utility function for parsing a string (window.location typically) to extract the `pathname` and `search` properties in a consistent manner.
+  - `routing` {function} - Allow for registering additional routing matchers and handlers.
+  - `storage` {function} - Access to data Lux is storing:
+    + Initially nothing.
+    + Login uses `authToken` for storing a session token and will be included in `authorization` header of API requests.
+
+### Initialization
+
+Projects using Lux must provide a API root URI; this should be an absolute URI to the root resource of the API "backing" the application.
+
+  1. `api` - The API root URI. REQUIRED.
+  2. [Customize](lux-customization). Optional.
+
+```
+import lux from '@luxui/core';
+
+// a minimum implementation
+lux({ api: 'http://api.root' });
+```
+
+### Authentication TODO: tutorial
+
+Applications with resources "behind" a session login will need to create a custom login page and handler. The handler will need to store session information in the localStorage key `authToken`. The value in `authToken` will be passed in the `authentication` header of subsequent API requests until a `403` response if returned and then a second request without the `authentication` header included succeeds.
+
+---
+
 ## Lux Customization
 
-lux provides limited customization options; but those customizations are in critical areas which will allow for necessary flexibility.
+Lux provides limited customization options; but those customizations are in critical areas which will allow for necessary flexibility.
 
 ### Non-resource-backed pages
 
@@ -31,157 +69,7 @@ TBD
 
 TBD
 
-
-## Siren+lux
-
-[Siren] is a hypermedia specification which has affordances for more than simple/static data transfer in: actions, entities, and links. These additional affordances enable the API to provide more - if not all - necessary application control information in each response. This additional information means that the application and API need to have less "[shared knowledge](#shared-knowledge)"; and therefore puts all control of the application in the domain of the API. The UI is then only responsible for display based on the API responses.
-
-### Action Classes
-
-All actions in a Siren response have an Array property `class` which will indicate to lux what the action type is; the valid action classes are:
-
-  - delete - used to request a resource be removed from the API
-  - submit - generically intended for submitting a form; "submit" could be:
-    * PUT requests against an existing resource
-    * POST requests such as a login form credentials
-    * PATCH requests
-  - view - includes the fields array to define how a item should be displayed
-
-### Action Names
-
-Some actions are special and need to be used in specific locations within the UI. These are the "special" action names and their purposes:
-
-  - `create-*` - defines an empty resource to fill out
-  - `delete` - for requesting a resource to be deleted
-  - `login` or `logout` - for a link to a form to allow a user to log in or out
-  - `search` - for performing a search action
-  - `update` - for updating a resource using a form
-
-### Embedded Entities
-
-Some resources have "linked" or "sub" resources that are complex objects, or non-scalar, values. These additional resources are included in responses to for completeness. lux expects that these be [logically grouped](#complex-top-level-properties), for explicit linking, in the `embedded` section of the response.
-
-### Link Relations
-
-Any property within the resource representation that includes an `href` property must also include a `rel` property and should include at least one of the following link rels.
-
-rel                | Intent | URL/Notes
----                | ------ | ---------
-`chapter`          | A grouping within a collection; a "page". | `/applications?page=3`
-`collection`       | Identifies a collection of resources. | `/applications`
-`create-form`      | _Returns a resource which defines an empty form._ | `/applications/*`
-`enclosure`        | Embedded entities that are themselves: resources, complex objects, and non-scalar. | `/`
-`index`            | The root of the API only. | `/`
-`item`             | Identifies an item within a collection of resources. | `/applications/1234`
-`first` or `start` | Collection paging; always coupled with `chapter` and `collection`. | `/applications?page=1`
-`last`             | Collection paging; always coupled with `chapter` and `collection`. | `/applications?page=4`
-`next`             | Collection paging; always coupled with `chapter` and `collection`. | `/applications?page=3`
-`current`          | Collection paging; always coupled with `chapter` and `collection`. | `/applications?page=2`
-`prev`             | Collection paging; always coupled with `chapter` and `collection`. | `/applications?page=1`
-`related`          | Identifies links to supporting resources; e.g. Settings. | `/applications/1234/settings`
-`self`             | The current page/resource | *Any link could have the `self` rel.*
-`section`          | Top-level resources | Identifies links that will make up the main menu of the application.
-`subsection`       | Reserved for the possibility for sub navigation in the main menu. |
-`up`               | Identifies a parent resources. | If the UI encounters a link with this rel the UI might decide to redirect the user to that resources for good UX.
-
-#### Examples
-
-##### API root
-```
-// ...
-  "links": [
-    {
-      "href": ".../",
-      "rel": ["index"],
-      "title": "Home"
-    }
-  ]
-// ...
-```
-
-##### Main menu links
-```
-// ...
-  "links": [
-    {
-      "href": ".../applications",
-      "rel": ["collection", "section"],
-      "title": "Applications"
-    }
-  ],
-// ...
-```
-
-##### Collection paging
-```
-// ...
-  "links": [
-    {
-      "href": ".../applications?page=2",
-      "rel": ["chapter", "collection", "current", "self"],
-      "title": "Current"
-    },
-    {
-      "href": ".../applications?page=1",
-      "rel": ["chapter", "collection", "first"],
-      "title": "First"
-    },
-    {
-      "href": ".../applications?page=4",
-      "rel": ["chapter", "collection", "last"],
-      "title": "Last"
-    },
-    {
-      "href": ".../applications?page=3",
-      "rel": ["chapter", "collection", "next"],
-      "title": "Next"
-    },
-    {
-      "href": ".../applications?page=1",
-      "rel": ["chapter", "collection", "prev"],
-      "title": "Previous"
-    }
-  ],
-// ...
-```
-
-##### Complex top-level properties
-```
-// ...
-  "entities": [
-    {
-      "entities": [
-        {
-          "class": ["application"],
-          "href": ".../applications/6789",
-          "rel": ["related"],
-          "title": "Application 6789"
-        },
-        // ... many more.
-      ],
-      "href": ".../applications/1234/rules",
-      "rel": ["collection", "enclosure", "related"],
-      "title": "targetRules"
-    },
-  ],
-// ...
-```
-
-### Resource Classes
-
-Only two classes are recognized and expected: `collection` and `item`; all other classes are purely informational and unused by lux. The purpose of these classes is to remove the reliance on URL patterns and data inference for display determination. This allows the API to explicitly specify that a resource is one or the other; a `collection` of items or a specific `item`.
-
-All resources in the API are expected to return a top-level property `class` which will hold one of: `collection` or `item`. The only exception being the root resource which may omit the property.
-
-### `title` Attributes
-
-The `title` attribute as a property of various portions of a Siren response will be use for display in many cases.
-
-Siren "section" | Use of `title`
---------------- | -------------
-links           | The title will be used as the link text.
-actions         | The title will be used as the button text.
-
+---
 
 ## Shared Knowledge
 
@@ -192,6 +80,8 @@ One example of "shared knowledge" is, an API provides a unique identifier for a 
 An API should abstract domain knowledge to encourage external integration so that many systems can leverage the abstractions in new and novel ways to solve for business needs. Building an API for only one specific UI limits the ability for an API to be useful to many *different* clients.
 
 lux attempts to have **no "shared knowledge"** between API and UI. All knowledge should be encoded into the API responses in some way.
+
+---
 
 ## RESTful resources
 
