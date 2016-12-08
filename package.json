@@ -1,5 +1,5 @@
 {
-  "name": "@luxui/core",
+  "name": "@luxui/core-lux",
   "version": "0.1.0",
   "description": "Admin UI as a Siren hypermedia client.",
   "main": "src/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/luxui/core.git"
+    "url": "git+ssh://git@github.com/luxui/core-lux.git"
   },
   "keywords": [
     "hypermedia",
@@ -23,9 +23,9 @@
   "author": "Joshua T Kalis <JoshKalis@QickenLoans.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/luxui/core/issues"
+    "url": "https://github.com/luxui/core-lux/issues"
   },
-  "homepage": "https://github.com/luxui/core#readme",
+  "homepage": "https://github.com/luxui/core-lux#readme",
   "devDependencies": {
     "jest": "^17.0.3",
     "jest-cli": "^17.0.3",
