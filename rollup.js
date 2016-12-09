@@ -9,7 +9,7 @@ console.log(`Bundling [${process.env.NODE_ENV}] @luxui/core-lux`);
 
 export default {
   dest: './dist/index.js',
-  entry: './index.js',
+  entry: './src/index.js',
   format: 'cjs',
   plugins: [
     // the order of these plugins is important
