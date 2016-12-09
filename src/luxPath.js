@@ -5,7 +5,7 @@
 
 import urlParse from 'url-parse';
 
-import { isString } from './lib/is';
+import { isString } from './is';
 
 /**
  * @typedef LuxPath
@@ -27,7 +27,7 @@ import { isString } from './lib/is';
  *
  * @return {LuxPath} - The standardized luxPath value for the given URL.
  */
-function luxPathFactory(loc) {
+function luxPath(loc) {
   const url = isString(loc) ? urlParse(loc) : loc;
   const path = url.pathname.replace(/\/+$/, '');
   const query = url.query || '';
@@ -35,4 +35,4 @@ function luxPathFactory(loc) {
   return path + query;
 }
 
-export default luxPathFactory;
+export default luxPath;

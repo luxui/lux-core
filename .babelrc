@@ -1,6 +1,19 @@
 {
-  "presets": [
-    "es2015",
-    "stage-3"
-  ]
+  "env": {
+    "production": {
+      "comments": false,
+      "minified": true,
+      "presets": [
+        "es2015-rollup",
+        "stage-3"
+      ]
+    },
+    "test": {
+      "presets": [
+        "es2015",
+        "stage-3"
+      ]
+    }
+  },
+  "plugins": ["transform-object-rest-spread"]
 }

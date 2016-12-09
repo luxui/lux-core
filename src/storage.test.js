@@ -1,4 +1,4 @@
-import lib from './storage';
+import storage from './storage';
 
 let cache;
 const mockStorage = {
@@ -9,27 +9,27 @@ const mockStorage = {
 
 describe('Library: storage', () => {
   it('should exist', () => {
-    expect(lib).toBeDefined();
+    expect(storage).toBeDefined();
   });
 
   it('should innitialize with an undefined value', function () {
-    expect(lib('key', false, {store: mockStorage})).not.toBeDefined();
+    expect(storage('key', false, {store: mockStorage})).not.toBeDefined();
   });
 
   it('should store and retrieve a value', function () {
     const expected = '1234';
-    lib('key', expected, {store: mockStorage});
+    storage('key', expected, {store: mockStorage});
 
-    expect(lib('key', false, {store: mockStorage})).toBe(expected);
+    expect(storage('key', false, {store: mockStorage})).toBe(expected);
   });
 
   it('should remove a set value', function () {
-    lib({reset: 'key'}, false, {store: mockStorage});
+    storage({reset: 'key'}, false, {store: mockStorage});
 
-    expect(lib('key', false, {store: mockStorage})).not.toBeDefined();
+    expect(storage('key', false, {store: mockStorage})).not.toBeDefined();
   });
 
   it('should throw errors', function () {
-    expect(lib).toThrow(Error('No "key" provided to storage().'));
+    expect(storage).toThrow(Error('No "key" provided to storage().'));
   });
 });

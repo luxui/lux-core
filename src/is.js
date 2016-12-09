@@ -1,20 +1,21 @@
 /**
- * @module lux/lib/is
- * @memberof module:lux/lib
- * @private
+ * @module has
+ * @memberof lib-lux
  */
 
 /**
- * Function that returns true if the parameter matches the type of object the
- * function is expecting.
- *
  * @typedef {function} IsFunction
+ *
+ * @description
+ * A function that returns true if the parameter matches the type the function
+ * is expecting.
  *
  * @param {any} - A variable reference to evaluate against its type:
  *
  *  - Array
  *  - Function
  *  - Object
+ *  - RegExp
  *  - String
  *  - etc.
  *
@@ -24,20 +25,25 @@
 
 
 const typeString = Function.prototype.call.bind(Object.prototype.toString);
-const is = (type, q) => typeString(q) === type;
+const isType = (type, q) => `[object ${type}]` === typeString(q);
 
-const factory = _ => is.bind(null, `[object ${_}]`);
-
-const isArray = factory('Array');
-const isFunction = factory('Function');
-const isRegExp = factory('RegExp');
-const isString = factory('String');
+const isArray = q => isType('Array', q);
+const isFunction = q => isType('Function', q);
+const isRegExp = q => isType('RegExp', q);
+const isObject = q => isType('Object', q);
+const isString = q => isType('String', q);
+// eslint-disable-next-line no-void, `void 0` will always be `undefined`
+const isNull = q => q === null || q === void 0;
 
 export {
   /** @type {IsFunction} */
   isArray,
   /** @type {IsFunction} */
   isFunction,
+  /** @type {IsFunction} */
+  isNull,
+  /** @type {IsFunction} */
+  isObject,
   /** @type {IsFunction} */
   isRegExp,
   /** @type {IsFunction} */

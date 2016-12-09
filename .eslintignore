@@ -1,2 +1,3 @@
 **/*.test.js
-jestInit.js
+dist/
+jest.js

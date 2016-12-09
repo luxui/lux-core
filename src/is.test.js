@@ -1,6 +1,8 @@
 import {
   isArray,
   isFunction,
+  isNull,
+  isObject,
   isRegExp,
   isString,
   typeString
@@ -10,6 +12,8 @@ describe('Library: is', () => {
   [
     isArray,
     isFunction,
+    isNull,
+    isObject,
     isRegExp,
     isString,
     typeString
@@ -21,7 +25,7 @@ describe('Library: is', () => {
     });
   });
 
-  describe(`isArray - functionality`, () => {
+  describe(`isArray`, () => {
     it(`should return true for an Array`, () => {
       expect(isArray([])).toBe(true);
     });
@@ -31,7 +35,7 @@ describe('Library: is', () => {
     });
   });
 
-  describe(`isFunction - functionality`, () => {
+  describe(`isFunction`, () => {
     it(`should return true for Function`, () => {
       expect(isFunction(_ => _)).toBe(true);
     });
@@ -41,7 +45,44 @@ describe('Library: is', () => {
     });
   });
 
-  describe(`isRegExp - functionality`, () => {
+  describe(`isNull`, () => {
+    it(`should return true for null`, () => {
+      expect(isNull()).toBe(true);
+    });
+
+    it(`should return true for undefined`, () => {
+      expect(isNull(void 0)).toBe(true);
+    });
+
+    it(`should return true for undefined`, () => {
+      let temp;
+      expect(isNull(temp)).toBe(true);
+    });
+
+    it(`should return false for anything not a null or undefined`, () => {
+      expect(isFunction(1)).toBe(false);
+    });
+
+    it(`should return false for anything not a null or undefined`, () => {
+      expect(isFunction({})).toBe(false);
+    });
+
+    it(`should return false for anything not a null or undefined`, () => {
+      expect(isFunction([])).toBe(false);
+    });
+  });
+
+  describe(`isObject`, () => {
+    it(`should return true for a Object`, () => {
+      expect(isObject({})).toBe(true);
+    });
+
+    it(`should return false for anything not a Object`, () => {
+      expect(isObject([])).toBe(false);
+    });
+  });
+
+  describe(`isRegExp`, () => {
     it(`should return true for a RegExp`, () => {
       expect(isRegExp(/./)).toBe(true);
     });
@@ -51,7 +92,7 @@ describe('Library: is', () => {
     });
   });
 
-  describe(`isString - functionality`, () => {
+  describe(`isString`, () => {
     it(`should return true for a String`, () => {
       expect(isString('')).toBe(true);
     });
@@ -61,7 +102,7 @@ describe('Library: is', () => {
     });
   });
 
-  describe(`typeString - functionality`, () => {
+  describe(`typeString`, () => {
     it(`should return '[object String]' for a String`, () => {
       expect(typeString('')).toBe('[object String]');
     });

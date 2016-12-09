@@ -3,7 +3,7 @@
  * @memberof lux
  */
 
-import { isString, isRegExp, isFunction } from './lib/is';
+import { isString, isRegExp, isFunction } from './is';
 
 const cache = {};
 let errorHandler = null;

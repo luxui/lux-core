@@ -5,7 +5,7 @@
 
 import 'whatwg-fetch';
 
-import responseModel from './responseModel';
+import model from './responseModel';
 import storage from './storage';
 
 /**
@@ -65,7 +65,7 @@ function apiRequest(URI = '/', options = {}) {
   return fetch(URI, options)
     .then(retryFactory(URI, options))
     .then(response => response.json())
-    .then(responseModel);
+    .then(model);
 }
 
 function retryFactory(URI, options) {

@@ -81,5 +81,4 @@ function responseModelHandler(response = {}) {
 }
 
 export default responseModelHandler;
-
 export { responseModelFormat };
