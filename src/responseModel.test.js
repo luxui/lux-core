@@ -58,17 +58,19 @@ describe('responseModel', function () {
   });
 
   it('should return client errors', function () {
-    const result = responseModel(mockResponse('Client error.', 404));
+    const error = 404;
+    const result = responseModel(mockResponse('Client error.', error));
 
-    expect(result.error).toBe(true);
-    expect(result.status).toBe(404);
+    expect(result.error).toEqual(new Error(`Received ${error}.`));
+    expect(result.status).toBe(error);
   });
 
   it('should return server errors', function () {
-    const result = responseModel(mockResponse('Whooops.', 500));
+    const error = 500;
+    const result = responseModel(mockResponse('Whooops.', error));
 
-    expect(result.error).toBe(true);
-    expect(result.status).toBe(500);
+    expect(result.error).toEqual(new Error(`Received ${error}.`));
+    expect(result.status).toBe(error);
   });
 
   it('should handle "good" responses', function () {

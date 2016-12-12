@@ -22,14 +22,14 @@ const SIREN = 'application/vnd.siren+json';
  * Create a new ResponseModel from an API response.
  *
  * @param  {Object}  response - The data object to format into a ResponseModel.
- * @param  {(Boolean|undefined)} [error=false] - The error or nothing.
+ * @param  {(Boolean)} [error=false] - The error or nothing.
  *
  * @return {ResponseModel}
  */
 function responseModelFormat(response, error = false) {
 
   return {
-    data: response.data,
+    data: (error ? { error, response: response.data } : response.data),
     error,
     status: response.status || 0,
   };
@@ -57,10 +57,10 @@ function responseModelHandler(response = {}) {
   switch (statusClass) {
     case 5: // 5xx = 500-599 - server error
 
-      return responseModelFormat(response, true);
+      return responseModelFormat(response, new Error(`Received ${status}.`));
     case 4: // 4xx = 400-499 - client error
 
-      return responseModelFormat(response, true);
+      return responseModelFormat(response, new Error(`Received ${status}.`));
     case 2: // 2xx = 200-299 - success
       if (response.headers.get('content-type') !== SIREN) {
         const type = response.headers.get('content-type');
