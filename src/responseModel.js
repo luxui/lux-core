@@ -30,7 +30,7 @@ function responseModelFormat(response, error = false) {
 
   return {
     data: (error ? { error, response: response.data } : response.data),
-    error,
+    error: !!error,
     status: response.status || 0,
   };
 }

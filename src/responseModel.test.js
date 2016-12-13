@@ -20,35 +20,35 @@ describe('responseModel', function () {
     const expectedError = new Error('Invalid HTTP status code: undefined.');
     const model = responseModel();
 
-    expect(model.error).toEqual(expectedError);
+    expect(model.data.error).toEqual(expectedError);
   });
 
   it('should resolve to an error if `status` is not within status code classes', function () {
     const expectedError = new Error('Invalid HTTP status code: 999.');
     const model = responseModel(mockResponse('WAT!', 999));
 
-    expect(model.error).toEqual(expectedError);
+    expect(model.data.error).toEqual(expectedError);
   });
 
   it('should resolve to an error if `status` is 1xx', function () {
     const expectedError = new Error('Unexpected HTTP status code: 100.');
     const model = responseModel(mockResponse('Informational', 100));
 
-    expect(model.error).toEqual(expectedError);
+    expect(model.data.error).toEqual(expectedError);
   });
 
   it('should resolve to an error if `status` is 3xx', function () {
     const expectedError = new Error('Unexpected HTTP status code: 300.');
     const model = responseModel(mockResponse('Informational', 300));
 
-    expect(model.error).toEqual(expectedError);
+    expect(model.data.error).toEqual(expectedError);
   });
 
   it('should resolve to an error if `content-type` is not Siren', function () {
     const expectedError = new Error('Invalid content-type, application/json, returned.');
     const model = responseModel(mockResponse('Just JSON.', 200, 'application/json'));
 
-    expect(model.error).toEqual(expectedError);
+    expect(model.data.error).toEqual(expectedError);
   });
 
   it('should return proper shape', function () {
@@ -61,7 +61,7 @@ describe('responseModel', function () {
     const error = 404;
     const result = responseModel(mockResponse('Client error.', error));
 
-    expect(result.error).toEqual(new Error(`Received ${error}.`));
+    expect(result.data.error).toEqual(new Error(`Received ${error}.`));
     expect(result.status).toBe(error);
   });
 
@@ -69,14 +69,15 @@ describe('responseModel', function () {
     const error = 500;
     const result = responseModel(mockResponse('Whooops.', error));
 
-    expect(result.error).toEqual(new Error(`Received ${error}.`));
+    expect(result.data.error).toEqual(new Error(`Received ${error}.`));
     expect(result.status).toBe(error);
   });
 
   it('should handle "good" responses', function () {
-    const result = responseModel(mockResponse('Happy path.'));
+    const message = 'Happy path.';
+    const result = responseModel(mockResponse(message));
 
-    expect(result.error).toBe(false);
-    expect(result.data).toBe('Happy path.');
+    expect(result.data.error).toBeUndefined();
+    expect(result.data).toBe(message);
   });
 });
