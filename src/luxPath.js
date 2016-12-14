@@ -3,9 +3,7 @@
  * @memberof lux
  */
 
-import urlParse from 'url-parse';
-
-import { isString } from './is';
+import urlParse from './urlParse';
 
 /**
  * @typedef LuxPath
@@ -28,11 +26,11 @@ import { isString } from './is';
  * @return {LuxPath} - The standardized luxPath value for the given URL.
  */
 function luxPath(loc) {
-  const url = isString(loc) ? urlParse(loc) : loc;
-  const path = url.pathname.replace(/\/+$/, '');
-  const query = url.query || '';
+  const url = urlParse(`${loc}`);
+  const path = url.pathname
+    .replace(/\/+$/, ''); // remove trailing slashes
 
-  return path + query;
+  return `${path}${url.search}`;
 }
 
 export default luxPath;

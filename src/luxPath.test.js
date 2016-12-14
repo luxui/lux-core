@@ -4,7 +4,7 @@ function locationMock(str) {
   const query = str.match(/\?.*/);
   const pathname = str.replace(query, '');
 
-  return { pathname, query };
+  return { pathname, query, toString: () => `${pathname}${query || ''}` };
 }
 
 describe('Library: luxPath', function () {

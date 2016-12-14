@@ -3,6 +3,8 @@
  * @memberof lux
  */
 
+// TODO: document dependecy on whatwg-fetch so it can be included by
+// implmentors and not bundled in with core-lux
 import 'whatwg-fetch';
 
 import model from './responseModel';
