@@ -5,7 +5,6 @@ import {
   isObject,
   isRegExp,
   isString,
-  typeString
 } from './is';
 
 describe('Library: is', () => {
@@ -16,7 +15,6 @@ describe('Library: is', () => {
     isObject,
     isRegExp,
     isString,
-    typeString
   ].forEach(fn => {
     describe(fn.name + ' - existential', () => {
       it(`should exist`, () => {
@@ -99,12 +97,6 @@ describe('Library: is', () => {
 
     it(`should return false for anything not a String`, () => {
       expect(isString({})).toBe(false);
-    });
-  });
-
-  describe(`typeString`, () => {
-    it(`should return '[object String]' for a String`, () => {
-      expect(typeString('')).toBe('[object String]');
     });
   });
 });
