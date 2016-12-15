@@ -1,13 +1,15 @@
 
 /**
  * Admin UI as a Siren hypermedia client.
- * v0.3.2
+ * v0.3.4
  * Repository URL: https://github.com/luxui/core-lux.git
  */
 
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.luxCore = global.luxCore || {})));
+}(this, (function (exports) { 'use strict';
 
 var rHTTPStatuses=/^[1-5]\d\d/;var SIREN='application/vnd.siren+json';function responseModelFormat(response){var error=arguments.length>1&&arguments[1]!==undefined?arguments[1]:false;return{data:error?{error:error,response:response.data}:response.data,error:!!error,status:response.status||0}}function responseModelHandler(){var response=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var status=response.status;if(!rHTTPStatuses.test(status)){var error=new Error('Invalid HTTP status code: '+status+'.');return responseModelFormat(response,error)}var statusClass=+(''+status)[0];switch(statusClass){case 5:return responseModelFormat(response,new Error('Received '+status+'.'));case 4:return responseModelFormat(response,new Error('Received '+status+'.'));case 2:if(response.headers.get('content-type')!==SIREN){var type=response.headers.get('content-type');var _error2=new Error('Invalid content-type, '+type+', returned.');return responseModelFormat(response,_error2)}return responseModelFormat(response);default:var _error=new Error('Unexpected HTTP status code: '+status+'.');return responseModelFormat(response,_error);}}
 
@@ -181,3 +183,7 @@ exports.isNull = isNull;
 exports.isObject = isObject;
 exports.isRegExp = isRegExp;
 exports.isString = isString;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

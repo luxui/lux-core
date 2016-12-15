@@ -7,7 +7,7 @@ import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
 // format options: cjs, es, iife, umd
-const format = 'cjs';
+const format = 'umd';
 const npmPackage = require('./package.json');
 
 // eslint-disable-next-line no-console,max-len
@@ -26,6 +26,7 @@ export default {
   dest: './dist/index.js',
   entry: './src/index.js',
   format,
+  moduleName: 'luxCore',
   plugins: [
     // the order of these plugins is important
     builtins(),
