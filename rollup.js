@@ -9,7 +9,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 const npmPackage = require('./package.json');
 
 // eslint-disable-next-line no-console
-console.log(`Bundling [${process.env.NODE_ENV}] @luxui/core-lux`);
+console.log(`Bundling [${process.env.NODE_ENV}] ${npmPackage.name}`);
 
 const bruce = `
 /**

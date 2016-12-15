@@ -1,7 +1,7 @@
 
 /**
  * Admin UI as a Siren hypermedia client.
- * v0.3.0
+ * v0.3.2
  * Repository URL: https://github.com/luxui/core-lux.git
  */
 
