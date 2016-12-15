@@ -6,10 +6,12 @@ import eslint from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
+// format options: cjs, es, iife, umd
+const format = 'cjs';
 const npmPackage = require('./package.json');
 
-// eslint-disable-next-line no-console
-console.log(`Bundling [${process.env.NODE_ENV}] ${npmPackage.name}`);
+// eslint-disable-next-line no-console,max-len
+console.log(`Bundling [${process.env.NODE_ENV}] ${npmPackage.name} as ${format}`);
 
 const bruce = `
 /**
@@ -23,7 +25,7 @@ export default {
   banner: bruce,
   dest: './dist/index.js',
   entry: './src/index.js',
-  format: 'es',
+  format,
   plugins: [
     // the order of these plugins is important
     builtins(),

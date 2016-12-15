@@ -5,6 +5,10 @@
  * Repository URL: https://github.com/luxui/core-lux.git
  */
 
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var rHTTPStatuses=/^[1-5]\d\d/;var SIREN='application/vnd.siren+json';function responseModelFormat(response){var error=arguments.length>1&&arguments[1]!==undefined?arguments[1]:false;return{data:error?{error:error,response:response.data}:response.data,error:!!error,status:response.status||0}}function responseModelHandler(){var response=arguments.length>0&&arguments[0]!==undefined?arguments[0]:{};var status=response.status;if(!rHTTPStatuses.test(status)){var error=new Error('Invalid HTTP status code: '+status+'.');return responseModelFormat(response,error)}var statusClass=+(''+status)[0];switch(statusClass){case 5:return responseModelFormat(response,new Error('Received '+status+'.'));case 4:return responseModelFormat(response,new Error('Received '+status+'.'));case 2:if(response.headers.get('content-type')!==SIREN){var type=response.headers.get('content-type');var _error2=new Error('Invalid content-type, '+type+', returned.');return responseModelFormat(response,_error2)}return responseModelFormat(response);default:var _error=new Error('Unexpected HTTP status code: '+status+'.');return responseModelFormat(response,_error);}}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
@@ -162,4 +166,18 @@ function luxPath(loc){var url=urlParse(''+loc);var path=url.pathname.replace(/\/
 
 var cache={};var errorHandler=null;var routes=[];function errorString(str){return str+' provided to routing API.'}function lookup(path){if(!cache[path]){var found=routes.filter(function(_ref){var _ref2=slicedToArray(_ref,2),_=_ref2[0],matcherFn=_ref2[1];return matcherFn(path)})[0];cache[path]=found?found.pop():errorHandler;}return cache[path]}function register(matcher,handler){if(!handler||!isFunction(handler)){throw new Error(errorString('No "handler" function'))}if(!(isString(matcher)||isRegExp(matcher)||isFunction(matcher))){var type=typeof matcher==='undefined'?'undefined':_typeof(matcher);throw new Error(errorString('Invalid "PathMatcher" type ('+type+')'))}if(matcher==='/error'){cache['/error']=errorHandler=handler;return}var found=routes.filter(function(_ref3){var _ref4=slicedToArray(_ref3,1),m=_ref4[0];return m===matcher.toString()})[0];if(found){throw new Error('Routing API already has a handler registerd for PathMatcher: '+matcher.toString()+'.')}else if(isString(matcher)){routes.push([matcher.toString(),function(path){return matcher===path},handler]);}else if(isRegExp(matcher)){routes.push([matcher.toString(),function(path){return matcher.test(path)},handler]);}else{routes.push([matcher.toString(),matcher,handler]);}}function routing(matcher,handler){if(!matcher){throw new Error(errorString('No "PathMatcher" function'))}switch(arguments.length){case 1:return lookup(matcher);case 2:return register(matcher,handler);default:throw new Error('Too many arguments provided to routing API.');}}
 
-export { apiRequest, luxPath, responseModelHandler as responseModel, responseModelFormat, routing, storage, hasAll, hasAny, hasOne, isArray, isFunction, isNull, isObject, isRegExp, isString };
+exports.apiRequest = apiRequest;
+exports.luxPath = luxPath;
+exports.responseModel = responseModelHandler;
+exports.responseModelFormat = responseModelFormat;
+exports.routing = routing;
+exports.storage = storage;
+exports.hasAll = hasAll;
+exports.hasAny = hasAny;
+exports.hasOne = hasOne;
+exports.isArray = isArray;
+exports.isFunction = isFunction;
+exports.isNull = isNull;
+exports.isObject = isObject;
+exports.isRegExp = isRegExp;
+exports.isString = isString;
