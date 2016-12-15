@@ -1,13 +1,9 @@
 /**
  * @module apiRequest
- * @memberof lux
+ * @memberof core-lux
  */
 
-// TODO: document dependecy on whatwg-fetch so it can be included by
-// implmentors and not bundled in with core-lux
-import 'whatwg-fetch';
-
-import model from './responseModel';
+import responseModelRequestHandler from './responseModel';
 import storage from './storage';
 
 /**
@@ -20,6 +16,9 @@ import storage from './storage';
  * A single simple retry logic is employed where if a request results in an 403
  * error from the server the request will be retried if the first request
  * included a session token.
+ *
+ * #NOTE: `apiRequest()` relies on the fetch API to be globally available; if
+ * needed make sure to polyfill with `whatwg-fetch`.
  *
  * @param  {String} [URI='/'] - The URI of the resource to retrieve.
  * @param  {Object} [options={}] - Additional options for the request; this
@@ -67,7 +66,7 @@ function apiRequest(URI = '/', options = {}) {
   return fetch(URI, options)
     .then(retryFactory(URI, options))
     .then(response => response.json())
-    .then(model);
+    .then(responseModelRequestHandler);
 }
 
 function retryFactory(URI, options) {
@@ -79,6 +78,8 @@ function retryFactory(URI, options) {
 
       return fetch(URI, options)
         .then((response) => {
+          // FIXME: use Redux to emit an event to reset the token, rather then
+          // resetting the token directly here.
           // reset the authToken only if a retry succeeds without it
           storage({ reset: 'authToken' });
 

@@ -1,6 +1,6 @@
 /**
  * @module luxPath
- * @memberof lux
+ * @memberof core-lux
  */
 
 import urlParse from './urlParse';

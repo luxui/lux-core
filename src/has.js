@@ -1,6 +1,6 @@
 /**
  * @module has
- * @memberof lib-lux
+ * @memberof core-lux
  */
 
 function hasAll(prop, search, obj) {
