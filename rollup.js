@@ -23,7 +23,7 @@ export default {
   banner: bruce,
   dest: './dist/index.js',
   entry: './src/index.js',
-  format: 'cjs',
+  format: 'es',
   plugins: [
     // the order of these plugins is important
     builtins(),

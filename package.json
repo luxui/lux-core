@@ -1,6 +1,6 @@
 {
   "name": "@luxui/core-lux",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Admin UI as a Siren hypermedia client.",
   "main": "dist/index.js",
   "files": [
