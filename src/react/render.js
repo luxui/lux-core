@@ -18,29 +18,33 @@ const errorInvalidConfig = 'Lux must be configured before routing.';
 const errorInvalidPath = 'Paths must be strings.';
 const Layout = registry('Layout');
 
-function render(path) {
+// FIXME: figure out how to test this function
+// istanbul ignore next
+function reactRender(model) {
+  ReactDOM.render(<Layout {...model} />, config.renderRoot);
+}
+
+function render(path, fn = reactRender) {
   if (!config.renderRoot) {
-    throw new Error('Config property `root` has not been set yet.');
+    throw new Error('Config property `renderRoot` not set.');
   }
 
   let pending;
 
   if (!config.apiRoot) {
-    pending = new Promise((resolve) => {
-      resolve(responseModelFormat({}, new Error(errorInvalidConfig)));
+    pending = new Promise((complete) => {
+      complete(responseModelFormat({}, new Error(errorInvalidConfig)));
     });
   } else if (!path || isString(path)) {
     pending = apiRequest(`${config.apiRoot}${luxPath(path)}`);
   } else {
-    pending = new Promise((resolve) => {
-      resolve(responseModelFormat({}, new Error(errorInvalidPath)));
+    pending = new Promise((complete) => {
+      complete(responseModelFormat({}, new Error(errorInvalidPath)));
     });
   }
 
   return pending
-    .then((model) => {
-      ReactDOM.render(<Layout {...model} />, config.renderRoot);
-    });
+    .then(fn);
 }
 
 export default render;

@@ -26,6 +26,7 @@ function configure({ apiRoot, renderRoot }) {
 
   // listen for history changes and re-render; don't "break" back button
   // NOTE: intentionally wrapped in anonymous function to ensure no arguments
+  // istanbul ignore next
   window.onpopstate = () => render();
 
   config.apiRoot = apiRoot;

@@ -1,6 +1,6 @@
 {
   "name": "@luxui/lux",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Generate a web application hypermedia API client pages based on API responses.",
   "main": "dist/index.js",
   "files": [
