@@ -1,4 +1,4 @@
-jest.mock('./index');
+jest.mock('./render');
 
 jest.mock('../lib/luxPath');
 import luxPath from '../lib/luxPath';

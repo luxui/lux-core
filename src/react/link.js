@@ -5,7 +5,7 @@
 
 import React from 'react'; // Even if this isn't used it needs to be imported!
 
-import render from './index';
+import render from './render';
 
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
