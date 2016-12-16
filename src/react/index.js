@@ -1,5 +1,5 @@
 /**
- * @module lux-react
+ * @module luxReact
  */
 
 // import apiRequest from '../lib/apiRequest';

@@ -1,11 +1,11 @@
 /**
  * @module configure
- * @memberof core-lux
+ * @memberof luxReact
  */
 
-import render from './render';
-
 import { isString } from '../lib/is';
+
+import render from './render';
 
 const config = {};
 

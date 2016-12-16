@@ -1,14 +1,14 @@
 /**
  * @module Link
- * @memberof lux-react
+ * @memberof luxReact
  */
 
-import React from 'react'; // Even if this isn't used it needs to be imported!
-
-import render from './render';
+import React from 'react'; // `React` must be in scope when using JSX
 
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
+
+import render from './render';
 
 function attributeValue(name, attrs, defaultValue) {
   const isPresent = Object.keys(attrs).indexOf(name) > -1;

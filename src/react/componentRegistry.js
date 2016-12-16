@@ -1,6 +1,6 @@
 /**
  * @module componentRegistry
- * @memberof lux-react
+ * @memberof luxReact
  */
 
 import { isFunction, isString } from '../lib/is';

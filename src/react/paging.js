@@ -1,6 +1,6 @@
 /**
  * @module Paging
- * @memberof lux-react
+ * @memberof luxReact
  */
 
 import React from 'react'; // Even if this isn't used it needs to be imported!

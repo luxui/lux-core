@@ -3,7 +3,7 @@
  * @memberof lux-react/layout
  */
 
-import React from 'react'; // Even if this isn't used it needs to be imported!
+import React from 'react'; // `React` must be in scope when using JSX
 
 import registry from '../componentRegistry';
 

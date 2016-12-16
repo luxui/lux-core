@@ -1,20 +1,21 @@
 /**
- * @module lux-react
+ * @module render
+ * @memberof luxReact
  */
 
 import React from 'react'; // Even if this isn't used it needs to be imported!
 import ReactDOM from 'react-dom';
 
-import { config } from './config';
 import apiRequest from '../lib/apiRequest';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import { responseModelFormat } from '../lib/responseModel';
 
+import { config } from './config';
 import registry from './componentRegistry';
 
-const errorInvalidConfig = new Error('Lux must be configured before routing.');
-const errorInvalidPath = new Error('Paths must be strings.');
+const errorInvalidConfig = 'Lux must be configured before routing.';
+const errorInvalidPath = 'Paths must be strings.';
 const Layout = registry('Layout');
 
 function render(path) {
@@ -25,13 +26,15 @@ function render(path) {
   let pending;
 
   if (!config.apiRoot) {
-    pending = new Promise(resolve =>
-      resolve(responseModelFormat({}, errorInvalidConfig)));
+    pending = new Promise((resolve) => {
+      resolve(responseModelFormat({}, new Error(errorInvalidConfig)));
+    });
   } else if (!path || isString(path)) {
-    pending = apiRequest(config.apiRoot + luxPath(path));
+    pending = apiRequest(`${config.apiRoot}${luxPath(path)}`);
   } else {
-    pending = new Promise(resolve =>
-      resolve(responseModelFormat({}, errorInvalidPath)));
+    pending = new Promise((resolve) => {
+      resolve(responseModelFormat({}, new Error(errorInvalidPath)));
+    });
   }
 
   return pending
