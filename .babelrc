@@ -1,19 +1,23 @@
 {
   "env": {
     "production": {
-      "comments": false,
-      "minified": true,
+      "comments": true,
+      "minified": false,
       "presets": [
         "es2015-rollup",
+        "react",
         "stage-3"
       ]
     },
     "test": {
       "presets": [
         "es2015",
+        "react",
         "stage-3"
       ]
     }
   },
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": [
+    "transform-object-rest-spread"
+  ]
 }

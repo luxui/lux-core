@@ -1,15 +1,17 @@
 {
-  "name": "@luxui/core-lux",
-  "version": "0.3.4",
-  "description": "Admin UI as a Siren hypermedia client.",
+  "name": "@luxui/lux",
+  "version": "0.5.0",
+  "description": "Generate a web application hypermedia API client pages based on API responses.",
   "main": "dist/index.js",
   "files": [
-    "dist/index.js"
+    "dist/*.js",
+    "README.md",
+    "SIREN+LUX.md"
   ],
   "scripts": {
-    "bundle": "export NODE_ENV=production && rollup -c rollup.js",
-    "prebundle": "rm -rf ./dist/*",
-    "compile": "babel ./index.js",
+    "build": "export NODE_ENV=production && npm run bundle:react",
+    "prebuild": "rm -rf ./dist/*",
+    "bundle:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
     "doc": "jsdoc -c ./jsdoc.json",
     "predoc": "rm -rf ./docs/*",
     "test": "jest --watch",
@@ -17,25 +19,32 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/luxui/core-lux.git"
+    "url": "https://github.com/luxui/lux.git"
   },
   "keywords": [
     "hypermedia",
     "javascript",
     "js",
     "siren",
-    "client"
+    "client",
+    "react",
+    "reactjs"
   ],
   "author": "Joshua T Kalis <JoshKalis@QickenLoans.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/luxui/core-lux/issues"
+    "url": "https://github.com/luxui/lux/issues"
   },
-  "homepage": "https://github.com/luxui/core-lux#readme",
+  "homepage": "https://github.com/luxui/lux#readme",
   "devDependencies": {
+    "babel-preset-react": "^6.16.0",
     "jest": "^17.0.3",
     "jest-fetch-mock": "^1.0.6",
-    "jsdoc": "^3.4.3"
+    "jsdoc": "^3.4.3",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-test-renderer": "^15.4.1"
   },
   "dependencies": {
     "babel-cli": "^6.18.0",
@@ -47,6 +56,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
     "rollup": "^0.36.4",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-eslint": "^3.0.0",

@@ -1,0 +1,50 @@
+exports[`Header (supplied Layout) should match the (default) snapshot 1`] = `
+<header
+  className="main-header"
+  role="banner">
+  <h1>
+    <a
+      className="link--heroOrSomething"
+      href="/">
+      Home
+    </a>
+  </h1>
+  <navigation
+    id="mainnavigation"
+    role="navigation">
+    <ul>
+      <li
+        className="">
+        <a
+          className=""
+          href="/"
+          onClick={[Function]}
+          title="Home">
+          Home
+        </a>
+      </li>
+    </ul>
+  </navigation>
+  <noscript />
+</header>
+`;
+
+exports[`Header (supplied Layout) should pull the link with "index" for a rel as main link 1`] = `
+<header
+  className="main-header"
+  role="banner">
+  <h1>
+    <a
+      className="link--heroOrSomething"
+      href="/">
+      root
+    </a>
+  </h1>
+  <navigation
+    id="mainnavigation"
+    role="navigation">
+    <ul />
+  </navigation>
+  <noscript />
+</header>
+`;

@@ -1,0 +1,28 @@
+exports[`Navigation (supplied Layout) should identify the currently selected (self) menu item 1`] = `
+<navigation
+  id="mainnavigation"
+  role="navigation">
+  <ul>
+    <li
+      className="active">
+      <a
+        className="active"
+        href="/"
+        onClick={[Function]}
+        title="root">
+        root
+      </a>
+    </li>
+    <li
+      className="">
+      <a
+        className=""
+        href="/another"
+        onClick={[Function]}
+        title="another">
+        another
+      </a>
+    </li>
+  </ul>
+</navigation>
+`;

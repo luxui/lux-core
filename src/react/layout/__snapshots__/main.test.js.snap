@@ -1,0 +1,6 @@
+exports[`Main (supplied Layout) should match the snapshot 1`] = `
+<main
+  className="body-divider pbl"
+  id="maincontent"
+  role="main" />
+`;

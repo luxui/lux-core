@@ -1,0 +1,11 @@
+exports[`Auth (supplied Layout) should result in a \`<noscript />\` 1`] = `<noscript />`;
+
+exports[`Auth (supplied Layout) should result in a login link 1`] = `
+<a
+  className="auth-link link--plain"
+  href="http://example.com/login"
+  onClick={[Function]}
+  title="Log in">
+  Log in
+</a>
+`;
