@@ -1,15 +1,35 @@
 exports[`Link component should match the snapshot 1`] = `
 <a
   href="/hello"
-  onClick={[Function]}>
+  onClick={[Function]}
+  title="Hello">
   Hello
 </a>
 `;
 
-exports[`Link should match the snapshot 1`] = `
+exports[`Link component should match the snapshot; with alternate title attribute 1`] = `
 <a
   href="/hello"
-  onClick={[Function]}>
+  onClick={[Function]}
+  title="welcome">
+  Hello
+</a>
+`;
+
+exports[`Link component should match the snapshot; with child content 1`] = `
+<a
+  href="/hello"
+  onClick={[Function]}
+  title="Hello">
+  Hello
+</a>
+`;
+
+exports[`Link component should match the snapshot; with title 1`] = `
+<a
+  href="/hello"
+  onClick={[Function]}
+  title="Hello">
   Hello
 </a>
 `;

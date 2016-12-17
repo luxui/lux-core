@@ -1,5 +1,4 @@
-Work in progress
-================
+# Work in progress
 
   - [ ] migrate router
   - [ ] make sure all library files have a JSDoc block
@@ -17,3 +16,15 @@ Work in progress
 ## Maybe
 
   - [ ] compare output from: webpack, and rollup
+
+---
+
+# Siren Considerations
+
+  - [ ] Main menu ("section") and sub-menu ("sub-section") links
+  - [ ] Form layout ("view" action)
+  - [ ] Form field configuration
+    + [ ] Component types
+    + [ ] Validation
+  - [ ] New resources (link vs. action)
+  - [ ] Breadcrumbs

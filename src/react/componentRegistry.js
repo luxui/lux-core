@@ -26,6 +26,8 @@ function findInRegistry(obj, ...tail) {
     : obj[head];
 }
 
+// TODO: add third param - `noOverwrite` - to prevent "clobbering" an existing
+// component in the registry; returns true if stored, false if not successful.
 function register(path, fn) {
   if (!isString(path)) {
     throw new Error('Component identifiers are required and must be strings.');

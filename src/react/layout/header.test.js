@@ -8,12 +8,12 @@ const Header = registry('Header');
 
 describe('Header (supplied Layout)', function () {
   it('should exist; and should be a function', function () {
-    expect(typeof Header).toMatch(/function/i);
+    expect(typeof Header).toBe('function');
   });
 
   it('should match the (default) snapshot', function () {
     const component = renderer.create(
-      <Header />
+      <Header links={[]} properties={{}} title={''} />
     );
 
     let tree = component.toJSON();
@@ -25,7 +25,7 @@ describe('Header (supplied Layout)', function () {
       { href: '/', rel: ['index'], title: 'root' },
     ];
     const component = renderer.create(
-      <Header links={links}></Header>
+      <Header links={links} properties={{}} title={''}></Header>
     );
 
     let tree = component.toJSON();

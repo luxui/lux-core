@@ -1,6 +1,6 @@
 /**
- * @module ResponseModel
- * @memberof core-lux
+ * @module lib/responseModel
+ * @memberof luxCore
  */
 
 // not sure an exhastive list of acceptable status codes is necessary here
@@ -26,7 +26,7 @@ const SIREN = 'application/vnd.siren+json';
  *
  * @return {ResponseModel}
  */
-function responseModelFormat(response, error = false) {
+function format(response, error = false) {
 
   return {
     data: (error ? { error, response: response.data } : response.data),
@@ -43,13 +43,13 @@ function responseModelFormat(response, error = false) {
  *
  * @return {ResponseModel}
  */
-function responseModelHandler(response = {}) {
+function handler(response = {}) {
   const { status } = response;
 
   if (!rHTTPStatuses.test(status)) {
     const error = new Error(`Invalid HTTP status code: ${status}.`);
 
-    return responseModelFormat(response, error);
+    return format(response, error);
   }
 
   const statusClass = +(`${status}`)[0];
@@ -57,28 +57,27 @@ function responseModelHandler(response = {}) {
   switch (statusClass) {
     case 5: // 5xx = 500-599 - server error
 
-      return responseModelFormat(response, new Error(`Received ${status}.`));
+      return format(response, new Error(`Received ${status}.`));
     case 4: // 4xx = 400-499 - client error
 
-      return responseModelFormat(response, new Error(`Received ${status}.`));
+      return format(response, new Error(`Received ${status}.`));
     case 2: // 2xx = 200-299 - success
       if (response.headers.get('content-type') !== SIREN) {
         const type = response.headers.get('content-type');
         const error = new Error(`Invalid content-type, ${type}, returned.`);
 
-        return responseModelFormat(response, error);
+        return format(response, error);
       }
 
-      return responseModelFormat(response);
+      return format(response);
     // case 3: // 3xx = 300-399 - redirection
     // case 1: // 1xx = 100-199 - informational
     // eslint-disable-next-line no-case-declarations
     default: // anything else
       const error = new Error(`Unexpected HTTP status code: ${status}.`);
 
-      return responseModelFormat(response, error);
+      return format(response, error);
   }
 }
 
-export default responseModelHandler;
-export { responseModelFormat };
+export { format, handler };

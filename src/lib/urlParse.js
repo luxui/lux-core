@@ -1,6 +1,6 @@
 /**
- * @module urlParse
- * @memberof core-lux
+ * @module lib/urlParse
+ * @memberof luxCore
  */
 
 // FIXME: this module is probably a bad idea long-term but for the short-term

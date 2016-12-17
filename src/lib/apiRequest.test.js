@@ -1,5 +1,5 @@
 jest.mock('./responseModel');
-import responseModel from './responseModel';
+import { handler } from './responseModel';
 
 jest.mock('./storage');
 import storage from './storage';
@@ -7,7 +7,7 @@ import storage from './storage';
 import apiRequest from './apiRequest';
 
 // this will have its own tests; no need to validate in these tests
-responseModel.mockImplementation(_ => _);
+handler.mockImplementation(_ => _);
 
 describe('Lux - apiRequest', function () {
   it('should exist; and should be a function', function () {
@@ -66,11 +66,11 @@ describe('Lux - apiRequest', function () {
       .then(response => expect(response.retry).toBe('successful'));
   });
 
-  it('should call `responseModelHandler()`', function () {
+  it('should call `responseModel#handler()`', function () {
     const response = {model: 'response'};
     fetch.mockResponseOnce(JSON.stringify(response));
 
     return apiRequest('/shape')
-      .then(response => expect(responseModel).lastCalledWith(response));
+      .then(response => expect(handler).lastCalledWith(response));
   });
 });

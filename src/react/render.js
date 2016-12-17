@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import apiRequest from '../lib/apiRequest';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
-import { responseModelFormat } from '../lib/responseModel';
+import { format as responseModelFormat } from '../lib/responseModel';
 
 import { config } from './config';
 import registry from './componentRegistry';

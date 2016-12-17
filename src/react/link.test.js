@@ -20,10 +20,16 @@ describe('Link', function () {
 
   describe('component', function () {
     it('should exist; and should be a function', function () {
-      expect(typeof Link).toMatch(/function/i);
+      expect(typeof Link).toBe('function');
     });
 
-    it('should match the snapshot', function () {
+    it('should throw an error if no `title` is accessible', function () {
+      expect(function () {
+        renderer.create(<Link href="/hello"><img /></Link>);
+      }).toThrow('Links should always have a title attribute.');
+    });
+
+    it('should match the snapshot; with child content', function () {
       const component = renderer.create(
         <Link href="/hello">Hello</Link>
       );
@@ -32,10 +38,28 @@ describe('Link', function () {
       expect(tree).toMatchSnapshot();
     });
 
+    it('should match the snapshot; with title', function () {
+      const component = renderer.create(
+        <Link href="/hello" title="Hello" />
+      );
+
+      let tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('should match the snapshot; with alternate title attribute', function () {
+      const component = renderer.create(
+        <Link href="/hello" title="welcome">Hello</Link>
+      );
+
+      let tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
     it('should fire the clickHandler; with `noClickHandler=false`', function () {
       luxPath
-      .mockReturnValueOnce('/always')
-      .mockReturnValueOnce('/once');
+        .mockReturnValueOnce('/always')
+        .mockReturnValueOnce('/once');
 
       behavior.render(
         <Link href="/hello" noClickHandler="false">Hello</Link>
@@ -59,8 +83,8 @@ describe('Link', function () {
     it('should NOT fire the clickHandler; with `noClickHandler`', function () {
       let clicked = false;
       luxPath
-      .mockReturnValueOnce('/always')
-      .mockReturnValueOnce('/once');
+        .mockReturnValueOnce('/always')
+        .mockReturnValueOnce('/once');
 
       behavior.render(
         <Link href="/hello" noClickHandler onClick={() => { clicked = true; }}>Hello</Link>

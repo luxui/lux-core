@@ -1,6 +1,6 @@
 /**
- * @module Auth
- * @memberof lux-react/layout
+ * @module layout/Auth
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
@@ -35,7 +35,7 @@ function authComponent(props) {
   return (<Link {...attrs}>{attrs.title}</Link>);
 }
 authComponent.propTypes = {
-  ...shapeOfSiren
+  ...shapeOfSiren.links
 };
 
 registry('Auth', authComponent);

@@ -1,0 +1,20 @@
+exports[`Rest.Collection.List.Item should render a \`span\` tag 1`] = `
+<span>
+  Home
+   
+  <span
+    className="collection-items__icon" />
+</span>
+`;
+
+exports[`Rest.Collection.List.Item should render an \`a\` (anchor, or "link") tag 1`] = `
+<a
+  href="/home"
+  onClick={[Function]}
+  title="Home">
+  Home
+   
+  <span
+    className="collection-items__icon" />
+</a>
+`;

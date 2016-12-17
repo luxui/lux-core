@@ -1,0 +1,81 @@
+exports[`Paging should find and display "current" links 1`] = `
+<ul
+  className="paging-links">
+  <li
+    className="paging-links__item">
+    <a
+      className="paging-link__current"
+      href="http://example.com/foo-bar"
+      onClick={[Function]}
+      title="Foo Bar">
+      Foo Bar
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Paging should find and display "first" links 1`] = `
+<ul
+  className="paging-links">
+  <li
+    className="paging-links__item">
+    <a
+      className="paging-link__first"
+      href="http://example.com/foo-bar"
+      onClick={[Function]}
+      title="Foo Bar">
+      Foo Bar
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Paging should find and display "last" links 1`] = `
+<ul
+  className="paging-links">
+  <li
+    className="paging-links__item">
+    <a
+      className="paging-link__last"
+      href="http://example.com/foo-bar"
+      onClick={[Function]}
+      title="Foo Bar">
+      Foo Bar
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Paging should find and display "next" links 1`] = `
+<ul
+  className="paging-links">
+  <li
+    className="paging-links__item">
+    <a
+      className="paging-link__next"
+      href="http://example.com/foo-bar"
+      onClick={[Function]}
+      title="Foo Bar">
+      Foo Bar
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Paging should find and display "prev" links 1`] = `
+<ul
+  className="paging-links">
+  <li
+    className="paging-links__item">
+    <a
+      className="paging-link__prev"
+      href="http://example.com/foo-bar"
+      onClick={[Function]}
+      title="Foo Bar">
+      Foo Bar
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`Paging should render \`<noscript />\` if no paging links are present 1`] = `<noscript />`;

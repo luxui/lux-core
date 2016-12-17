@@ -1,6 +1,6 @@
 /**
- * @module has
- * @memberof core-lux
+ * @module lib/has
+ * @memberof luxCore
  */
 
 /**

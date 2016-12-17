@@ -1,6 +1,6 @@
 /**
- * @module storage
- * @memberof core-lux
+ * @module lib/storage
+ * @memberof luxCore
  */
 
 /**

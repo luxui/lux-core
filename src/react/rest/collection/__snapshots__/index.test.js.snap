@@ -1,0 +1,22 @@
+exports[`Collection should 1`] = `
+<div
+  className="collection-display">
+  <h2
+    className="heading--primary">
+    Resources
+  </h2>
+  <a
+    className="btn btn--primary mrl"
+    href="http://foo.bar/baz/new"
+    onClick={[Function]}
+    title="Foo Bar Baz">
+    Foo Bar Baz
+  </a>
+  <p>
+    No more 
+    Resources
+     to show.
+  </p>
+  <noscript />
+</div>
+`;

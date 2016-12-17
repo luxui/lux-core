@@ -1,5 +1,6 @@
 /**
  * @module lib/series
+ * @memberof luxCore
  */
 
 import { isFunction } from './is';

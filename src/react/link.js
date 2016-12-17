@@ -5,6 +5,7 @@
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
 
@@ -75,9 +76,14 @@ function isModifiedClick(event) {
  */
 function Link(props) {
   const attrs = { ...props };
-  const { children } = props;
+  const { children, title } = props;
 
   delete attrs.children;
+  if (title || isString(children)) {
+    attrs.title = title || children;
+  } else {
+    throw new Error('Links should always have a title attribute.');
+  }
 
   const handleClick = attributeValue('noClickHandler', attrs, true);
   delete attrs.noClickHandler;
@@ -89,13 +95,14 @@ function Link(props) {
   }
 
   return (
-    <a {...attrs}>{children}</a>
+    <a {...attrs}>{children || title}</a>
   );
 }
 Link.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: React.PropTypes.node,
   // eslint-disable-next-line react/no-unused-prop-types
   href: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string,
 };
 
 export default Link;

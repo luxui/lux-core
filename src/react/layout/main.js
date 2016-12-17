@@ -1,6 +1,6 @@
 /**
- * @module Main
- * @memberof lux-react
+ * @module layout/Main
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX

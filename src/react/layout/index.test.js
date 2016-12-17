@@ -8,20 +8,36 @@ const Layout = registry('Layout');
 
 describe('Layout (supplied Layout)', function () {
   it('should log an error because no content/data is provided', function () {
-    spyOn(console, 'error');//.and.callThrough();
+    const expected = [
+      'data',
+      'error',
+      'links',
+      'properties',
+      'title',
+    ];
+
+    // true: the errors will not be shown in the console output
+    // false: the errors will be logged to the console for debugging
+    true ? spyOn(console, 'error') : spyOn(console, 'error').and.callThrough();
     console.error.calls.reset();
 
-    expect(console.error.calls.count()).toBe(0);
-
     renderer.create(<Layout />);
-    expect(console.error.calls.count()).toBe(2);
+
+    const reported = console.error.calls.all()
+      .map(({ args: [arg] }) => {
+        const [_, prop] = /the prop `([^`]+)`/i.exec(arg);
+
+        return prop;
+      });
+
+    expect(reported).toEqual(expected);
   });
 
   it('should render an Error page', function () {
     const response = {
       data: {
-        data: {},
         error: new Error('Nothing worked.'),
+        response: {},
       },
       error: true,
       status: 500,

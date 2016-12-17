@@ -1,6 +1,6 @@
 /**
- * @module Footer
- * @memberof lux-react/layout
+ * @module layout/Footer
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX

@@ -1,5 +1,6 @@
 /**
  * @module lib/debounce
+ * @memberof luxCore
  */
 
 /**

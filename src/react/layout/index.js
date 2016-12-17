@@ -1,6 +1,6 @@
 /**
- * @module Layout
- * @memberof lux-react
+ * @module layout
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
@@ -33,7 +33,10 @@ function layoutComponent(props) {
 layoutComponent.propTypes = {
   data: React.PropTypes.oneOfType([
     React.PropTypes.shape({
-      error: React.PropTypes.string,
+      error: React.PropTypes.oneOfType([
+        React.PropTypes.string, // error string ...?
+        React.PropTypes.object, // Error object
+      ]),
       response: React.PropTypes.object,
     }),
     React.PropTypes.shape(shapeOfSiren),

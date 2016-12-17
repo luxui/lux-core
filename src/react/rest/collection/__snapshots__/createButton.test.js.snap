@@ -1,0 +1,11 @@
+exports[`Rest.Collection.CreateButton should render \`<noscript />\` when either \`href\` or \`title\` are falsey 1`] = `<noscript />`;
+
+exports[`Rest.Collection.CreateButton should render a link (anchor) tag 1`] = `
+<a
+  className="btn btn--primary mrl"
+  href="/home"
+  onClick={[Function]}
+  title="Home">
+  Home
+</a>
+`;

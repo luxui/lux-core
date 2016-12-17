@@ -7,12 +7,17 @@ import './main';
 const Main = registry('Main');
 
 describe('Main (supplied Layout)', function () {
-  it('should match the snapshot', function () {
-    const component = renderer.create(
-      <Main />
-    );
+  it('should exist; and should be a function', function () {
+    expect(typeof Main).toBe('function');
+  });
 
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  it('should match the snapshot', function () {
+    // const component = renderer.create(
+    //   <Main />
+    // );
+    //
+    // let tree = component.toJSON();
+    // expect(tree).toMatchSnapshot();
+    fail();
   });
 });

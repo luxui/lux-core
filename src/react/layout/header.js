@@ -1,6 +1,6 @@
 /**
- * @module Header
- * @memberof lux-react/layout
+ * @module layout/Header
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
@@ -65,7 +65,7 @@ function headerComponent(props) {
   );
 }
 headerComponent.propTypes = {
-  ...shapeOfSiren
+  ...shapeOfSiren.links
 };
 
 registry('Header', headerComponent);

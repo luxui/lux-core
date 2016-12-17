@@ -12,18 +12,7 @@ exports[`Header (supplied Layout) should match the (default) snapshot 1`] = `
   <navigation
     id="mainnavigation"
     role="navigation">
-    <ul>
-      <li
-        className="">
-        <a
-          className=""
-          href="/"
-          onClick={[Function]}
-          title="Home">
-          Home
-        </a>
-      </li>
-    </ul>
+    <ul />
   </navigation>
   <noscript />
 </header>

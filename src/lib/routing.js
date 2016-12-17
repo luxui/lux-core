@@ -1,6 +1,6 @@
 /**
- * @module routing
- * @memberof core-lux
+ * @module lib/routing
+ * @memberof luxCore
  */
 
 import { isString, isRegExp, isFunction } from './is';

@@ -1,6 +1,6 @@
 /**
- * @module Navigation
- * @memberof react-lux/Layout
+ * @module layout/Navigation
+ * @memberof layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX

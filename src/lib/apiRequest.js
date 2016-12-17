@@ -1,9 +1,9 @@
 /**
- * @module apiRequest
- * @memberof core-lux
+ * @module lib/apiRequest
+ * @memberof luxCore
  */
 
-import responseModelRequestHandler from './responseModel';
+import { handler as responseModelRequestHandler } from './responseModel';
 import storage from './storage';
 
 /**
