@@ -3,10 +3,14 @@
  * @memberof luxCore
  */
 
+import { isString } from './is';
+
+const rURLStart = /^(?:http[s]?:)|\/{1,2}|\?|#/;
+
 // FIXME: this module is probably a bad idea long-term but for the short-term
 // it'll have to be Ok.
 
-function queryToObject(search) {
+function queryObject(search) {
 
   return search
     ? search
@@ -62,6 +66,14 @@ function toValue(valueInQuestion) {
  * ```
  */
 function urlParse(url) {
+  if (!isString(url)) {
+    throw new Error(`URLs must be strings: "${typeof url}" provided.`);
+  }
+
+  if (url && !rURLStart.test(url)) {
+    throw new Error(`Unparsable URL: (${typeof url}) "${url}".`);
+  }
+
   const firstGroup = result => (result && result[1] ? result[1] : '');
 
   const str = `${url}`;
@@ -80,14 +92,12 @@ function urlParse(url) {
   const [pathname, query = ''] = path.split('?');
   const [hostname, port = ''] = host.split(':');
 
-  const param = queryToObject(query);
-
   return {
     auth,
     hash,
     host,
     hostname,
-    param,
+    param: queryObject(query),
     path,
     pathname,
     port,
@@ -98,3 +108,5 @@ function urlParse(url) {
 }
 
 export default urlParse;
+
+export { queryObject };
