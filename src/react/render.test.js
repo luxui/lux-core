@@ -22,7 +22,7 @@ describe('render', function () {
   it('should resolve to an error when `apiRoot` is not set in config', function () {
     config.renderRoot = '#renderRoot';
 
-    return render('', function (model) {
+    return render('', function (_, model) {
       expect(model.data.error).toEqual(new Error('Lux must be configured before routing.'));
     });
   });
@@ -31,8 +31,8 @@ describe('render', function () {
     config.renderRoot = '#renderRoot';
     config.apiRoot = 'http://foo.bar';
 
-    return render(1234, function (model) {
-      expect(model.data.error).toEqual(new Error('Paths must be strings.'));
+    return render(1234, function (_, model) {
+      expect(model.data.error).toEqual(new Error('Unparsable URL: (string) "1234".'));
     });
   });
 
@@ -40,11 +40,15 @@ describe('render', function () {
     config.renderRoot = '#renderRoot';
     config.apiRoot = 'http://foo.bar';
 
-    apiRequest
-      .mockReturnValueOnce(new Promise(resolve => resolve(config.apiRoot)));
+    const resolvedData = 'API response';
+    const resourcePath = '/anything';
 
-    return render('', function (model) {
-      expect(model).toBe(config.apiRoot);
+    apiRequest
+      .mockReturnValueOnce(new Promise(resolve => resolve(resolvedData)));
+
+    return render(resourcePath, function (path, model) {
+      expect(model).toBe(resolvedData);
+      expect(path).toBe(resourcePath);
     });
   });
 });
