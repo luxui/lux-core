@@ -63,7 +63,7 @@ describe('Library: luxPath', function () {
       expect(result).toBe(pathname);
     });
 
-    it('should', function () {
+    it('should parse partial with only query string', function () {
       const querystring = '?zxy=123';
       const location = `http://example.com${querystring}`
       const result = luxPath(location);
