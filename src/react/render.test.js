@@ -23,7 +23,7 @@ describe('render', function () {
     config.renderRoot = '#renderRoot';
 
     return render('', function (_, model) {
-      expect(model.data.error).toEqual(new Error('Lux must be configured before routing.'));
+      expect(model.error).toEqual(new Error('Lux must be configured before routing.'));
     });
   });
 
@@ -32,7 +32,7 @@ describe('render', function () {
     config.apiRoot = 'http://foo.bar';
 
     return render(1234, function (_, model) {
-      expect(model.data.error).toEqual(new Error('Unparsable URL: (string) "1234".'));
+      expect(model.error).toEqual(new Error('Unparsable URL: (string) "1234".'));
     });
   });
 

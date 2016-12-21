@@ -29,8 +29,8 @@ const SIREN = 'application/vnd.siren+json';
 function format(response, error = false) {
 
   return {
-    data: (error ? { error, response: response.data } : response.data),
-    error: !!error,
+    data: response.data,
+    error,
     status: response.status || 0,
   };
 }
