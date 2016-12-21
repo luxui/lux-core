@@ -6,20 +6,51 @@
 import React from 'react'; // `React` must be in scope when using JSX
 
 import registry from '../componentRegistry';
-import shapeOfSiren from '../siren.react';
+import routing from '../../lib/routing';
+import responseModelShape from '../responseModel.propType';
 
-function childFinder() {}
+import '../error';
+import '../rest/collection';
+import '../rest/item';
 
 function mainComponent(props) {
+  let Component;
+
+  try {
+    if (props.error) {
+      throw props.error;
+    }
+
+    const pageComponent = routing(props.path);
+
+    if (pageComponent) {
+      Component = pageComponent;
+    } else {
+      const type = props.data.class
+        .filter(item => /^(?:collection|item)$/.test(item))[0];
+
+      switch (type) {
+        case 'collection':
+          Component = registry('Rest.Collection');
+          break;
+        case 'item':
+          Component = registry('Rest.Item');
+          break;
+        default:
+          // eslint-disable-next-line max-len
+          throw new Error(`No appropriate Component for "${props.path}", returning "${props.data.class}" Siren \`class\`.`);
+      }
+    }
+  } catch (e) {
+    Component = registry('Error');
+  }
 
   return (
     <main className="body-divider pbl" id="maincontent" role="main">
-      {childFinder(props.class)}
+      <Component {...props.data} path={props.path} />
     </main>
   );
 }
-mainComponent.propTypes = {
-  ...shapeOfSiren
-};
+mainComponent.propTypes = responseModelShape;
 
 registry('Main', mainComponent);

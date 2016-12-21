@@ -1,0 +1,18 @@
+exports[`Error - main - Component should match the snapshot 1`] = `
+<section>
+  <h1>
+    Error
+  </h1>
+  <p>
+    Luxui encountered an error.
+  </p>
+  <p>
+    Error: Unforseen error.
+  </p>
+  <pre>
+    <code>
+      {}
+    </code>
+  </pre>
+</section>
+`;

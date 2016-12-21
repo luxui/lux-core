@@ -2,7 +2,7 @@ import React from 'react'; // `React` must be in scope when using JSX
 
 import registry from '../componentRegistry';
 
-import { siren } from '../siren.react';
+import { siren } from '../siren.propType';
 
 function FormComponent(props) {
 

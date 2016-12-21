@@ -10,7 +10,7 @@ import { hasAny, hasOne } from '../../../lib/has';
 import Link from '../../link';
 import randomKey from '../../randomKey';
 import registry from '../../componentRegistry';
-import shapeOfSiren from '../../siren.react';
+import shapeOfSiren from '../../siren.propType';
 
 function pagingComponent(props) {
   if (!props.links) {

@@ -7,7 +7,7 @@ import React from 'react'; // `React` must be in scope when using JSX
 
 import randomKey from '../../randomKey';
 import registry from '../../componentRegistry';
-import shapeOfSiren from '../../siren.react';
+import shapeOfSiren from '../../siren.propType';
 
 import './item';
 

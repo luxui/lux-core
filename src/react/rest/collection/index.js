@@ -9,7 +9,7 @@ import { hasOne } from '../../../lib/has';
 
 import randomKey from '../../randomKey';
 import registry from '../../componentRegistry';
-import shapeOfSiren from '../../siren.react';
+import shapeOfSiren from '../../siren.propType';
 
 import './createButton';
 import './list';

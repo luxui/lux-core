@@ -8,7 +8,7 @@ import React from 'react'; // `React` must be in scope when using JSX
 import '../../form';
 
 import registry from '../../componentRegistry';
-import shapeOfSiren from '../../siren.react';
+import shapeOfSiren from '../../siren.propType';
 
 import formModel from './formModel';
 

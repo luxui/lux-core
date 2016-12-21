@@ -10,7 +10,7 @@ import storage from '../../lib/storage';
 
 import Link from '../link';
 import registry from '../componentRegistry';
-import shapeOfSiren from '../siren.react';
+import shapeOfSiren from '../siren.propType';
 
 function authComponent(props) {
   const authAction = (props.actions || [])

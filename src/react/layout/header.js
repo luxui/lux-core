@@ -11,7 +11,7 @@ import './auth';
 import './navigation';
 
 import registry from '../componentRegistry';
-import shapeOfSiren from '../siren.react';
+import shapeOfSiren from '../siren.propType';
 
 /**
  * Creates the main header of the site layout.

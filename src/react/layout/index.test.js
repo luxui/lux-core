@@ -5,43 +5,74 @@ import registry from '../componentRegistry';
 
 import './index';
 const Layout = registry('Layout');
+const Header = registry('Header');
+const Main = registry('Main');
+const Footer = registry('Footer');
 
 describe('Layout (supplied Layout)', function () {
-  it('should log an error because no content/data is provided', function () {
-    const expected = [
-      'data',
-      'error',
-      'links',
-      'properties',
-      'title',
-    ];
+  let response;
 
-    // true: the errors will not be shown in the console output
-    // false: the errors will be logged to the console for debugging
-    true ? spyOn(console, 'error') : spyOn(console, 'error').and.callThrough();
-    console.error.calls.reset();
-
-    renderer.create(<Layout />);
-
-    const reported = console.error.calls.all()
-      .map(({ args: [arg] }) => {
-        const [_, prop] = /the prop `([^`]+)`/i.exec(arg);
-
-        return prop;
-      });
-
-    expect(reported).toEqual(expected);
+  afterEach(function () {
+    // set these back to original values
+    registry('Header', Header);
+    registry('Main', Main);
+    registry('Footer', Footer);
   });
 
-  it('should render an Error page', function () {
-    const response = {
+  beforeEach(function () {
+    response = {
       data: {
-        error: new Error('Nothing worked.'),
-        response: {},
+        mock: 'data'
       },
-      error: true,
-      status: 500,
+      error: false,
+      path: '',
+      status: 200,
     };
+  });
+
+  it('should not throw errors if nothing is provided', function () {
+    spyOn(console, 'error');
+    expect(function () {
+      renderer.create(<Layout />);
+    }).not.toThrow();
+  });
+
+  it('should pass responseModel.data to Header', function () {
+    spyOn(console, 'error');
+    registry('Header', (model) => {
+      expect(model).toEqual(response.data);
+
+      return (<p />);
+    });
+    renderer.create(<Layout {...response} />);
+  });
+
+  it('should pass responseModel.data to Footer', function () {
+    spyOn(console, 'error');
+    registry('Footer', (model) => {
+      expect(model).toEqual(response.data);
+
+      return (<p />);
+    });
+    renderer.create(<Layout {...response} />);
+  });
+
+  it('should pass responseModel to Main', function () {
+    spyOn(console, 'error');
+    registry('Main', (model) => {
+      expect(model).toEqual(response);
+
+      return (<p />);
+    });
+    renderer.create(<Layout {...response} />);
+  });
+
+  it('should match snapshot', function () {
+    const noComponent = () => (<noscript />);
+
+    registry('Header', noComponent);
+    registry('Main', noComponent);
+    registry('Footer', noComponent);
 
     const component = renderer.create(
       <Layout {...response}/>
