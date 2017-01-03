@@ -54,4 +54,8 @@ describe('configure', function () {
       expect(typeof window.onpopstate).toBe('function');
     }).not.toThrow();
   });
+
+  it('return an error when attempting to get a configuration property that doesn\'t exist', function () {
+    expect(configure('non-existent-key')).toEqual(new Error('Configuration key "non-existent-key" not found.'));
+  });
 });

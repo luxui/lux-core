@@ -9,7 +9,17 @@ import render from './render';
 
 const config = {};
 
-function configure({ apiRoot, renderRoot }) {
+function configure(arg) {
+
+  return isString(arg) ? get(arg) : set(arg);
+}
+
+function get(key) {
+
+  return config[key] || new Error(`Configuration key "${key}" not found.`);
+}
+
+function set({ apiRoot, renderRoot }) {
   if (!apiRoot) {
     throw new Error('Config property `apiRoot` not provided.');
   } else if (!isString(apiRoot)) {

@@ -45,8 +45,7 @@ export default {
   exports: 'named', // quiet the Rollup warning about named + default exports
   format,
   globals: {
-    // eslint-disable-next-line
-    'react': 'React',
+    'react': 'React', // eslint-disable-line quote-props
     'react-dom': 'ReactDOM',
   },
   moduleName,
