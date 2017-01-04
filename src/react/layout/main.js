@@ -1,12 +1,13 @@
 /**
- * @module layout/Main
- * @memberof layout
+ * @module react/layout/main
+ * @memberof react/layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import registry from '../componentRegistry';
+import registry from '../../lib/componentRegistry';
 import routing from '../../lib/routing';
+
 import responseModelShape from '../responseModel.propType';
 
 import '../error';
@@ -53,4 +54,4 @@ function mainComponent(props) {
 }
 mainComponent.propTypes = responseModelShape;
 
-registry('Main', mainComponent);
+registry('Main', mainComponent, false);

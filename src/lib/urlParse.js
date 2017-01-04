@@ -1,6 +1,6 @@
 /**
  * @module lib/urlParse
- * @memberof luxCore
+ * @memberof lux-lib
  */
 
 import { isString } from './is';
@@ -42,14 +42,6 @@ function toValue(valueInQuestion) {
 
 /**
  * Parse the parts of a URL into an object for use.
- *
- * @param  {string} str - The URL to parse.
- *
- * @return {object} - The parsed URL represented as an object conforming to the
- * diagram in the description; and from https://nodejs.org/dist/latest-v7.x/docs/api/url.html
- * (Source).
- *
- * @description
  * ```
  * ┌───────────────────────────────────────────────────────────────────────────┐
  * │                                  href                                     │
@@ -64,6 +56,24 @@ function toValue(valueInQuestion) {
  * └──────────┴┴─────────┴──────────┴──────┴──────────┴─┴──────────────┴───────┘
  * (all spaces in the "" are purely for formatting)
  * ```
+ *
+ * @param  {string} url - The URL to parse.
+ *
+ * @return {object} - The parsed URL represented as an object conforming to the
+ * diagram in the description; and from https://nodejs.org/dist/latest-v7.x/docs/api/url.html
+ * (Source).
+ *
+ * @example
+ * import urlParse from './urlParse';
+ *
+ * const { pathname } = urlParse('http://foo.bar/baz/boo?fizz=buzz');
+ * // pathname === '/baz/boo'
+ *
+ * @example
+ * import { queryObject } from './urlParse';
+ *
+ * const { foo } = queryObject('?foo=bar');
+ * // foo === 'bar'
  */
 function urlParse(url) {
   if (!isString(url)) {

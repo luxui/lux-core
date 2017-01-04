@@ -1,13 +1,13 @@
 /**
- * @module Rest.Collection/CreateButton
- * @memberof Rest.Collection
+ * @module react/rest/collection/createButton
+ * @memberof react/rest/collection
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import Link from '../../link';
+import registry from '../../../lib/componentRegistry';
 
-import registry from '../../componentRegistry';
+import Link from '../../link';
 
 function RestCollectionCreateButton({ href, title }) {
   if (!href || !title) {

@@ -1,14 +1,14 @@
 /**
- * @module Rest.Collection
- * @memberof Rest.Collection
+ * @module react/rest/collection
+ * @memberof react/rest
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import registry from '../../../lib/componentRegistry';
 import { hasOne } from '../../../lib/has';
 
 import randomKey from '../../randomKey';
-import registry from '../../componentRegistry';
 import shapeOfSiren from '../../siren.propType';
 
 import './createButton';

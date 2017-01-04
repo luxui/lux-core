@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import registry from '../../componentRegistry';
+import registry from '../../../lib/componentRegistry';
 
 import './item';
 const Item = registry('Rest.Collection.List.Item');

@@ -1,17 +1,17 @@
 /**
- * @module render
- * @memberof luxReact
+ * @module react/render
+ * @memberof react
  */
 
 import React from 'react'; // Even if this isn't used it needs to be imported!
 import ReactDOM from 'react-dom';
 
 import apiRequest from '../lib/apiRequest';
+import registry from '../lib/componentRegistry';
 import luxPath from '../lib/luxPath';
 import { format as responseModelFormat } from '../lib/responseModel';
 
 import { config } from './config';
-import registry from './componentRegistry';
 
 const errorInvalidConfig = 'Lux must be configured before routing.';
 const Layout = registry('Layout');

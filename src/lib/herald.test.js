@@ -53,4 +53,14 @@ describe('heraldFactory', function () {
     instance('again, anything but a function');
     expect(count).toBe(31);
   });
+
+  it('should pass additional parameters to listeners', function () {
+    const remove = herald((a, b, c) => {
+      expect(a).toBe(1);
+      expect(b).toBe(2);
+      expect(c).toBe(3);
+    });
+
+    herald(1, 2, 3);
+  });
 });

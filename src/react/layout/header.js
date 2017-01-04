@@ -1,16 +1,16 @@
 /**
- * @module layout/Header
- * @memberof layout
+ * @module react/layout/header
+ * @memberof react/layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import registry from '../../lib/componentRegistry';
 import { hasOne } from '../../lib/has';
 
 import './auth';
 import './navigation';
 
-import registry from '../componentRegistry';
 import shapeOfSiren from '../siren.propType';
 
 /**
@@ -68,5 +68,4 @@ headerComponent.propTypes = {
   ...shapeOfSiren.links
 };
 
-registry('Header', headerComponent);
-export default registry('Header');
+registry('Header', headerComponent, false);

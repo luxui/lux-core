@@ -1,15 +1,15 @@
 /**
- * @module Paging
- * @memberof Rest.Collection
+ * @module react/rest/collection/paging
+ * @memberof react/rest/collection
  */
 
 import React from 'react'; // Even if this isn't used it needs to be imported!
 
+import registry from '../../../lib/componentRegistry';
 import { hasAny, hasOne } from '../../../lib/has';
 
 import Link from '../../link';
 import randomKey from '../../randomKey';
-import registry from '../../componentRegistry';
 import shapeOfSiren from '../../siren.propType';
 
 function pagingComponent(props) {

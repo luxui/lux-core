@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import registry from '../../componentRegistry';
+import registry from '../../../lib/componentRegistry';
 
 import './createButton';
 const Button = registry('Rest.Collection.CreateButton');

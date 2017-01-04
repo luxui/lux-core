@@ -1,13 +1,13 @@
 /**
- * @module Rest.Collection/Item
- * @memberof Rest.Collection
+ * @module react/rest/collection/list/item
+ * @memberof react/rest/collection/list
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import Link from '../../link';
+import registry from '../../../lib/componentRegistry';
 
-import registry from '../../componentRegistry';
+import Link from '../../link';
 
 const icon = (<span className="collection-items__icon" />);
 

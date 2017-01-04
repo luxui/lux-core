@@ -1,13 +1,12 @@
 /**
  * @module lib/routing
- * @memberof luxCore
+ * @memberof lux-lib
  */
 
 import { isString, isRegExp, isFunction } from './is';
 
 const cache = {};
-let errorHandler = null;
-const routes = [];
+const routeHandlers = [];
 
 /**
  * @callback PathHandler
@@ -19,7 +18,7 @@ const routes = [];
 
 /**
  * @typedef PathMatcher
- * @type {PathMatcherFn|RegExp|String}
+ * @type {(PathMatcherFn|RegExp|string)}
  * @global
  *
  * @description
@@ -34,7 +33,7 @@ const routes = [];
  *
  * @param {LuxPath} path - The path to test against.
  *
- * @returns {Boolean} - Returns `true` if the `path` parameter is a match; all
+ * @returns {boolean} - Returns `true` if the `path` parameter is a match; all
  * other return values are assumed to be falsey.
  */
 
@@ -43,20 +42,23 @@ function errorString(str) {
   return `${str} provided to routing API.`;
 }
 
+// Attempt to match the path with the matchers in routeHandlers.
 function lookup(path) {
   if (!cache[path]) {
-    const found = routes
+    const found = routeHandlers
       // eslint-disable-next-line no-unused-vars
       .filter(([_, matcherFn]) => matcherFn(path))[0];
 
     cache[path] = found
       ? found.pop()
-      : errorHandler;
+      : cache['/error'];
   }
 
   return cache[path];
 }
 
+// Store the matcher in the list of routeHandlers checking for duplication or
+// collision.
 function register(matcher, handler) {
   if (!handler || !isFunction(handler)) {
     throw new Error(errorString('No "handler" function'));
@@ -68,27 +70,32 @@ function register(matcher, handler) {
   }
 
   if (matcher === '/error') {
-    cache['/error'] = errorHandler = handler;
+    cache['/error'] = handler;
 
     return;
   }
 
-  const found = routes
-    .filter(([m]) => m === matcher.toString())[0];
+  const matcherID = matcher.toString();
+  const found = routeHandlers
+    .filter(([id]) => id === matcherID)[0];
 
   if (found) {
     // eslint-disable-next-line max-len
-    throw new Error(`Routing API already has a handler registerd for PathMatcher: ${matcher.toString()}.`);
-  } else if (isString(matcher)) {
-    routes
-      .push([matcher.toString(), path => matcher === path, handler]);
-  } else if (isRegExp(matcher)) {
-    routes
-      .push([matcher.toString(), path => matcher.test(path), handler]);
-  } else {
-    routes
-      .push([matcher.toString(), matcher, handler]);
+    throw new Error(`Routing API already has a handler registerd for PathMatcher: ${matcherID}.`);
   }
+
+  let check;
+
+  if (isString(matcher)) {
+    check = path => matcher === path;
+  } else if (isRegExp(matcher)) {
+    check = path => matcher.test(path);
+  } else {
+    check = matcher;
+  }
+
+  routeHandlers
+    .push([matcherID, check, handler]);
 }
 
 /**
@@ -100,6 +107,23 @@ function register(matcher, handler) {
  * @param  {PathHandler} handler - The handler for a given URI.
  *
  * @return {PathHandler} - The handler for a matched URI.
+ *
+ * @example
+ * import routing from './routing';
+ *
+ * // register a handler for a route
+ * routing('/home', awesomeRouteHandler);
+ * // returns undefined
+ *
+ * @example
+ * import routing from './routing';
+ *
+ * // look for a handler
+ * routing('/home');
+ * // returns awesomeRouteHandler
+ *
+ * routing('/non-existent-route');
+ * // returns undefined
  */
 function routing(matcher, handler) {
   if (!matcher) {

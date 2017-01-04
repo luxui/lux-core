@@ -1,15 +1,14 @@
 /**
- * @module Link
- * @memberof luxReact
+ * @module react/link
+ * @memberof react
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import herald from '../lib/herald';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
-
-import render from './render';
 
 function attributeValue(name, attrs, defaultValue) {
   const isPresent = Object.keys(attrs).indexOf(name) > -1;
@@ -31,9 +30,7 @@ function clickHandler(event) {
     const newPath = luxPath(clickedLink.href);
 
     if (newPath !== luxPath(window.location)) {
-      // TODO: integrate with Redux store; emit an event: "navigate"
-      // this will allow for easier extension without needing to reimplementing
-      render(newPath);
+      herald('render', newPath);
       history.pushState(null, '', newPath);
     }
   }

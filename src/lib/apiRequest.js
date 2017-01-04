@@ -1,7 +1,9 @@
 /**
  * @module lib/apiRequest
- * @memberof luxCore
+ * @memberof lux-lib
  */
+
+import herald from './herald';
 
 import { handler as responseModelRequestHandler } from './responseModel';
 import storage from './storage';
@@ -20,23 +22,27 @@ import storage from './storage';
  * #NOTE: `apiRequest()` relies on the fetch API to be globally available; if
  * needed make sure to polyfill with `whatwg-fetch`.
  *
- * @param  {String} [URI='/'] - The URI of the resource to retrieve.
- * @param  {Object} [options={}] - Additional options for the request; this
+ * @param  {string} [URI='/'] - The URI of the resource to retrieve.
+ * @param  {object} [options={}] - Additional options for the request; this
  * object is transparently (mostly) passed to the fetch API. Augmentations:
  *
  *   1. HTTP methods are upper-cased
  *   2. Request body is stringified
  *   3. A sesion token is added to `headers.authorization`
  *
- * @return {Promise} - The returned Promise object will have the resulting json
+ * @return {promise} - The returned Promise object will have the resulting json
  * response resolved so that callers will not need to repeatedly call
  * `.then(response => response.json())`.
  *
  * @example
+ * import apiRequest from './apiRequest';
+ *
  * apiRequest('http://example.com/')
  *   .then(response => doSomethingWith(response));
  *
  * @example
+ * import apiRequest from './apiRequest';
+ *
  * const options = {
  *   body: {property: 'Update'},
  *   method: 'POST',
@@ -78,10 +84,7 @@ function retryFactory(URI, options) {
 
       return fetch(URI, options)
         .then((response) => {
-          // FIXME: use Redux to emit an event to reset the token, rather then
-          // resetting the token directly here.
-          // reset the authToken only if a retry succeeds without it
-          storage({ reset: 'authToken' });
+          herald('logout');
 
           return response;
         });

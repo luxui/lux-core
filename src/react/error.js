@@ -1,12 +1,13 @@
 /**
- * @module Error
- * @memberof luxReact
+ * @module react/error
+ * @memberof react
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import registry from '../lib/componentRegistry';
+
 // import Link from './link';
-import registry from './componentRegistry';
 import responseModelShape from './responseModel.propType';
 
 function errorComponent(props) {

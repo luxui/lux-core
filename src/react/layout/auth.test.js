@@ -5,7 +5,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import renderer from 'react-test-renderer';
 
-import registry from '../componentRegistry';
+import registry from '../../lib/componentRegistry';
 
 import './auth';
 const Auth = registry('Auth');

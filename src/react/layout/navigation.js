@@ -1,14 +1,14 @@
 /**
- * @module layout/Navigation
- * @memberof layout
+ * @module react/layout/navigation
+ * @memberof react/layout
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
+import registry from '../../lib/componentRegistry';
 import { hasOne } from '../../lib/has';
 
 import Link from '../link';
-import registry from '../componentRegistry';
 
 function linksReduce(acc, link) {
   if (hasOne('rel', 'section', link)) {
@@ -61,4 +61,4 @@ navigationComponent.propTypes = {
   })).isRequired,
 };
 
-registry('Navigation', navigationComponent);
+registry('Navigation', navigationComponent, false);

@@ -1,13 +1,21 @@
 /**
- * @module luxReact
+ * @module react
  */
 
 // import React from 'react'; // `React` must be in scope when using JSX
 
+import herald from '../lib/herald';
 import routing from '../lib/routing';
 
 import configure from './config';
 import render from './render';
+
+herald((message, path) => {
+  /* istanbul ignore else */
+  if (message === 'render') {
+    render(path);
+  }
+});
 
 function luxReact(path) {
   const root = configure('apiRoot');
@@ -20,7 +28,7 @@ function luxReact(path) {
     // and requesting the resource will either get the resource or an error
     : `${root}${path}`;
 
-  return render(URI);
+  return herald('render', URI);
 }
 
 // export functions for project use

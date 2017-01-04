@@ -1,12 +1,3 @@
-exports[`Link component should match the snapshot 1`] = `
-<a
-  href="/hello"
-  onClick={[Function]}
-  title="Hello">
-  Hello
-</a>
-`;
-
 exports[`Link component should match the snapshot; with alternate title attribute 1`] = `
 <a
   href="/hello"

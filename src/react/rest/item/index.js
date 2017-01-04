@@ -1,13 +1,13 @@
 /**
- * @module Rest.Item
- * @memberof Rest.Item
+ * @module react/rest/item
+ * @memberof react/rest
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import '../../form';
+import registry from '../../../lib/componentRegistry';
 
-import registry from '../../componentRegistry';
+import '../../form';
 import shapeOfSiren from '../../siren.propType';
 
 import formModel from './formModel';

@@ -1,6 +1,6 @@
 /**
  * @module lib/debounce
- * @memberof luxCore
+ * @memberof lux-lib
  */
 
 /**
@@ -11,10 +11,21 @@
  *
  * For a little more on debounce checkout [JavaScript Debounce Function](https://davidwalsh.name/javascript-debounce-function).
  *
+ * @param  {function} fn - function to call once delay has elapsed
+ *
+ * @param  {number} [delay=300] - time in miliseconds to delay
+ *
+ * @param  {window} [global=window] - the global object with:
+ * #clearTimeout(), and #setTimeout()
+ *
+ * @return {function} - debounced function
+ *
  * @example
+ * import debounce from './debounce';
+ *
  * // Typical use-case - no context - to prevent unnecessary execution.
  * function usernameCheck(event) {
- *  // ... use AJAX to query the server if the username is taken
+ *   // ... use AJAX to query the server if the username is taken
  * }
  *
  * const debouncedFn = debounce(usernameCheck, 400);
@@ -22,25 +33,17 @@
  * $('.usernameField').on('change', debouncedFn);
  *
  * @example
+ * import debounce from './debounce';
+ *
  * // Contrived use-case - providing a context.
  * function otherFunctionality(event) {
- *  // ... use the context - this - is some interesting way
+ *   // ... use the context - this - is some interesting way
  * }
  *
  * const $element = $('..usernameField');
  * const debouncedFn = debounce.call($element, otherFunctionality, 400);
  *
  * $element.on('change', debouncedFn);
- *
- * @param  {function} fn - function to call once delay has elapsed
- *
- * @param  {number}   [delay=300] - time in miliseconds to delay
- *
- * @param  {window}   [global=window] - the global object with:
- * #clearTimeout(), and #setTimeout()
- *
- * @return {function}
- *         debounced function
  */
 function debounce(fn, delay = 300, global = window) {
   const context = this;

@@ -1,6 +1,6 @@
 import lib from './series';
 
-describe('Utility: series', () => {
+describe('series', () => {
   it('should exist', () => {
     expect(lib).toBeDefined();
   });
@@ -11,7 +11,7 @@ describe('Utility: series', () => {
     const series = lib(
       x => count += x,
       x => count += x,
-      x => count += x
+      x => count += x,
     );
 
     series(1);

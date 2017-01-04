@@ -1,6 +1,6 @@
 /**
  * @module lib/series
- * @memberof luxCore
+ * @memberof lux-lib
  */
 
 import { isFunction } from './is';
@@ -12,6 +12,15 @@ import { isFunction } from './is';
  * @param  {function} [allFunctions] - All functions in the series.
  *
  * @return {function} - The composed function.
+ *
+ * @example
+ * import series from './series';
+ *
+ * const fnA = () => console.log('Hello, ');
+ * const fnB = () => console.log('world.');
+ * const functions = series(fnA, fnB);
+ * functions();
+ * // both fnA and fnB are called
  */
 function series(...allFunctions) {
   function composition(...args) {

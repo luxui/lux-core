@@ -27,9 +27,23 @@ describe('componentRegistry', function () {
     }).toThrow(new Error('React components must be functions.'));
   });
 
+  it('should overwrite an existing component by default', function () {
+    registry('Hello', () => 'Goodbye');
+    registry('Hello', () => 'Hello');
+
+    expect(registry('Hello')()).toBe('Hello');
+  });
+
+  it('should NOT overwrite an existing component when indicating not to', function () {
+    registry('Hello', () => 'Hello');
+    registry('Hello', () => 'Goodbye', false);
+
+    expect(registry('Hello')()).toBe('Hello');
+  });
+
   it('should throw an error if too many arguments are provided', function () {
     expect(function () {
-      registry('', () => {}, 1234);
+      registry('', () => {}, true, 234);
     }).toThrow(new Error('Too many arguments provided to componentRegistry.'));
   });
 });

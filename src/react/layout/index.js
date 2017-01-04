@@ -1,11 +1,12 @@
 /**
- * @module layout
- * @memberof layout
+ * @module react/layout
+ * @memberof react
  */
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import registry from '../componentRegistry';
+import registry from '../../lib/componentRegistry';
+
 import responseModelShape from '../responseModel.propType';
 
 import './footer';
@@ -18,6 +19,7 @@ const skip = {
   title: 'Skip to main content',
 };
 
+// TODO: jsdoc-bloc this!
 function layoutComponent(props) {
   const Footer = registry('Footer');
   const Header = registry('Header');
@@ -34,4 +36,4 @@ function layoutComponent(props) {
 }
 layoutComponent.propTypes = responseModelShape;
 
-registry('Layout', layoutComponent);
+registry('Layout', layoutComponent, false);

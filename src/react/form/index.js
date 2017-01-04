@@ -1,6 +1,6 @@
 import React from 'react'; // `React` must be in scope when using JSX
 
-import registry from '../componentRegistry';
+import registry from '../../lib/componentRegistry';
 
 import { siren } from '../siren.propType';
 

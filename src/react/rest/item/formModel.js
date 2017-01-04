@@ -1,6 +1,6 @@
 /**
- * @module formModel
- * @memberof Rest.Item
+ * @module react/rest/item/formModel
+ * @memberof react/rest/item
  */
 
 import { hasOne } from '../../../lib/has';

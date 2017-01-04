@@ -1,6 +1,6 @@
 /**
  * @module lib/responseModel
- * @memberof luxCore
+ * @memberof lux-lib
  */
 
 // not sure an exhastive list of acceptable status codes is necessary here
@@ -9,22 +9,27 @@ const rHTTPStatuses = /^[1-5]\d\d/;
 const SIREN = 'application/vnd.siren+json';
 
 /**
- * @typedef ResponseModel
- * @type {Object}
+ * @typedef {object} ResponseModel
  * @global
  *
- * @property {(Object|undefined)} data
- * @property {(Boolean|Error)} error
- * @property {(Number|undefined)} status
+ * @property {(object|undefined)} data
+ * @property {(boolean|error)} error
+ * @property {(number|undefined)} status
  */
 
 /**
  * Create a new ResponseModel from an API response.
  *
- * @param  {Object}  response - The data object to format into a ResponseModel.
- * @param  {(Boolean)} [error=false] - The error or nothing.
+ * @param  {object}  response - The data object to format into a ResponseModel.
+ * @param  {boolean} [error=false] - The error or nothing.
  *
  * @return {ResponseModel}
+ *
+ * @example
+ * import { format } from './responseModel';
+ *
+ * format({ data: 'Hello', status: 200 });
+ * // returns { data: 'Hello', error: false, status: 200 }
  */
 function format(response, error = false) {
 
@@ -39,9 +44,19 @@ function format(response, error = false) {
  * Promise handler for HTTP requests for converting HTTP responses into a
  * standardized ResponseModel.
  *
- * @param  {Object} response - The response object to convert.
+ * @param  {object} response - The response object to convert.
  *
  * @return {ResponseModel}
+ *
+ * @example
+ * import { handler } from './responseModel';
+ *
+ * fetch(apiURI)
+ *   .then(handler)
+ *   .then(response => {
+ *     // ...
+ *     // do something with response, which will be of the form ResponseModel
+ *   });
  */
 function handler(response = {}) {
   const { status } = response;

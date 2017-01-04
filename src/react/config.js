@@ -1,6 +1,6 @@
 /**
- * @module configure
- * @memberof luxReact
+ * @module react/configure
+ * @memberof react
  */
 
 import { isString } from '../lib/is';

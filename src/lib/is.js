@@ -1,6 +1,6 @@
 /**
- * @module lib/has
- * @memberof luxCore
+ * @module lib/is
+ * @memberof lux-lib
  */
 
 /**
@@ -10,7 +10,7 @@
  * A function that returns true if the parameter matches the type the function
  * is expecting.
  *
- * @param {any} - A variable reference to evaluate against its type:
+ * @param {any} - A variable to evaluate against its type:
  *
  *  - Array
  *  - Function
@@ -21,6 +21,12 @@
  *
  * @return {bool} - The result of the test against the type the function is
  * expecting.
+ *
+ * @example
+ * import { isString } from './is';
+ *
+ * isString('Hello');
+ * // returns true
  */
 
 const isType = (type, q) => `[object ${type}]` === ({}).toString.call(q);

@@ -2,7 +2,7 @@ jest.mock('../lib/apiRequest');
 import apiRequest from '../lib/apiRequest';
 
 import { config } from './config';
-import registry from './componentRegistry';
+import registry from '../lib/componentRegistry';
 import render from './render';
 
 describe('render', function () {
