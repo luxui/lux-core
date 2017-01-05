@@ -65,7 +65,7 @@ function headerComponent(props) {
   );
 }
 headerComponent.propTypes = {
-  ...shapeOfSiren.links
+  ...shapeOfSiren.links,
 };
 
 registry('Header', headerComponent, false);

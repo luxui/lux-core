@@ -18,8 +18,12 @@ herald((message, path) => {
 });
 
 function luxReact(path) {
+  // FIXME: change the name of `configure` here as it might be misleading as a
+  // "getter" and not a "setter".
   const root = configure('apiRoot');
 
+  // FIXME: this might be a candidate to move back to apiRequest; as it is
+  // logic that any implementation will need.
   const URI = routing(path)
     // if the path is registered with the routing API it is a page and therefor
     // not "backed" by the API so load the "root" resource for meta information

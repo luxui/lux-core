@@ -84,5 +84,5 @@ function heraldFactory() {
 export default heraldFactory();
 
 export {
-  heraldFactory
+  heraldFactory,
 };

@@ -22,12 +22,12 @@ function linksReduce(acc, link) {
 
     const itemAttrs = {
       className,
-      key: `navigation-${linkAttrs.href}-${linkAttrs.title}`
+      key: `navigation-${linkAttrs.href}-${linkAttrs.title}`,
     };
 
     return [
       ...acc,
-      <li {...itemAttrs}><Link {...linkAttrs}>{linkAttrs.title}</Link></li>
+      <li {...itemAttrs}><Link {...linkAttrs}>{linkAttrs.title}</Link></li>,
     ];
   }
 

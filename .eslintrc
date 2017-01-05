@@ -13,19 +13,15 @@
     }
   },
   "rules": {
-    "comma-dangle": 0,
     "react/jsx-filename-extension": 0,
     "react/sort-comp": 0,
     "max-len": [1, {
-      "ignorePattern": "eslint-ignore-long-line",
       "ignoreUrls": true
     }],
     "no-param-reassign": 0,
     "no-use-before-define": ["error", {
       "functions": false
     }],
-    "padded-blocks": 0,
-    "prefer-rest-params": 1,
-    "jsx-a11y/label-has-for": 1
+    "padded-blocks": 0
   }
 }

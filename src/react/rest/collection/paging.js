@@ -49,16 +49,14 @@ function pagingComponent(props) {
     ? (
       <ul className="paging-links">
         {pagingLinks
-          .map(link => (
-            <li className="paging-links__item" key={randomKey()}>{link}</li>
-          )
-        )}
+          // eslint-disable-next-line max-len
+          .map(link => <li className="paging-links__item" key={randomKey()}>{link}</li>)}
       </ul>
     )
     : (<noscript />);
 }
 pagingComponent.propTypes = {
-  links: shapeOfSiren.links
+  links: shapeOfSiren.links,
 };
 
 registry('Rest.Collection.Paging', pagingComponent);

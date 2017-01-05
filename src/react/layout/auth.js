@@ -43,7 +43,7 @@ function authComponent(props) {
   return (<Link {...attrs}>{attrs.title}</Link>);
 }
 authComponent.propTypes = {
-  ...shapeOfSiren.links
+  ...shapeOfSiren.links,
 };
 
 registry('Auth', authComponent, false);

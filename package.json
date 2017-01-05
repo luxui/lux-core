@@ -9,13 +9,14 @@
     "SIREN+LUX.md"
   ],
   "scripts": {
-    "build": "export NODE_ENV=production && npm run bundle:react",
+    "build": "export NODE_ENV=production && npm run build:react",
     "prebuild": "rm -rf ./dist/*",
-    "bundle:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
+    "build:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
     "doc": "jsdoc -c ./jsdoc.json",
     "predoc": "rm -rf ./docs/*",
-    "test": "jest --watch",
-    "test:cover": "jest --coverage"
+    "lint": "eslint src/",
+    "start": "jest --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,10 @@
     "reactjs"
   ],
   "author": "Joshua T Kalis <JoshKalis@QickenLoans.com>",
+  "contributors": [],
+  "maintainers": [
+    "Joshua T Kalis <kalisjoshua@gmail.com.com> (kalisjoshua.me)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/luxui/lux/issues"

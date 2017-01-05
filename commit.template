@@ -1,0 +1,13 @@
+# 52 characters --------------------------------->|
+Summary; capitalized; imperative mood; no period
+
+# 72 characters ----------------------------------------------------->|
+Detailed description of changes if not summarized completely by the
+first line title summary; lines in this detailed description should
+wrap around 72 characters.
+
+# Additional paragraphs separated by blank lines. All content should
+# use the imperative mood and focus on answering for WHAT and was
+# changed and, possibly, also WHY; avoid explaining HOW.
+
+# [fixes|closes] #0000

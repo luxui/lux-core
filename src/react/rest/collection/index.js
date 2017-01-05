@@ -27,7 +27,7 @@ function createLinks(links) {
       if (/^create/.test(action.name)) {
         const link = {
           ...action,
-          href: `${action.href}/new`
+          href: `${action.href}/new`,
         };
 
         acc.push(<CreateButton {...link} key={randomKey()} />);
@@ -58,7 +58,7 @@ function restCollectionComponent(props) {
   );
 }
 restCollectionComponent.propTypes = {
-  ...shapeOfSiren
+  ...shapeOfSiren,
 };
 
 registry('Rest.Collection', restCollectionComponent);

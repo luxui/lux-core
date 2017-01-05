@@ -39,7 +39,7 @@ function storage(key, value, config = {}) {
   const { prefix, store } = {
     prefix: 'luxui--',
     store: window.localStorage,
-    ...config
+    ...config,
   };
   const { reset } = key;
 
