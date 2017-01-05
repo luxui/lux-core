@@ -1,8 +1,8 @@
 {
   "name": "@luxui/lux",
-  "version": "0.6.0",
-  "description": "Generate a web application hypermedia API client pages based on API responses.",
-  "main": "dist/index.js",
+  "version": "0.7.0",
+  "description": "A client-side, in-browser single-page application, UI for Siren hypermedia APIs.",
+  "main": "dist/reactLux.js",
   "files": [
     "dist/*.js",
     "README.md",
