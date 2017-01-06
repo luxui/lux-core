@@ -1,36 +1,69 @@
 Siren+lux
 =========
 
-[Siren] is a hypermedia specification which has affordances for more than simple/static data transfer in: actions, entities, and links. These additional affordances enable the API to provide more - if not all - necessary application control information in each response. This additional information means that the application and API need to have less "[shared knowledge](#shared-knowledge)"; and therefore puts all control of the application in the domain of the API. The UI is then only responsible for display based on the API responses.
+[Siren] is a hypermedia specification which has affordances for more than
+simple/static data transfer in: `actions`, `entities`, and `links`. These
+additional affordances enable the API to provide more - if not all - necessary
+application control information in each response. This additional information
+means that the application and API need to have less "[shared knowledge]"; and
+therefore puts all control of the application in the domain of the API. The UI
+is then only responsible for display based on the API responses.
 
 ## Action Classes
 
-All actions in a Siren response have an Array property `class` which will indicate to lux what the action type is; the valid action classes are:
+Each `action` must answer - at least - two questions with the `class` property:
+the scope, and the intent of the action. The **scope** will answer for the
+*what* of its effect and the **intent** will answer for the *how* of the effect.
 
-  - delete - used to request a resource be removed from the API
-  - submit - generically intended for submitting a form; "submit" could be:
-    * PUT requests against an existing resource
-    * POST requests such as a login form credentials
-    * PATCH requests
-  - view - includes the fields array to define how a item should be displayed
+  - **Scope** ("What")
+    + global - site-wide actions that do not pertain to any specific or typical
+        API resource; such as: login, logout, search, or others
+    + resource - a collection or an item
+    + field - a particular field of a resource
+  - **Intent** ("How")
+    + `(c___)` create
+    + `(___d)` delete
+    + `(__u_)` submit
+    + `(_r__)` view
+
+*Each `action` should identify one, and only one, of each: scope, and intent.*
+
+Not all combinations of scope and intent are necessarily relevant to all APIs;
+some APIs might allow for creation of top-level resource but other not. User
+permissions might change one combination to another; for example, an
+unauthenticated user might receive `["resource", "view"]` while an
+authenticated user will receive `["resource", "submit"]` for the same resource.
 
 ## Action Names
 
-Some actions are special and need to be used in specific locations within the UI. These are the "special" action names and their purposes:
+Some actions are "special" and need to be used in specific locations within the
+UI. These are the "special" action names and their purposes:
 
-  - `create-*` - defines an empty resource to fill out
-  - `delete` - for requesting a resource to be deleted
-  - `login` or `logout` - for a link to a form to allow a user to log in or out
-  - `search` - for performing a search action
-  - `update` - for updating a resource using a form
+  - `login`
+    + Defines a form for enabling a user to authenticate
+    + Indicates that the current user is not already authenticated
+  - `logout`
+    + Defines an action to perform to notify the server that the user is
+        intending to log out
+    + Indicates that the current user is currently authenticated
+  - `search` - for performing search
+
+These action names need to be unique within a resource representation as they
+are specifically searched for by Luxui for placement.
 
 ## Embedded Entities
 
-Some resources have "linked" or "sub" resources that are complex objects, or non-scalar, values. These additional resources are included in responses to for completeness. lux expects that these be [logically grouped](#complex-top-level-properties), for explicit linking, in the `embedded` section of the response.
+Some resources have "linked" or "sub" resources that are complex objects
+(non-scalar values) and are included in Siren representations to reduce network
+requests because they include information that will be necessary for display or
+completeness of description.
 
 ## Link Relations
 
-Any property within the resource representation that includes an `href` property must also include a `rel` property and should include at least one of the following link rels.
+Any object within the resource representation that includes an `href` property
+should also include a `rel` property - which must be an array of strings - and
+should include at least one of the following link relations as indication of
+its purpose and use:
 
 rel                | Intent | URL/Notes
 ---                | ------ | ---------
@@ -136,15 +169,25 @@ rel                | Intent | URL/Notes
 
 ## Resource Classes
 
-Only two classes are recognized and expected: `collection` and `item`; all other classes are purely informational and unused by lux. The purpose of these classes is to remove the reliance on URL patterns and data inference for display determination. This allows the API to explicitly specify that a resource is one or the other; a `collection` of items or a specific `item`.
+Only two - top-level - classes are recognized and expected: `collection` and
+`item`; all other classes are purely informational and unused by Luxui. The
+purpose of these classes is to remove the reliance on URL patterns and data
+inference for display determination. This allows the API to explicitly specify
+that a resource is one or the other; a `collection` of items or a specific
+`item`.
 
-All resources in the API are expected to return a top-level property `class` which will hold one of: `collection` or `item`. The only exception being the root resource which may omit the property.
+All resources in the API are expected to return a top-level property `class`
+which will hold one of: `collection` or `item`. The only exception being the
+root resource which may omit the property.
 
 ## `title` Attributes
 
-The `title` attribute as a property of various portions of a Siren response will be use for display in many cases.
+The `title` attribute as a property of various portions of a Siren response
+will be use for display in many cases.
 
 Siren "section" | Use of `title`
 --------------- | -------------
 links           | The title will be used as the link text.
 actions         | The title will be used as the button text.
+
+[shared knowledge]: README.md#shared-knowledge

@@ -1,11 +1,17 @@
+**NOTE: This project is still in heavy development and is not ready for actual
+use at this time. Releasing to the open source community is aimed at getting
+feedback and help from the community.**
+
+---
+
 Luxui
 =====
 
-Luxui is a [Siren] (hypermedia) client which presents a web application UI for
-RESTful API resource representations. Luxui only has logic to build pages from
-API resource representations and nothing more; this allows for, or enforces,
-that all application control is in the domain of the API; including: workflow,
-access control, field display and type, etc.
+Luxui is a [Siren][Siren] (hypermedia) client which presents a web application
+UI for RESTful API resource representations. Luxui only has logic to build
+pages from API resource representations and nothing more; this allows for, or
+enforces, that all application control is in the domain of the API; including:
+workflow, access control, field display and type, etc.
 
 Specifically Luxui adheres to [Siren+lux] as a standard for API resource
 representations; this attempts to reduce ambiguity and inconsistency between
@@ -39,6 +45,11 @@ const app = luxReact({
 
 app.render();
 ```
+
+## API implementation
+
+For more information about what responses from the API should be and why read
+through the [API Implementation Guide](API_IMPLEMENTATION.md).
 
 ## Contributing
 
