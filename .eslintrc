@@ -13,15 +13,18 @@
     }
   },
   "rules": {
-    "react/jsx-filename-extension": 0,
-    "react/sort-comp": 0,
-    "max-len": [1, {
-      "ignoreUrls": true
-    }],
-    "no-param-reassign": 0,
-    "no-use-before-define": ["error", {
-      "functions": false
-    }],
-    "padded-blocks": 0
+    "complexity": ["error", { "max": 10 }],
+    "jsx-quotes": ["warn", "prefer-double"],
+    "max-depth": ["error", { "max": 3 }],
+    "max-params": ["error", { "max": 3 }],
+    "max-statements-per-line" : ["error", { "max": 1 }],
+    "max-len": ["error", { "ignoreUrls": true }],
+    "newline-before-return": "error",
+    "no-param-reassign": "off",
+    "no-use-before-define": ["error", { "functions": false }],
+    "padded-blocks": "off",
+    "react/jsx-filename-extension": "off",
+    "react/sort-comp": "off",
+    "valid-jsdoc": ["error"]
   }
 }

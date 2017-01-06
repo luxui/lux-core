@@ -66,12 +66,9 @@ function componentRegistry(path, fn, overwrite = true) {
     case 2:
       // intentional switch case "fallthrough" because of default arg value
     case 3:
-      if (!overwrite && findInRegistry(registry, ...parts)) {
-
-        return undefined;
-      }
-
-      return addToRegistry(registry, ...parts, fn);
+      return !overwrite && findInRegistry(registry, ...parts)
+        ? undefined
+        : addToRegistry(registry, ...parts, fn);
     default:
       throw new Error('Too many arguments provided to componentRegistry.');
   }

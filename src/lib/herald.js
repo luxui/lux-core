@@ -38,7 +38,7 @@ import { isFunction } from './is';
 /**
  * Create an instance of {@link Herald}, with isolated "listeners" arrays.
  *
- * @return {module:lib/herald.Herald}
+ * @return {module:lib/herald.Herald} - a "herald"ing function
  *
  * @example
  * import { heraldFactory } from './herald';

@@ -115,22 +115,37 @@ Read more about the [Git Commit Templating][Git Templating] feature.
 
 The coding style is very similar to the [airbnb] style, with a few changes:
 
-  - No `.jsx` filenames for ReactJS files; just `/js`.
-  - Prefer alphabetization over other arbitrary, or subjective, ordering of
-      function/method definitions. For variables sometimes naming collides with
-      alphabetization so logic is preferred over contorting variable names to
-      fit.
-  - Line length is adhered to as often as possible with exceptions for:
-    + Error texts
+  - Restrict the complexity of functions because too much complexity is
+      difficult to manage. `complexity`
+  - Prefer double-quotes in JSX. `jsx-quotes`
+  - Restrict the nesting depth of functions; because complexity. `max-depth`
+  - Restrict the number of function parameters; because complexity. `max-params`
+  - Restrict the number of statements on a line; because who needs multiple
+      statements on a single line. `max-statements-per-line`
+  - Line length is adhered to as often as possible with exceptions for: `max-len`
+    + Error strings
     + JSX or markup
-  - Function arguments can be reassigned; though it is not encouraged.
+    + URLs
+  - Lines that `return` values should have an empty line before them. `newline-before-return`
+  - Function arguments can be reassigned; though it is not encouraged. `no-param-reassign`
   - Within function bodies using a function before it is defined due to
-      alphabetization is allowed.
-  - Lines that `return` values should have an empty line before them.
+      alphabetization is allowed. `no-use-before-define`
+  - Conflicting preferences `padded-blocks` and `newline-before-return`; the
+      required newline before returns "wins". `padded-blocks`
+  - No `.jsx` filenames for ReactJS files; just `/js`. `react/jsx-filename-extension`
+  - Conflicting non-ESLint preference for alphabetization rather than arbitrary
+      or subjective ordering of functions/methods (mentioned below). `react/sort-comp`
+  - Any help with documentation is going to be helpful in the long-run - and
+      was immediately upon turning this option on. `valid-jsdoc`
 
 [ESLint] is the preferred way of enforcing the style guide and has plenty of
 integrations with IDEs and editors to help automate that for you. Additionally
 you can run the linter using `npm run lint` at your command line prompt.
+
+Additionally prefer alphabetization over other arbitrary, or subjective,
+ordering of function/method definitions. For variables sometimes naming
+collides with alphabetization so logic is preferred over contorting variable
+names to fit.
 
 ### Code Conventions
 

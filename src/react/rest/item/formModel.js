@@ -6,7 +6,9 @@
 import { hasOne } from '../../../lib/has';
 import { isArray } from '../../../lib/is';
 
-const requiredArgs = 'No arguments passed to `formModel`.';
+function required() {
+  throw new Error('No arguments passed to `formModel`.');
+}
 
 function formActionsReduce(acc, action) {
   // NOTE: #Siren-consideration: action.name='[match]-item'
@@ -20,7 +22,7 @@ function formActionsReduce(acc, action) {
   return acc;
 }
 
-function formModel(props = (() => { throw new Error(requiredArgs); })()) {
+function formModel(props = required()) {
   if (!props.actions || !isArray(props.actions)) {
     throw new Error('No `actions` provided; "view-item" action is required.');
   }

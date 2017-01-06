@@ -23,7 +23,7 @@ const SIREN = 'application/vnd.siren+json';
  * @param  {object}  response - The data object to format into a ResponseModel.
  * @param  {boolean} [error=false] - The error or nothing.
  *
- * @return {ResponseModel}
+ * @return {ResponseModel} - a responseModel
  *
  * @example
  * import { format } from './responseModel';
@@ -46,7 +46,7 @@ function format(response, error = false) {
  *
  * @param  {object} response - The response object to convert.
  *
- * @return {ResponseModel}
+ * @return {ResponseModel} - a responseModel
  *
  * @example
  * import { handler } from './responseModel';

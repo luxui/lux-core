@@ -13,10 +13,11 @@
  *
  * @param  {any} value - Any value localStorage will allow for storage.
  *
- * @param  {string} prefix - A value to prefix all storage keys.
- *
- * @param  {object} store - An API - which matches the browser's localStorage
- * API - to persist values to.
+ * @param  {string} config - An object including overrides for default values
+ * for: `prefix`, and `store`. The `prefix` value is used to prepend all key-
+ * names in the store to ensure against naming collisions withing the store.
+ * The `store` is will enable switching between Session and Local storage
+ * as well as other options; also handy for unit testing.
  *
  * @return {any} - The value in storage.
  *

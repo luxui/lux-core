@@ -57,7 +57,7 @@ function isModifiedClick(event) {
  * @param {object} props - All React properties for the instance of the
  * component.
  *
- * @returns ReactComponent
+ * @return {ReactComponent} - the Link React component
  *
  * @example
  * // page.js (jsx)

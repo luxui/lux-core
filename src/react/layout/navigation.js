@@ -41,7 +41,7 @@ function linksReduce(acc, link) {
  * @param  {array} props.links - A collection of link objects related to the
  * current resource.
  *
- * @return {ReactComponent}
+ * @return {ReactComponent} - the component
  */
 function navigationComponent(props) {
 
