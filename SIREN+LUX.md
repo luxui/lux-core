@@ -167,19 +167,6 @@ rel                | Intent | URL/Notes
 // ...
 ```
 
-## Resource Classes
-
-Only two - top-level - classes are recognized and expected: `collection` and
-`item`; all other classes are purely informational and unused by Luxui. The
-purpose of these classes is to remove the reliance on URL patterns and data
-inference for display determination. This allows the API to explicitly specify
-that a resource is one or the other; a `collection` of items or a specific
-`item`.
-
-All resources in the API are expected to return a top-level property `class`
-which will hold one of: `collection` or `item`. The only exception being the
-root resource which may omit the property.
-
 ## `title` Attributes
 
 The `title` attribute as a property of various portions of a Siren response
@@ -187,7 +174,7 @@ will be use for display in many cases.
 
 Siren "section" | Use of `title`
 --------------- | -------------
-links           | The title will be used as the link text.
-actions         | The title will be used as the button text.
+`links`         | The title will be used as the link text.
+`actions`       | The title will be used as the button text.
 
 [shared knowledge]: README.md#shared-knowledge

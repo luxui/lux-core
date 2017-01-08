@@ -61,16 +61,43 @@ browse the open Pull Requests and issues for ideas on where to focus.
 
 ## Project Goals
 
-The primary use-case for Luxui is APIs which also need to make available a UI
+<!--
+The primary use-case for Luxui is an APIs which also needs to provide a UI
 for people to use only as a functional application and not as a broad solution
 for web applications or marketing sites. This could eventually change as the
 project becomes more mature and the idea is proven to be valid.
+
+Luxui does not aim to be the next "big thing" in application frameworks, nor
+does it make the claim that it will magically make any complexity of
+application development "go away". The goal of Luxui is to automate the things
+that it can and push the rest of the responsibility of application development
+into a single domain - the API - and make debugging more deterministic.
+
+The main goal of Luxui is to clearly define a separation between API consumer
+and producer and the responsibilities of each. All control should be
+consolidated in the producer and
+
+The first goal of Luxui is to create an application framework for consistently
+displaying web components as a display for API resource representations. The
+need for this goal is created by a deeper goal of spirit of Luxui which is to
+-->
+
+The main goal of Luxui is to make web application development better for. Said
+another way, the aim is to make following statement completely true:
+
+  > "The API is in control of everything."
+
+The strategy that Luxui employs is to document, in resource representations, as
+much additional information as necessary as to be able to render a complete UI.
+
+Luxui is a UI rendering framework focused on translating Siren representations
+into fully interactive web applications.
 
 ### A Standard UI/Application
 
 The problems that Luxui is attempting to solve for are:
 
-  1. Creating a reason for our APIs to become standardized in response format.
+  1. Creating a reason for APIs to become standardized in response format.
   2. Give non-UI developers control of the UI in a familiar way.
   3. Enable UI developers to build more general purpose components within a
       framework rather than single-use UI elements.

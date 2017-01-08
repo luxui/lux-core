@@ -3,6 +3,8 @@
  * @memberof react/rest/item
  */
 
+// FIXME: refactor this module into lib/
+
 import { hasOne } from '../../../lib/has';
 import { isArray } from '../../../lib/is';
 
