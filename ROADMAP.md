@@ -1,4 +1,4 @@
-Luxui Roadmap
+LuxUI Roadmap
 =============
 
 Here are a few key things that known. If you have ideas for the project not
