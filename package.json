@@ -5,6 +5,11 @@
   "main": "dist/reactLux.js",
   "files": [
     "dist/*.js",
+    "API_IMPLEMENTATION.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "LICENSE.md",
+    "PLUGINS.md",
     "README.md",
     "SIREN+LUX.md"
   ],
@@ -12,13 +17,14 @@
     "build": "export NODE_ENV=production && npm run build:react",
     "prebuild": "rm -rf ./dist/*",
     "build:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
-    "doc": "jsdoc -c ./jsdoc.json",
-    "predoc": "rm -rf ./docs/*",
+    "doc": "jsdoc -c ./jsdoc.json -d ./pages/docs",
+    "predoc": "rm -rf ./pages/docs",
     "lint": "eslint src/",
-    "doc-pub": "git subtree push --prefix=docs upstream gh-pages",
-    "predoc-pub": "npm run doc",
-    "start": "jest --watch",
-    "test": "jest"
+    "pages": "npm run doc && npm run stats && npm run test",
+    "postpages": "git subtree push --prefix=pages upstream gh-pages --squash",
+    "start": "jest -c ./jest/testing.json --watch",
+    "stats": "plato -d ./pages/stats --eslint .eslintrc --exclude \\.test\\.js$ --noempty --recurse --title \"LuxUI\" src/",
+    "test": "jest -c ./jest/reporting.json"
   },
   "repository": {
     "type": "git",
@@ -63,6 +69,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
+    "plato": "^1.7.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "rollup": "^0.36.4",
@@ -72,20 +79,5 @@
     "rollup-plugin-node-builtins": "^2.0.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "whatwg-fetch": "^2.0.1"
-  },
-  "jest": {
-    "automock": false,
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "setupFiles": [
-      "./jest.js"
-    ]
   }
 }

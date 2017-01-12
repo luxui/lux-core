@@ -1,15 +1,18 @@
 {
-  "extends": "airbnb",
   "env": {
     "browser": true,
     "node": false
   },
+  "extends": "airbnb",
   "globals": {
     "window": true
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true
     }
   },
   "rules": {
