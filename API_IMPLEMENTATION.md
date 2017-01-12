@@ -274,14 +274,14 @@ property of the representation; this describes the fields to display, their
 order to display in the page, what type of field they should be, and the
 current value. The `title` will be used as a title for the form/page. The
 `name` property of the action is fairly inconsequential and ignored by LuxUI.
-Finally, the [action's `class`](SIREN+LUX.md#action-classes) is documented in
+Finally, the [action's `class`][action-classes] is documented in
 [Siren+lux](SIREN+LUX.md).
 
 ## Form Actions
 
 Where LuxUI applications start to get truly exciting is in the actions that can
 be performed against resources in the API; and specifically in the area of
-[field components](#field-components) but that is getting ahead of ourselves.
+field components.
 
 The first, and most crucial of form "actions" is the "view" action; for without
 the view there would be no display.
@@ -336,8 +336,8 @@ the state of the resource; LuxUI doesn't actually care which is the case as it
 only knows what representation it received.
 
 There are more options/configuration that can be added to various fields and
-types. Check the complete listing of [options and configuration](#options-and-configuration)
-for all built-in components.
+types; check the complete listing of [attributes](SIREN+LUX.md#attributes) and
+[types](SIREN+LUX.md#types) for all built-in components.
 
 ### Create
 
@@ -477,5 +477,5 @@ that is being removed; there is no need for a `fields` array since that will be
 covered by the "view" action. This action is essentially used to build a button
 element for the user to click to have the item "removed".
 
-[action-classes]: SIREN+lux.md#action-classes
+[action-classes]: SIREN+LUX.md#action-classes
 [LuxUI Plugins]: PLUGINS.md

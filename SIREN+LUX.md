@@ -100,10 +100,20 @@ There are two meta-types: list, and table; both are a collection of zero or
 more items. A list is a collection of scalar values (the types above), and a
 table is a collection of more complex (non-scalar) types.
 
-A list of *first* names would be defined as `["text"]` while a list of *first
-and last* names would be defined as `[["text", "text"]]`. More information is
-needed for table than last and some additional optional information can be
-provided for both in [meta types config](#meta-types-config).
+For example a *list* of **first names** would be defined as `["text"]` while a
+*table* of **first and last names** would be defined as `[["text", "text"]]`.
+
+The components for *list* and *table* have some additional options that can be
+configured. Add any of the following string values to the `features` property
+of `fields`.
+
+Feature | Description
+------- | -----------
+add     | Add items to the collection.
+filter  | Filter the list based on a search term; for long lists.
+remove  | Remove items from the collection.
+reorder | Enable the user to change the order of the items in the collection.
+sort    | Sort the order of the items display; *does not change the order*.
 
 ## Action Classes
 

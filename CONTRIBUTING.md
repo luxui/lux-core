@@ -46,9 +46,9 @@ If you choose to add your name to the list of `maintainers`, you are pledging
 to:
 
   - Help *uphold* the [Code of Conduct][Conduct],
-  - Respond to new issues in a [timely manner](timely-response).
+  - Respond to new issues in a [timely manner](#timely-response).
 
-These responsibilities are in **addition** to the [Contributors Pledge](contributors-pledge).
+These responsibilities are in **addition** to the [Contributors Pledge](#contributors-pledge).
 
 ### Timely Response
 
