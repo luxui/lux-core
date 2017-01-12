@@ -4,15 +4,111 @@ Siren+lux
 [Siren] is a hypermedia specification which has affordances for more than
 simple/static data transfer in: `actions`, `entities`, and `links`. These
 additional affordances enable the API to provide more - if not all - necessary
-application control information in each response. This additional information
+application control information in each response. This, additional information,
 means that the application and API need to have less "shared knowledge"; and
 therefore puts all control of the application in the domain of the API. The UI
-is then only responsible for display based on the API responses.
+is then only responsible for display based on the resource representations.
+
+## Action Fields
+
+A field is a single *logical* data-point; a "logical data-point" could have
+more than one piece of data; "location" might have "latitude" and "longitude"
+or "parcel" might have "depth", "height", "width", and "weight".
+
+Field components are the central part of customization in a LuxUI application.
+Most parts of the LuxUI framework *can* be customized, or replaced, but the
+field components are the area that will most often be customized or replaced to
+more appropriately suit the application domain.
+
+*The field components are the area of a LuxUI application that will take it
+beyond simple CRUD.*
+
+The LuxUI built-in supported types follow the HTML5 input types for
+compatibility and familiarity.
+
+The options and types documented here should not be taken as an exhaustive list
+of what is possible with Siren+lux, [custom LuxUI plugins][Plugins] will
+be developed over time to solve new, and more specific application needs that
+will necessarily define their own types.
+
+### Attributes
+
+Attribute       | Notes
+--------------- | -----
+cacheable       | A boolean indicating that "lookup" or "search" values can be safely cached.
+columns         | An array of string identifying the column names, and order of display, for a table.
+features        | An array of strings identifying the component features: add, remove, reorder, filter, sort.
+href            | The URL that terms will be sent to for "lookup" or "search". <sup>2</sup>
+max             | An inclusive max numeric value.
+maxlength       |
+min             | An inclusive min numeric value.
+minlength       |
+multiple        | Boolean indicating that the field can have multiple values <sup>1<sup>
+options         | An array of strings; for: checkboxes, datalist, radios, or select.
+pattern         | Regular expression to validate the value against.
+placeholder     |
+readonly        | Boolean <sup>1<sup>
+required        | Boolean <sup>1<sup>
+size            | String (small, medium, or large) indicating how wide the input should be.
+step            |
+value           |
+
+  1. *Default is false.*
+  2. *POST requests will be used for security; query parameters can be cached.*
+
+### Types
+
+Here are the LuxUI built-in field types, these can be used as the `type` for
+`fields` elements of `actions`.
+
+`input` Type    | Notes
+--------------- | -----
+checkbox        | Will also require that an `options` list be provided.
+color           |
+date            |
+datetime        |
+datetime-local  |
+email           |
+file            | {TODO}
+hidden          |
+month           |
+number          |
+password        |
+radio           | Will also require that an `options` list be provided.
+range           |
+select          | Will also require that an `options` list be provided.
+search          |
+tel             |
+text            |
+textarea        | Will render a `textarea` rather than an `input`.
+time            |
+url             |
+week            |
+
+The following W3C `input` types are not currently planned to be supported:
+
+`input` Type    | Notes
+--------------- | -----
+button          | Created from the actions available.
+image           | No plans to support this input type.
+reset           | This will be left to custom field component plugins.
+submit          | Created from the actions available.
+
+#### Meta Types
+
+There are two meta-types: list, and table; both are a collection of zero or
+more items. A list is a collection of scalar values (the types above), and a
+table is a collection of more complex (non-scalar) types.
+
+A list of *first* names would be defined as `["text"]` while a list of *first
+and last* names would be defined as `[["text", "text"]]`. More information is
+needed for table than last and some additional optional information can be
+provided for both in [meta types config](#meta-types-config).
 
 ## Action Classes
 
 Each `action` must answer - at least - two questions with the `class` property:
-the scope, and the intent of the action. The **scope** will answer for the
+the scope, and the intent of the `action`. The **scope** will answer for the
 *what* of its effect and the **intent** will answer for the *how* of the effect.
 
   - **Scope** ("What")

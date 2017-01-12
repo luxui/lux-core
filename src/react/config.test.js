@@ -1,4 +1,4 @@
-import configure from './config';
+import configure, { settings } from './config';
 
 describe('configure', function () {
   const config = {
@@ -48,14 +48,15 @@ describe('configure', function () {
 
   it('should fully configure without error', function () {
     expect(function () {
-      const render = configure(config);
+      configure(config);
 
-      expect(typeof render).toBe('function');
       expect(typeof window.onpopstate).toBe('function');
     }).not.toThrow();
   });
 
-  it('return an error when attempting to get a configuration property that doesn\'t exist', function () {
-    expect(configure('non-existent-key')).toEqual(new Error('Configuration key "non-existent-key" not found.'));
+  it('should throw an error when attempting to reassign properties; after successful configuration', function () {
+    expect(function () {
+      settings.apiRoot = 'http://foo.bar';
+    }).toThrow(new TypeError('Cannot set property apiRoot of #<Object> which has only a getter'));
   });
 });

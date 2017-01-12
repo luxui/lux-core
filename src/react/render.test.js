@@ -1,14 +1,17 @@
+// jest.mock('../lib/herald');
+import herald from '../lib/herald';
+
 jest.mock('../lib/apiRequest');
 import apiRequest from '../lib/apiRequest';
 
-import { config } from './config';
+import { settings } from './config';
 import registry from '../lib/componentRegistry';
 import render from './render';
 
 describe('render', function () {
   beforeEach(function () {
-    delete config.apiRoot;
-    delete config.renderRoot;
+    delete settings.apiRoot;
+    delete settings.renderRoot;
   });
 
   it('should exist; and should be a function', function () {
@@ -20,7 +23,7 @@ describe('render', function () {
   });
 
   it('should resolve to an error when `apiRoot` is not set in config', function () {
-    config.renderRoot = '#renderRoot';
+    settings.renderRoot = '#renderRoot';
 
     return render('', function (_, model) {
       expect(model.error).toEqual(new Error('Lux must be configured before routing.'));
@@ -28,8 +31,8 @@ describe('render', function () {
   });
 
   it('should resolve to an error when `path` is not a string', function () {
-    config.renderRoot = '#renderRoot';
-    config.apiRoot = 'http://foo.bar';
+    settings.renderRoot = '#renderRoot';
+    settings.apiRoot = 'http://foo.bar';
 
     return render(1234, function (_, model) {
       expect(model.error).toEqual(new Error('Unparsable URL: (string) "1234".'));
@@ -37,8 +40,8 @@ describe('render', function () {
   });
 
   it('should make an API request', function () {
-    config.renderRoot = '#renderRoot';
-    config.apiRoot = 'http://foo.bar';
+    settings.renderRoot = '#renderRoot';
+    settings.apiRoot = 'http://foo.bar';
 
     const resolvedData = 'API response';
     const resourcePath = '/anything';
@@ -50,5 +53,11 @@ describe('render', function () {
       expect(model).toBe(resolvedData);
       expect(path).toBe(resourcePath);
     });
+  });
+
+  it('should attempt to render', function () {
+    expect(function () {
+      herald('render', '/');
+    }).toThrow('Config property `renderRoot` not set.');
   });
 });

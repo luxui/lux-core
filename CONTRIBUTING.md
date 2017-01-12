@@ -105,7 +105,7 @@ wrap around 72 characters.
 Included in this repository is a `./commit.template` file that you can set as a
 commit message template using the command:
 
-```
+```bash
 $ git commit commit.template ./commit.template
 ```
 

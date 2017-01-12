@@ -8,29 +8,29 @@ import ReactDOM from 'react-dom';
 
 import apiRequest from '../lib/apiRequest';
 import registry from '../lib/componentRegistry';
+import herald from '../lib/herald';
 import luxPath from '../lib/luxPath';
 import { format as responseModelFormat } from '../lib/responseModel';
 
-import { config } from './config';
+import { settings } from './config';
 
-const errorInvalidConfig = 'Lux must be configured before routing.';
 const Layout = registry('Layout');
 
 function promiseOfAnError(error) {
 
-  return new Promise((complete) => {
-    complete(responseModelFormat({}, error));
+  return new Promise((resolve) => {
+    resolve(responseModelFormat({}, error));
   });
 }
 
-// FIXME: figure out how to test this function
+// FIXME: test this function
 // istanbul ignore next
 function reactRender(path, model) {
-  ReactDOM.render(<Layout {...model} path={path} />, config.renderRoot);
+  ReactDOM.render(<Layout {...model} path={path} />, settings.renderRoot);
 }
 
 function render(path, fn = reactRender) {
-  if (!config.renderRoot) {
+  if (!settings.renderRoot) {
     // this cannot use `promiseOfAnError` because `reactRender` would not know
     // where to "render" content to.
     throw new Error('Config property `renderRoot` not set.');
@@ -42,10 +42,11 @@ function render(path, fn = reactRender) {
   try {
     requestedPath = luxPath(path);
 
-    if (!config.apiRoot) {
-      pending = promiseOfAnError(new Error(errorInvalidConfig));
+    if (!settings.apiRoot) {
+      // eslint-disable-next-line max-len
+      pending = promiseOfAnError(new Error('Lux must be configured before routing.'));
     } else {
-      pending = apiRequest(`${config.apiRoot}${requestedPath}`);
+      pending = apiRequest(`${settings.apiRoot}${requestedPath}`);
     }
   } catch (e) {
     pending = promiseOfAnError(e);
@@ -54,5 +55,12 @@ function render(path, fn = reactRender) {
   return pending
     .then(model => fn(requestedPath, model));
 }
+
+herald((message, path) => {
+  /* istanbul ignore else */
+  if (message === 'render') {
+    render(path);
+  }
+});
 
 export default render;

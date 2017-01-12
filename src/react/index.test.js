@@ -1,22 +1,14 @@
 jest.mock('../lib/routing');
 import routingMock from '../lib/routing';
 
-jest.mock('./render');
-import render from './render';
+jest.mock('../lib/herald');
+import herald from '../lib/herald';
 
-import { configure, luxReact, routing } from './index';
+import luxReact from './index';
 
 describe('Luxui API', function () {
-  it('`configure` should exist; and should be a function', function () {
-    expect(typeof configure).toBe('function');
-  });
-
   it('`luxReact` should exist; and should be a function', function () {
     expect(typeof luxReact).toBe('function');
-  });
-
-  it('`routing` should exist; and should be a function', function () {
-    expect(typeof routing).toBe('function');
   });
 });
 
@@ -26,21 +18,41 @@ describe('luxReact', function () {
     renderRoot: '#reactRoot',
   };
 
-  configure(config);
+  const app = luxReact(config);
 
-  it('should render a page', function () {
-    routingMock.mockImplementation(() => true);
+  it('should return false if config is not valid', function () {
+    const badApp = luxReact({});
 
-    luxReact('/abc');
-
-    expect(render).lastCalledWith(config.apiRoot);
+    expect(badApp).toBe(false);
   });
 
-  it('should render a resource', function () {
+  it('should "herald" a page render', function () {
+    routingMock.mockImplementation(() => true);
+
+    app.render('/abc');
+
+    expect(herald).lastCalledWith('render', config.apiRoot);
+  });
+
+  it('should "herald" a resource render', function () {
     routingMock.mockImplementation(() => false);
 
-    luxReact('/abc');
+    app.render('/abc');
 
-    expect(render).lastCalledWith(`${config.apiRoot}/abc`);
+    expect(herald).lastCalledWith('render', `${config.apiRoot}/abc`);
+  });
+
+  it('should have a `.page` method on a configured application', function () {
+    expect(typeof app.page).toBe('function');
+  });
+
+  it('should register a page route with routing API', function () {
+    app.page('/foo', 'bar');
+
+    expect(routingMock).lastCalledWith('/foo', 'bar');
+  });
+
+  it('should use a fluent API style', function () {
+    expect(app.page()).toBe(app);
   });
 });

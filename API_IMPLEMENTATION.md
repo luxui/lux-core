@@ -23,18 +23,7 @@ that is well beyond the scope of LuxUI.
     + [`(__u_)` submit](#submit)
       * [ ] {TODO} PATCH support
     + [`(_r__)` view](#view)
-  5. [Field components](#field-components)
-    + [Options and Types](#options-and-types)
-    + Default components
-    + Custom components (plug-ins)
-    + Component validation
-    + Interactive components
-      * Search and lookup (cacheable, no-API-call)
-      * List and Table
-        - Augmenting options (add, remove, reorder)
-        - Display-only options (sort, filter)
-  6. [ ] {TODO} Breadcrumbs
-  7. [ ] {TODO} Workflow
+  5. [ ] {TODO} Workflow
     + [ ] {TODO} Return to parent
 
 *NOTE: All of the examples below are going to assume that the appropriate media
@@ -54,7 +43,7 @@ is required is that it includes a `links` property.
 
 **GET** `http://foo.bar`
 
-```
+```JSON
 {
   "links": [
     {
@@ -93,7 +82,7 @@ only need to provide some additional links with some specific link relations.
 
 **GET** `http://foo.bar`
 
-```
+```JSON
 {
   "links": [
     {
@@ -116,7 +105,7 @@ new representation.
 
 **GET** `http://foo.bar/about`
 
-```
+```JSON
 {
   "links": [
     {
@@ -163,13 +152,13 @@ provide and thus they will just exist for you to view.
 
 **GET** `http://parking.foo/parking-spaces`
 
-```
+```JSON
 {
   "entities": [
-    { href: "http://parking.foo/parking-spaces/1", title: "Parking Space 1" },
-    { href: "http://parking.foo/parking-spaces/2", title: "Parking Space 2" },
-    { href: "http://parking.foo/parking-spaces/3", title: "Parking Space 3" },
-    { href: "http://parking.foo/parking-spaces/4", title: "Parking Space 4" }
+    { "href": "http://parking.foo/parking-spaces/1", "title": "Parking Space 1" },
+    { "href": "http://parking.foo/parking-spaces/2", "title": "Parking Space 2" },
+    { "href": "http://parking.foo/parking-spaces/3", "title": "Parking Space 3" },
+    { "href": "http://parking.foo/parking-spaces/4", "title": "Parking Space 4" }
   ],
   "links": [
     {
@@ -179,12 +168,12 @@ provide and thus they will just exist for you to view.
     },
     {
       "href": "http://parking.foo/parking-spaces?page=2",
-      "rel": ["chapter", "collection, "next"],
+      "rel": ["chapter", "collection", "next"],
       "title": "Parking Spaces (page 2)"
     },
     {
       "href": "http://parking.foo/parking-spaces?page=13",
-      "rel": ["chapter", "collection, "last"],
+      "rel": ["chapter", "collection", "last"],
       "title": "Parking Spaces (page 13)"
     },
     {
@@ -218,7 +207,7 @@ like the following:
 
 **GET** `http://parking.foo/parking-spaces/1`
 
-```
+```JSON
 {
   "actions": [
     {
@@ -227,7 +216,7 @@ like the following:
         {
           "name": "name",
           "type": "text",
-          "value": "Parking Space Number 1 Dashboard"
+          "value": "Parking Space Number 1"
         },
         {
           "name": "covered",
@@ -236,7 +225,7 @@ like the following:
             "No"
           ],
           "type": "radio",
-          "value": true
+          "value": "Yes"
         },
         {
           "name": "vacant",
@@ -245,11 +234,11 @@ like the following:
             "No"
           ],
           "type": "radio",
-          "value": false
+          "value": "No"
         }
       ],
       "name": "view-item",
-      "title": "Parking Space Number 1 Dashboard"
+      "title": "Parking Space Number 1"
     }
   ],
   "links": [
@@ -304,7 +293,7 @@ the form layout; a listing of all of the fields and their configurations.
 
 **GET** `http://foo.bar/users/CuteCuddlyBear`
 
-```
+```JSON
 {
   // ...
   "actions": [
@@ -357,15 +346,13 @@ The action for to "create" a new resource will be very similar to that of the
 
 **GET** `http://foo.bar/users`
 
-```
+```JSON
 {
   // ...
   "actions": [
     {
       "class": ["resource", "create"],
-      "fields": [
-        // ...
-      ],
+      "fields": ["..."],
       "href": "http://foo.bar/users",
       "method": "POST",
       "name": "create-user",
@@ -400,7 +387,7 @@ The first example we'll look at is a "site-wide search".
 
 **GET** `http://foo.bar`
 
-```
+```JSON
 {
   // ...
   "actions": [
@@ -428,7 +415,7 @@ Another example would be a "login" action.
 
 **GET** `http://foo.bar`
 
-```
+```JSON
 {
   // ...
   "actions": [
@@ -469,7 +456,7 @@ API; this should not be taken as a suggestion that there these are the only
 action types that can be used. The delete action does, however, look a little
 different than the others.
 
-```
+```JSON
 {
   // ...
   "actions": [
@@ -490,81 +477,5 @@ that is being removed; there is no need for a `fields` array since that will be
 covered by the "view" action. This action is essentially used to build a button
 element for the user to click to have the item "removed".
 
-## Field Components
-
-Field components are the central part of customization in a LuxUI application.
-While most parts of the LuxUI framework can be customized or replaced the field
-components are the area that will most often be customized or replaced to more
-appropriately suit the domain of the application. The field components are even
-the area of the LuxUI application that will take it beyond simple CRUD.
-
-### Options and Types
-
-These options (attributes) and types intend to follow closely the HTML standard
-for compatibility, familiarity, and retention purposes.
-
-The options and types documented here should not be taken as an exhaustive list
-of what is possible with LuxUI, custom plugins will be developed over time to
-solve new, and more specific application needs. [LuxUI Plugins][LuxUI Plugins]
-should be well documented and define their own types and options.
-
-#### Options
-
-Attribute       | Notes
---------------- | -----
-list            | [Datalist](#datalist)
-max             | An inclusive max numeric value.
-maxlength       |
-min             | An inclusive min numeric value.
-minlength       |
-multiple        | *Boolean <sup>1<sup>*
-pattern         | Regular expression to validate the value against.
-placeholder     |
-readonly        | *Boolean <sup>1<sup>*
-required        | *Boolean <sup>1<sup>*
-size            | String (small, medium, or large) indicating how wide the input should be.
-step            |
-value           |
-
-  1. *Boolean indicating that the field can have multiple values; default is false.*
-
-#### Types
-
-Here are the LuxUI built-in field types, these can be used as the `type` for
-`fields` elements of `actions`.
-
-`input` Type    | Notes
---------------- | -----
-checkbox        | Will also require that an `options` list be provided.
-color           |
-date            |
-datetime        |
-datetime-local  |
-email           |
-file            | {TODO}
-hidden          |
-month           |
-number          |
-password        |
-radio           | Will also require that an `options` list be provided.
-range           |
-select          | Will also require that an `options` list be provided.
-search          |
-tel             |
-text            |
-textarea        | Will render a `textarea` rather than an `input`.
-time            |
-url             |
-week            |
-
-The following W3C `input` types are not currently planned to be supported:
-
-`input` Type    | Notes
---------------- | -----
-button          | Buttons will be created from the actions available.
-image           | No plans to support this input type.
-reset           | This will be left to custom field component plugins.
-submit          | Buttons will be created from the actions available.
-
 [action-classes]: SIREN+lux.md#action-classes
-[LuxUI Plugins]: LUXUI_PLUGINS.md
+[LuxUI Plugins]: PLUGINS.md

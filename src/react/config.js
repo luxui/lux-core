@@ -3,23 +3,14 @@
  * @memberof react
  */
 
+import broker from '../lib/broker';
 import { isString } from '../lib/is';
 
-import render from './render';
+import herald from '../lib/herald';
 
-const config = {};
+const settings = {};
 
-function configure(arg) {
-
-  return isString(arg) ? get(arg) : set(arg);
-}
-
-function get(key) {
-
-  return config[key] || new Error(`Configuration key "${key}" not found.`);
-}
-
-function set({ apiRoot, renderRoot }) {
+function configure({ apiRoot, renderRoot }) {
   if (!apiRoot) {
     throw new Error('Config property `apiRoot` not provided.');
   } else if (!isString(apiRoot)) {
@@ -35,16 +26,14 @@ function set({ apiRoot, renderRoot }) {
   }
 
   // listen for history changes and re-render; don't "break" back button
-  // NOTE: intentionally wrapped in anonymous function to ensure no arguments
-  // istanbul ignore next
-  window.onpopstate = () => render();
+  window.onpopstate = herald.bind(0, 'render');
 
-  config.apiRoot = apiRoot;
-  config.renderRoot = renderRoot;
-
-  return render;
+  broker({
+    apiRoot,
+    renderRoot,
+  }, settings);
 }
 
 export default configure;
 
-export { config };
+export { settings };

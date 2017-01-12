@@ -2,28 +2,35 @@
  * @module react
  */
 
-// import React from 'react'; // `React` must be in scope when using JSX
-
 import herald from '../lib/herald';
 import routing from '../lib/routing';
 
-import configure from './config';
-import render from './render';
+import configure, { settings } from './config';
 
-herald((message, path) => {
-  /* istanbul ignore else */
-  if (message === 'render') {
-    render(path);
+function appFactory(config) {
+  try {
+    configure(config);
+
+    const app = {
+      render,
+    };
+
+    app.page = (...args) => {
+      routing(...args);
+
+      return app;
+    };
+
+    return app;
+  } catch (e) {
+
+    return false;
   }
-});
+}
 
-function luxReact(path) {
-  // FIXME: change the name of `configure` here as it might be misleading as a
-  // "getter" and not a "setter".
-  const root = configure('apiRoot');
+function render(path) {
+  const root = settings.apiRoot;
 
-  // FIXME: this might be a candidate to move back to apiRequest; as it is
-  // logic that any implementation will need.
   const URI = routing(path)
     // if the path is registered with the routing API it is a page and therefor
     // not "backed" by the API so load the "root" resource for meta information
@@ -36,8 +43,4 @@ function luxReact(path) {
 }
 
 // export functions for project use
-export {
-  configure,
-  luxReact,
-  routing,
-};
+export default appFactory;

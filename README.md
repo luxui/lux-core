@@ -22,7 +22,7 @@ which have been made to reduce ambiguity and increase consistency between APIs.
 
 Install LuxUI as a dependency in your project:
 
-```
+```bash
 $ npm install --save @luxui/luxReact
 ```
 
@@ -36,7 +36,7 @@ the implementation code will be able to "own" for application rendering.
 
 Then you will be able to use LuxUI in your application(s):
 
-```
+```javascript
 import luxReact from '@luxui/luxReact';
 
 const app = luxReact({
@@ -46,6 +46,32 @@ const app = luxReact({
 
 app.render();
 ```
+
+### Static Pages
+
+Some applications will have a need for pages that aren't represented in the API
+as resources. LuxUI provides a way to register specific URLs that will be
+handled by a custom handlers. Once you have defined the implementation specific
+handler the way pages are registered are as follows:
+
+```javascript
+import luxReact from '@luxui/luxReact';
+
+import homePageHandler from './homePageHandler';
+
+const app = luxReact({
+  apiRoot: 'http://api.root',
+  renderRoot: '#renderRoot',
+});
+
+app
+  .page('/home', homePageHandler)
+  .render();
+```
+
+All pages will make an API call to the root resource of that API for meta
+information - such as main menu links, login status, etc. - and will then
+receive a responseModel object of that request.
 
 ## API implementation
 
@@ -88,6 +114,18 @@ The tactics that LuxUI employs to accomplish this goal are:
   7. Intelligently decouple rendering responsibilities and business logic.
   8. Enable updates to many applications in a consistent, scheduled,
       repeatable, and safe way.
+  9. Allow for independent evolution of API and UI elements.
+  10. Isolate testing requirements.
+
+### Browser Support
+
+These will be the supported versions; at this time there is no specific browser
+testing or validation. If you find problems please report them as issues.
+
+  - Chrome - current, and current - 1
+  - MS - Edge; IE > 9 (newer than IE9)
+  - Firefox - current, and current - 1
+  - Safari - current, and current - 1
 
 ---
 
