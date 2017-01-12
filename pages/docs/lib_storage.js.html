@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/storage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/storage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module lib/storage
+ * @memberof lux-lib
+ */
+
+/**
+ * Abstraction over the browser's localStorage API adding the option to provide
+ * an alternate solution.
+ *
+ * @param  {string|ResetConfig} key - The Primary controller of functionality;
+ * as a String will indicate which key to interact with in localStorage, as an
+ * Object will allow additional functionality.
+ *
+ * @param  {any} value - Any value localStorage will allow for storage.
+ *
+ * @param  {string} config - An object including overrides for default values
+ * for: `prefix`, and `store`. The `prefix` value is used to prepend all key-
+ * names in the store to ensure against naming collisions withing the store.
+ * The `store` is will enable switching between Session and Local storage
+ * as well as other options; also handy for unit testing.
+ *
+ * @return {any} - The value in storage.
+ *
+ * @example
+ * // set a value in the store
+ * storage('name', 'Joshua');
+ *
+ * // retrieve a value from the store
+ * storage('name');
+ *
+ * // remove the value from the store
+ * storage({ reset: 'name' });
+ */
+function storage(key, value, config = {}) {
+  if (!key) {
+    const errorMessage = 'No "key" provided to storage().';
+    throw new Error(errorMessage, 'luxui/lib/storage.js');
+  }
+
+  const { prefix, store } = {
+    prefix: 'luxui--',
+    store: window.localStorage,
+    ...config,
+  };
+  const { reset } = key;
+
+  if (reset) {
+    store.removeItem(`${prefix}${reset}`);
+  } else if (value) {
+    store.setItem(`${prefix}${key}`, value);
+  }
+
+  return store.getItem(`${prefix}${key}`);
+}
+
+export default storage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react.module_react_render.html">react/render</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

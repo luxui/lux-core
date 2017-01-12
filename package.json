@@ -21,7 +21,7 @@
     "predoc": "rm -rf ./pages/docs",
     "lint": "eslint src/",
     "pages": "npm run doc && npm run stats && npm run test",
-    "postpages": "git subtree push --prefix=pages upstream gh-pages --squash",
+    "postpages": "git push upstream `git subtree split --prefix pages master`:gh-pages --force",
     "start": "jest -c ./jest/testing.json --watch",
     "stats": "plato -d ./pages/stats --eslint .eslintrc --exclude \\.test\\.js$ --noempty --recurse --title \"LuxUI\" src/",
     "test": "jest -c ./jest/reporting.json"

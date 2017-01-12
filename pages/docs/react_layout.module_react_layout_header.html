@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: react/layout/header</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: react/layout/header</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="react_layout_header.js.html">react/layout/header.js</a>, <a href="react_layout_header.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="~headerComponent"><span class="type-signature">(inner) </span>headerComponent<span class="signature">(props)</span><span class="type-signature"> &rarr; {ReactComponent}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Creates the main header of the site layout.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponentProps</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A Siren object from the server.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>links</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A collection of link objects related to the
+current resource.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="react_layout_header.js.html">react/layout/header.js</a>, <a href="react_layout_header.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <h2>Siren Considerations</h2><p>The <code>Header</code> component makes use of the Siren properties: <code>links</code>, and
+<code>actions</code>. The <code>links</code> are searched for the API &quot;root&quot; URI (resource)
+indicated by the <code>rel</code> &quot;index&quot;. The <code>links</code> are also passed to the
+<code>Navigation</code> component for generating the main menu of the page. The Siren
+property <code>actions</code> is searched for an action for &quot;loggin in/out&quot;; if neither
+are found the auth-link is omitted completely.</p>
+<h3>Siren Property &amp; Usage</h3><ul>
+<li><code>links</code><ol>
+<li>Header banner link for application</li>
+<li>Main menu, navigation, links</li>
+</ol>
+</li>
+<li><code>actions</code><ol>
+<li>Login/logout - action <code>name</code></li>
+</ol>
+</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ReactComponent</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react.module_react_render.html">react/render</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

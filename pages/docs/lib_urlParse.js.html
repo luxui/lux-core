@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/urlParse.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/urlParse.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module lib/urlParse
+ * @memberof lux-lib
+ */
+
+import { isString } from './is';
+
+const rURLStart = /^(?:http[s]?:)|\/{1,2}|\?|#/;
+
+// FIXME: this module is probably a bad idea long-term but for the short-term
+// it'll have to be Ok.
+
+function queryObject(search) {
+
+  return search
+    ? search
+      .split('&amp;')
+      .reduce(queryToObjectReduce, {})
+    : {};
+}
+
+function queryToObjectReduce(acc, p) {
+  const [key, val] = p.split('=');
+
+  acc[key] = /,/.test(val)
+    ? val.split(',').map(toValue)
+    : toValue(val);
+
+  return acc;
+}
+
+function toValue(valueInQuestion) {
+  switch (true) {
+    case valueInQuestion === 'false':
+      return false;
+    case valueInQuestion === 'true':
+      return true;
+    default:
+      return valueInQuestion;
+  }
+}
+
+/**
+ * Parse the parts of a URL into an object for use.
+ * ```
+ * ┌───────────────────────────────────────────────────────────────────────────┐
+ * │                                  href                                     │
+ * ├──────────┬┬─────────┬─────────────────┬───────────────────────────┬───────┤
+ * │ protocol ││  auth   │      host       │           path            │ hash  │
+ * │          ││         ├──────────┬──────┼──────────┬────────────────┤       │
+ * │          ││         │ hostname │ port │ pathname │     search     │       │
+ * │          ││         │          │      │          ├─┬──────────────┤       │
+ * │          ││         │          │      │          │ │    query     │       │
+ * "  http:   // usr:pwd @ host.com : 8080   /p/a/t/h  ?  query=string   #hash "
+ * │          ││         │          │      │          │ │              │       │
+ * └──────────┴┴─────────┴──────────┴──────┴──────────┴─┴──────────────┴───────┘
+ * (all spaces in the "" are purely for formatting)
+ * ```
+ *
+ * @param  {string} url - The URL to parse.
+ *
+ * @return {object} - The parsed URL represented as an object conforming to the
+ * diagram in the description; and from https://nodejs.org/dist/latest-v7.x/docs/api/url.html
+ * (Source).
+ *
+ * @example
+ * import urlParse from './urlParse';
+ *
+ * const { pathname } = urlParse('http://foo.bar/baz/boo?fizz=buzz');
+ * // pathname === '/baz/boo'
+ *
+ * @example
+ * import { queryObject } from './urlParse';
+ *
+ * const { foo } = queryObject('?foo=bar');
+ * // foo === 'bar'
+ */
+function urlParse(url) {
+  if (!isString(url)) {
+    throw new Error(`URLs must be strings: "${typeof url}" provided.`);
+  }
+
+  if (url &amp;&amp; !rURLStart.test(url)) {
+    throw new Error(`Unparsable URL: (${typeof url}) "${url}".`);
+  }
+
+  const firstGroup = result => (result &amp;&amp; result[1] ? result[1] : '');
+
+  const str = `${url}`;
+
+  const auth = firstGroup(str.match(/\/\/([^@]*?)@/));
+  const hash = firstGroup(str.match(/(#.*)?$/));
+  const protocol = firstGroup(str.match(/^([^:]+:)/));
+
+  const hostAndPath = str
+    .replace(RegExp(`^${protocol}//${auth}${auth ? '@' : ''}`), '')
+    .replace(hash, '');
+
+  const host = firstGroup(hostAndPath.match(/(.*?)(?:[?/#]|$)/));
+  const path = hostAndPath.replace(host, '');
+
+  const [pathname, query = ''] = path.split('?');
+  const [hostname, port = ''] = host.split(':');
+
+  return {
+    auth,
+    hash,
+    host,
+    hostname,
+    param: queryObject(query),
+    path,
+    pathname,
+    port,
+    protocol,
+    query,
+    search: query ? `?${query}` : '',
+  };
+}
+
+export default urlParse;
+
+export { queryObject };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react.module_react_render.html">react/render</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
