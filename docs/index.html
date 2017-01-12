@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><p><strong>NOTE: This project is still in heavy development and is not ready for actual
+use at this time. Releasing to the open source community is aimed at getting
+feedback and help from the community.</strong></p>
+<hr>
+<h1>LuxUI</h1><p>LuxUI is a UI rendering framework focused on translating API resource
+representations into fully interactive web interfaces. Representations provide
+all necessary information about a resource, and the UI elements it requires.
+This will enable non-UI developers/engineers, through standardized description
+of resources, to build consistent and beautiful UIs without ever needing to
+dive into UI code; CSS, HTML, or JavaScript.</p>
+<p>LuxUI requires API responses to follow the <a href="https://github.com/kevinswiber/siren">Siren</a> hypermedia standard
+with some <a href="SIREN+LUX.md">additional restrictions</a>; these are a set of decisions
+which have been made to reduce ambiguity and increase consistency between APIs.</p>
+<h2>Installation</h2><p>Install LuxUI as a dependency in your project:</p>
+<pre class="prettyprint source lang-bash"><code>$ npm install --save @luxui/luxReact</code></pre><h2>Usage</h2><p>Projects using LuxUI must provide two configuration options: an API root URI
+(<code>apiRoot</code>) and a location to render the application to (<code>renderRoot</code>). The API
+root URI should be an absolute URI to the root resource of the API &quot;backing&quot;
+the application. The render location should be a <code>id</code> of a DOM resource that
+the implementation code will be able to &quot;own&quot; for application rendering.</p>
+<p>Then you will be able to use LuxUI in your application(s):</p>
+<pre class="prettyprint source lang-javascript"><code>import luxReact from '@luxui/luxReact';
+
+const app = luxReact({
+  apiRoot: 'http://api.root',
+  renderRoot: '#renderRoot',
+});
+
+app.render();</code></pre><h3>Static Pages</h3><p>Some applications will have a need for pages that aren't represented in the API
+as resources. LuxUI provides a way to register specific URLs that will be
+handled by a custom handlers. Once you have defined the implementation specific
+handler the way pages are registered are as follows:</p>
+<pre class="prettyprint source lang-javascript"><code>import luxReact from '@luxui/luxReact';
+
+import homePageHandler from './homePageHandler';
+
+const app = luxReact({
+  apiRoot: 'http://api.root',
+  renderRoot: '#renderRoot',
+});
+
+app
+  .page('/home', homePageHandler)
+  .render();</code></pre><p>All pages will make an API call to the root resource of that API for meta
+information - such as main menu links, login status, etc. - and will then
+receive a responseModel object of that request.</p>
+<h2>API implementation</h2><p>For more information about what responses from the API should be and why read
+through the <a href="API_IMPLEMENTATION.md">API Implementation Guide</a>.</p>
+<h2>Contributing</h2><p>If you would like to get involved in the development of the project we would
+appreciate your help; please review the <a href="CONTRIBUTING.md">Contributing Guide</a> and
+browse the open Pull Requests and Issues for ideas on where to focus.</p>
+<h2>Useful Links</h2><ul>
+<li><a href="http://git/pages/luxui/lux-core/docs/">Module Documentation</a></li>
+<li><a href="http://git/pages/luxui/lux-core/coverage/lcov-report/">Code Coverage Report</a></li>
+</ul>
+<hr>
+<h2>Project Goals</h2><p>An ultimate goal of LuxUI is to make the following statement completely true:</p>
+<blockquote>
+<p>&quot;The API is in control of everything.&quot;</p>
+</blockquote>
+<p>The tactics that LuxUI employs to accomplish this goal are:</p>
+<ul>
+<li>Standardized data contract (<a href="SIREN+LUX.md">Siren+lux</a>)<ol>
+<li><strong>No</strong> &quot;shared knowledge&quot; between &quot;backend&quot; and &quot;frontend&quot;.</li>
+<li>Document all application logic in API responses.</li>
+<li>The API has independent control of: workflow, access control, etc.</li>
+</ol>
+</li>
+<li>UI customization<ol>
+<li><a href="PLUGINS.md">Plugins</a> allow for specialized domain solutions.</li>
+<li>Static content pages in-app rather than contrived API resources.</li>
+<li>Full control and access to CSS.</li>
+</ol>
+</li>
+</ul>
+<h3>Why?</h3><ol>
+<li>Create a reason for APIs to become standardized in response format.</li>
+<li>Give non-UI developers control of the UI in a familiar way; API data.</li>
+<li>Enable UI developers to build more general-purpose web components.</li>
+<li>Stop building custom single-use UI elements.</li>
+<li>Working towards a consistent UX across many applications.</li>
+<li>Make moving between projects a consistent experience.</li>
+<li>Intelligently decouple rendering responsibilities and business logic.</li>
+<li>Enable updates to many applications in a consistent, scheduled,
+ repeatable, and safe way.</li>
+<li>Allow for independent evolution of API and UI elements.</li>
+<li>Isolate testing requirements.</li>
+</ol>
+<h3>Browser Support</h3><p>These will be the supported versions; at this time there is no specific browser
+testing or validation. If you find problems please report them as issues.</p>
+<ul>
+<li>Chrome - current, and current - 1</li>
+<li>MS - Edge; IE &gt; 9 (newer than IE9)</li>
+<li>Firefox - current, and current - 1</li>
+<li>Safari - current, and current - 1</li>
+</ul>
+<hr>
+<h2>License</h2><p><a href="LICENSE.md">MIT</a></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react.module_react_render.html">react/render</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
