@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - JavaScript Introspection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script>
+    var __options = {"title":"LuxUI","flags":{"complexity":{"commonjs":true,"logicalor":true,"switchcase":true,"forin":false,"trycatch":false,"newmi":true},"jshint":{"env":{"browser":true,"node":false},"extends":"airbnb","globals":{"window":true},"parser":"babel-eslint","parserOptions":{"ecmaFeatures":{"experimentalObjectRestSpread":true,"jsx":true,"modules":true}},"rules":{"complexity":["error",{"max":10}],"jsx-quotes":["warn","prefer-double"],"max-depth":["error",{"max":3}],"max-params":["error",{"max":3}],"max-statements-per-line":["error",{"max":1}],"max-len":["error",{"ignoreUrls":true}],"newline-before-return":"error","no-param-reassign":"off","no-use-before-define":["error",{"functions":false}],"padded-blocks":"off","react/jsx-filename-extension":"off","react/sort-comp":"off","valid-jsdoc":["error"]}}}}
+  </script>
+
+  <link href="assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="assets/css/plato.css" rel="stylesheet">
+  <link href="assets/css/plato-display.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>LuxUI</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="reportBlock lineCount">
+                <div class="reportContent">
+                    <small class="chart-label">Total / Average Lines</small>
+                    <h1>2033 / 56</h1>
+                </div>
+                <div id="chart_historical_sloc" class="chart js-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="reportBlock maintainability">
+                <div class="reportContent">
+                    <small class="chart-label">Average Maintainability</small>
+                    <h1>75.62</h1>
+                </div>
+                <div id="chart_historical_maint" class="chart js-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="reportBlock maintainabilityList">
+                <h2 class="reportTitle">Worst Maintainability Scores</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>49 score</strong>
+                        <small>src/react/siren.propType.js</small>
+                    </li>
+
+                    <li>
+                        <strong>57 score</strong>
+                        <small>src/lib/storage.js</small>
+                    </li>
+
+                    <li>
+                        <strong>58 score</strong>
+                        <small>src/react/config.js</small>
+                    </li>
+
+                    <li>
+                        <strong>59 score</strong>
+                        <small>src/lib/responseModel.js</small>
+                    </li>
+
+                    <li>
+                        <strong>61 score</strong>
+                        <small>src/react/layout/main.js</small>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="reportBlock locList">
+                <h2 class="reportTitle">Largest Files</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>146 lines</strong>
+                        <small>src/lib/routing.js</small>
+                    </li>
+
+                    <li>
+                        <strong>122 lines</strong>
+                        <small>src/lib/urlParse.js</small>
+                    </li>
+
+                    <li>
+                        <strong>111 lines</strong>
+                        <small>src/react/link.js</small>
+                    </li>
+
+                    <li>
+                        <strong>100 lines</strong>
+                        <small>src/lib/apiRequest.js</small>
+                    </li>
+
+                    <li>
+                        <strong>98 lines</strong>
+                        <small>src/lib/responseModel.js</small>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="reportBlock lintList">
+                <h2 class="reportTitle">Lint Warnings</h2>
+                <ul class="list-unstyled">
+
+                    <li>
+                        <strong>1 lint errors</strong>
+                        <small>src/lib/apiRequest.js</small>
+                   </li>
+
+                    <li>
+                        <strong>1 lint errors</strong>
+                        <small>src/lib/broker.js</small>
+                   </li>
+
+                    <li>
+                        <strong>1 lint errors</strong>
+                        <small>src/lib/componentRegistry.js</small>
+                   </li>
+
+                    <li>
+                        <strong>1 lint errors</strong>
+                        <small>src/lib/debounce.js</small>
+                   </li>
+
+                    <li>
+                        <strong>1 lint errors</strong>
+                        <small>src/lib/flattenArray.js</small>
+                   </li>
+
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script type="text/javascript" src="assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="assets/scripts/plato-display.js"></script>
+
+</body>
+</html>
