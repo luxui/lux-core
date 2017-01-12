@@ -84,6 +84,11 @@ If you would like to get involved in the development of the project we would
 appreciate your help; please review the [Contributing Guide][Contribute] and
 browse the open Pull Requests and Issues for ideas on where to focus.
 
+## Useful Links
+
+  - [Module Documentation](http://git/pages/luxui/lux-core/docs/)
+  - [Code Coverage Report](http://git/pages/luxui/lux-core/coverage/lcov-report/)
+
 ---
 
 ## Project Goals
