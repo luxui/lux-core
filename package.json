@@ -15,6 +15,8 @@
     "doc": "jsdoc -c ./jsdoc.json",
     "predoc": "rm -rf ./docs/*",
     "lint": "eslint src/",
+    "doc-pub": "git subtree push --prefix=docs upstream gh-pages",
+    "predoc-pub": "npm run doc",
     "start": "jest --watch",
     "test": "jest"
   },
