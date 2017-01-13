@@ -170,6 +170,10 @@ Some future implementation possibilities are:
   - [Polymer](https://www.polymer-project.org/1.0/)
   - YUI - just kidding!
 
+## Architecture Diagrams
+
+![LuxUI Application Lifecycle](pages/lifecycle-sequence-diagram.png)
+
 [airbnb]: https://github.com/airbnb/javascript
 [Conduct]: CODE_OF_CONDUCT.md
 [Contribute]: CONTRIBUTING.md
