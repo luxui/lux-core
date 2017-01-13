@@ -4,6 +4,8 @@ feedback and help from the community.**
 
 ---
 
+[![license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE.md)
+
 LuxUI
 =====
 
@@ -126,12 +128,6 @@ testing or validation. If you find problems please report them as issues.
   - MS - Edge; IE > 9 (newer than IE9)
   - Firefox - current, and current - 1
   - Safari - current, and current - 1
-
----
-
-## License
-
-[MIT](LICENSE.md)
 
 [Contribute]: CONTRIBUTING.md
 [plugins]: PLUGINS.md
