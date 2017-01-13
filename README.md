@@ -7,16 +7,11 @@ feedback and help from the community.**
 LuxUI
 =====
 
-LuxUI is a UI rendering framework focused on translating API resource
-representations into fully interactive web interfaces. Representations provide
-all necessary information about a resource, and the UI elements it requires.
-This will enable non-UI developers/engineers, through standardized description
-of resources, to build consistent and beautiful UIs without ever needing to
-dive into UI code; CSS, HTML, or JavaScript.
-
-LuxUI requires API responses to follow the [Siren][Siren] hypermedia standard
-with some [additional restrictions][Siren+lux]; these are a set of decisions
-which have been made to reduce ambiguity and increase consistency between APIs.
+LuxUI is a web UI rendering framework. LuxUI translates API resources into
+fully interactive web applications. LuxUI empowers API developers to build
+consistent, well-structured, diverse UIs without ever needing to work in CSS,
+HTML, or JavaScript. LuxUI requires API responses to follow the [Siren][Siren]
+hypermedia standard with some additional restrictions ([Siren+lux][Siren+lux]).
 
 ## Installation
 
@@ -28,7 +23,7 @@ $ npm install --save @luxui/luxReact
 
 ## Usage
 
-Projects using LuxUI must provide two configuration options: an API root URI
+Projects using LuxUI must provide two configuration settings: an API root URI
 (`apiRoot`) and a location to render the application to (`renderRoot`). The API
 root URI should be an absolute URI to the root resource of the API "backing"
 the application. The render location should be a `id` of a DOM resource that

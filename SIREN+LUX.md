@@ -9,6 +9,11 @@ means that the application and API need to have less "shared knowledge"; and
 therefore puts all control of the application in the domain of the API. The UI
 is then only responsible for display based on the resource representations.
 
+Siren+lux is a set of decisions which have been made to:
+
+  1. Reduce ambiguity and increase consistency between APIs
+  2. Provide a standard that can be used to build UI components
+
 ## Action Fields
 
 A field is a single *logical* data-point; a "logical data-point" could have
