@@ -17,7 +17,7 @@
     "build": "export NODE_ENV=production && npm run build:react",
     "prebuild": "rm -rf ./dist/*",
     "build:react": "export LUX_FRAMEWORK=react && rollup -c rollup.js",
-    "doc": "jsdoc -c ./jsdoc.json -d ./pages/docs",
+    "doc": "jsdoc -c ./jsdoc.json -d ./pages/docs --readme ./pages/index.md",
     "predoc": "rm -rf ./pages/docs",
     "lint": "eslint src/",
     "pages": "npm run doc && npm run stats && npm run test",
