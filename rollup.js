@@ -3,9 +3,9 @@
 import path from 'path';
 
 import babel from 'rollup-plugin-babel';
-import builtins from 'rollup-plugin-node-builtins';
 import eslint from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
+import builtins from 'rollup-plugin-node-builtins';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
 const framework = process.env.LUX_FRAMEWORK;
@@ -29,7 +29,7 @@ console.log([
   'Bundling',
   `  (${format.toUpperCase()}) ${name} ${version}`,
   `  ${moduleName} - ${path.resolve(dest)}`,
-  ''
+  '',
 ].join('\n'));
 
 const banner = `
@@ -55,7 +55,7 @@ export default {
     json(),
     eslint({
       include: './src/**/*.js',
-      throwError: true
+      throwError: true,
     }),
     nodeResolve({
       browser: true,
@@ -66,5 +66,5 @@ export default {
       ],
     }),
     babel(),
-  ]
+  ],
 };

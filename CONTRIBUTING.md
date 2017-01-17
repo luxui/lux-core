@@ -4,6 +4,49 @@ Contributing Guide
 GitHub has some good content on the practice of [contributing to open source
 projects][GitHub Guide].
 
+## Setup
+
+The basics of getting your own working development version of LuxUI.
+
+  1. [Fork](https://help.github.com/articles/fork-a-repo/) the LuxUI repository
+      on GitHub
+  2. Clone your fork of LuxUI; named "origin" to follow convention
+
+      `git clone -o origin <your_repository_url>`
+
+  3. Add the "upstream" repository so you can pull in the newest changes in the
+      future; named "upstream" to follow convention
+
+      `get remote add upstream <repo_url_here>`
+
+  4. Install package dependencies
+
+      `npm install`
+
+  5. Install "peerDependencies"; *check the `package.json` "peerDependencies"
+      listing to be sure that only package versions are identified and not
+      anything that could be harmful scripts, as the following command executes
+      the following command `npm install ${package_name}@{package_version}`.*
+
+      `npm run peers`
+
+  6. Run all tests to make sure everything is installed correctly and that your
+      new changes will be starting with all tests passing
+
+      `npm test`
+
+  7. (OPTIONAL) Run linter to be sure that all code is "Lint-free"
+
+      `npm run lint`
+
+  8. Always develop changes on a development branch so they can be easily
+      updated from "upstream"; [Atlassian Tutorial on `rebase`](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
+
+      `git checkout -b <your_development_branchname>`
+
+The LuxUI project(s) use [ESLint][ESLint] and [Babel][Babel], each of these has
+optional integrations for various IDEs and editors.
+
 ## What can you contribute?
 
 Some excellent ways to help the project are:
@@ -175,6 +218,7 @@ Some future implementation possibilities are:
 ![LuxUI Application Lifecycle](pages/lifecycle-sequence-diagram.png)
 
 [airbnb]: https://github.com/airbnb/javascript
+[Babel]: https://babeljs.io/
 [Conduct]: CODE_OF_CONDUCT.md
 [Contribute]: CONTRIBUTING.md
 [Covenant]: http://contributor-covenant.org
