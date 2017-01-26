@@ -20,6 +20,8 @@ describe('Layout (supplied Layout)', function () {
   });
 
   beforeEach(function () {
+    spyOn(console, 'error');
+
     response = {
       data: {
         mock: 'data'
@@ -31,14 +33,12 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should not throw errors if nothing is provided', function () {
-    spyOn(console, 'error');
     expect(function () {
       renderer.create(<Layout />);
     }).not.toThrow();
   });
 
   it('should pass responseModel.data to Header', function () {
-    spyOn(console, 'error');
     registry('Header', (model) => {
       expect(model).toEqual(response.data);
 
@@ -48,7 +48,6 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should pass responseModel.data to Footer', function () {
-    spyOn(console, 'error');
     registry('Footer', (model) => {
       expect(model).toEqual(response.data);
 
@@ -58,7 +57,6 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should pass responseModel to Main', function () {
-    spyOn(console, 'error');
     registry('Main', (model) => {
       expect(model).toEqual(response);
 

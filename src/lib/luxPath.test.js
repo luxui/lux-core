@@ -45,12 +45,12 @@ describe('Library: luxPath', function () {
       expect(result).toBe(`${pathname}?abc=1234`);
     });
 
-    it('should return empty string', function () {
+    it('should return "/"', function () {
       const pathname = '';
       const location = locationMock(`${pathname}`);
       const result = luxPath(location);
 
-      expect(result).toBe(pathname);
+      expect(result).toBe('/');
     });
   });
 

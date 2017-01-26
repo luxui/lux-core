@@ -37,6 +37,11 @@ describe('Collection', function () {
     registry('Paging', Paging);
   });
 
+  beforeEach(function () {
+    spyOn(console, 'error');
+    spyOn(console, 'log');
+  });
+
   it('should exist; and should be a function', function () {
     expect(typeof Collection).toBe('function');
   });
@@ -52,7 +57,7 @@ describe('Collection', function () {
     }).toThrow('No `self` link provided from API in response.');
   });
 
-  it('should', function () {
+  it('should render a collection page; with no errors', function () {
     registry('Rest.Collection.CreateButton', () => (<p />));
     registry('Rest.Collection.List', () => (<p />));
     registry('Paging', () => (<p />));
@@ -60,6 +65,25 @@ describe('Collection', function () {
     const attrs = {
       ...props,
     };
+
+    const component = renderer.create(
+      <Collection {...attrs} />
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render a collection page; even if the `actions` are missing', function () {
+    registry('Rest.Collection.CreateButton', () => (<p />));
+    registry('Rest.Collection.List', () => (<p />));
+    registry('Paging', () => (<p />));
+
+    const attrs = {
+      ...props,
+    };
+
+    delete attrs.actions;
 
     const component = renderer.create(
       <Collection {...attrs} />

@@ -1,7 +1,7 @@
 {
   "name": "@luxui/lux",
-  "version": "0.7.0",
-  "description": "A client-side, in-browser single-page application, UI for Siren hypermedia APIs.",
+  "version": "0.8.1",
+  "description": "LuxUI is a web UI rendering framework that translates Siren APIs into fully interactive web applications.",
   "main": "dist/reactLux.js",
   "files": [
     "dist/*.js",
@@ -25,7 +25,8 @@
     "peers": "node peers.js",
     "start": "jest -c ./jest/testing.json --watch",
     "stats": "plato -d ./pages/stats --eslint .eslintrc --exclude \\.test\\.js$ --noempty --recurse --title \"LuxUI\" src/",
-    "test": "jest -c ./jest/reporting.json"
+    "test": "jest -c ./jest/reporting.json",
+    "pretest": "rm -rf ./pages/coverage"
   },
   "repository": {
     "type": "git",
@@ -71,6 +72,7 @@
     "eslint-plugin-react": "^6.6.0",
     "rollup": "^0.36.4",
     "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-eslint": "^3.0.0",
     "rollup-plugin-json": "^2.0.2",
     "rollup-plugin-node-builtins": "^2.0.0",

@@ -3,7 +3,7 @@ import configure, { settings } from './config';
 describe('configure', function () {
   const config = {
     apiRoot: 'http://foo.bar',
-    renderRoot: '#renderRoot',
+    renderRoot: document.createElement('div'),
   };
 
   it('should exist; and should be a function', function () {
@@ -28,7 +28,7 @@ describe('configure', function () {
     }).toThrow('Config property `apiRoot` must be a string; number provided.');
   });
 
-  it('should throw an error if "render" renderRoot is not provided', function () {
+  it('should throw an error if `renderRoot` is not provided', function () {
     expect(function () {
       const bad = { ...config };
       delete bad.renderRoot;
@@ -37,13 +37,13 @@ describe('configure', function () {
     }).toThrow('Config property `renderRoot` not provided.');
   });
 
-  it('should throw an error if "render" renderRoot is not a string', function () {
+  it('should throw an error if `renderRoot` is not a DOM element', function () {
     expect(function () {
       const bad = { ...config };
       bad.renderRoot = 1234;
 
       configure(bad);
-    }).toThrow('Config property `renderRoot` must be a string; number provided.');
+    }).toThrow('Config property `renderRoot` must be a DOM element; number provided.');
   });
 
   it('should fully configure without error', function () {

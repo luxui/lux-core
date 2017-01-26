@@ -1,0 +1,29 @@
+exports[`Fatal should match the snapshot 1`] = `
+<div>
+  <h1>
+    Fatal Application Error
+  </h1>
+  <h2>
+    Path
+  </h2>
+  <pre>
+    could be anything
+  </pre>
+  <h2>
+    Model
+  </h2>
+  <pre>
+    {
+     \"props\": \"might not actually exist\"
+    }
+  </pre>
+  <h2>
+    Others
+  </h2>
+  <pre>
+    {
+     \"error\": {}
+    }
+  </pre>
+</div>
+`;

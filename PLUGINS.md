@@ -24,21 +24,27 @@ container (div or li)
 
 ## Using Plugins
 
-If an existing plugin is what you application needs then using the plugin is
+If an existing plugin is what your application needs then using the plugin is
 extremely easy.
 
 ```javascript
-import luxReact, { componentRegistry } from '@luxui/luxReact';
+import luxReact from '@luxui/luxReact';
 import customPlugin from '@custom/plugin';
+import anotherPlugin from '@another/plugin';
 
-componentRegistry('CustomPlugin', customPlugin);
+const app = luxReact(config);
 
-// normal application initialization...
+app
+  .component('CustomPlugin', customPlugin)
+  .component('AnotherPlugin', anotherPlugin);
 ```
 
 Many of the LuxUI implementation modules - ReactJS (`src/react/`) - use this
-definition method for components should you need working examples.
+definition method for components should you like to see working examples.
 
 ## Developing Custom Plugins
+
+Components within a LuxUI application can "opt-in" to be provided with a context
+object; check the docs pages on `react/appContext` for more info.
 
 TODO

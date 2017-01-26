@@ -1,9 +1,9 @@
 import { handler } from './responseModel';
 
-function mockResponse(data, status = 200, type = 'application/vnd.siren+json') {
+function mockResponse(body, status = 200, type = 'application/vnd.siren+json') {
 
   return {
-    data,
+    body,
     headers: {
       get: () => type
     },

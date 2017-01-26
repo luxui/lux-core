@@ -22,6 +22,8 @@ describe('Main (supplied Layout)', function () {
   });
 
   beforeEach(function () {
+    spyOn(console, 'error');
+
     response = {
       data: {
         actions: [],
@@ -104,6 +106,19 @@ describe('Main (supplied Layout)', function () {
 
   it('should render the Error component; when the class type is not: collection or item', function () {
     response.data.class = ['something-else'];
+
+    registry('Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+
+    const component = renderer.create(
+      <Main {...response} />
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render the Error component; when the `class` property is absent', function () {
+    delete response.data.class;
 
     registry('Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 

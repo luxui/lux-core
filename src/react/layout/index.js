@@ -19,8 +19,7 @@ const skip = {
   title: 'Skip to main content',
 };
 
-// TODO: jsdoc-bloc this!
-function layoutComponent(props) {
+function LayoutComponent(props) {
   const Footer = registry('Footer');
   const Header = registry('Header');
   const Main = registry('Main');
@@ -34,6 +33,6 @@ function layoutComponent(props) {
     </div>
   );
 }
-layoutComponent.propTypes = responseModelShape;
+LayoutComponent.propTypes = responseModelShape;
 
-registry('Layout', layoutComponent, false);
+registry('Layout', LayoutComponent, false);

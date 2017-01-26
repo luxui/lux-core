@@ -38,10 +38,10 @@ import luxReact from '@luxui/luxReact';
 
 const app = luxReact({
   apiRoot: 'http://api.root',
-  renderRoot: '#renderRoot',
+  renderRoot: document.getElementById('renderRoot'),
 });
 
-app.render();
+app.visit();
 ```
 
 ### Static Pages
@@ -58,12 +58,12 @@ import homePageHandler from './homePageHandler';
 
 const app = luxReact({
   apiRoot: 'http://api.root',
-  renderRoot: '#renderRoot',
+  renderRoot: document.getElementById('renderRoot'),
 });
 
 app
   .page('/home', homePageHandler)
-  .render();
+  .visit();
 ```
 
 All pages will make an API call to the root resource of that API for meta

@@ -49,7 +49,7 @@ function restCollectionComponent(props) {
     <div className="collection-display">
       <h2 className="heading--primary">{self.title}</h2>
 
-      {createLinks(props.actions)}
+      {createLinks(props.actions || [])}
 
       <RestCollectionList entities={props.entities} title={self.title} />
 

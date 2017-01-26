@@ -31,6 +31,36 @@ exports[`Main (supplied Layout) should render a page from the \`routing\` module
 </main>
 `;
 
+exports[`Main (supplied Layout) should render the Error component; when the \`class\` property is absent 1`] = `
+<main
+  className="body-divider pbl"
+  id="maincontent"
+  role="main">
+  <pre>
+    {
+     \"data\": {
+      \"actions\": [],
+      \"entities\": [],
+      \"links\": [
+       {
+        \"href\": \"/\",
+        \"rel\": [
+         \"self\"
+        ],
+        \"title\": \"Something Savvy\"
+       }
+      ],
+      \"properties\": {},
+      \"title\": \"Testing Main Component\"
+     },
+     \"error\": false,
+     \"path\": \"/home\",
+     \"status\": 200
+    }
+  </pre>
+</main>
+`;
+
 exports[`Main (supplied Layout) should render the Error component; when the class type is not: collection or item 1`] = `
 <main
   className="body-divider pbl"

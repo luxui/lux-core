@@ -2,7 +2,10 @@
 
 import path from 'path';
 
+// eslint-disable-next-line max-len
+/* eslint import/no-extraneous-dependencies: ["off", {"devDependencies": false}] */
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
 import eslint from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
 import builtins from 'rollup-plugin-node-builtins';
@@ -52,6 +55,11 @@ export default {
   plugins: [
     // The order of these plugins is important; babel should remain last.
     builtins(),
+    commonjs({
+      include: [
+        'node_modules/**',
+      ],
+    }),
     json(),
     eslint({
       include: './src/**/*.js',

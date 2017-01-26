@@ -1,6 +1,8 @@
 import {
   isArray,
+  isElement,
   isFunction,
+  isNode,
   isNull,
   isObject,
   isRegExp,
@@ -10,7 +12,9 @@ import {
 describe('Library: is', () => {
   [
     isArray,
+    isElement,
     isFunction,
+    isNode,
     isNull,
     isObject,
     isRegExp,
@@ -33,6 +37,20 @@ describe('Library: is', () => {
     });
   });
 
+  describe(`isElement`, () => {
+    it('should return true for a DOM element', () => {
+      expect(isElement(document.createElement('div'))).toBe(true);
+    });
+
+    it('should return false for a non DOM element', () => {
+      expect(isElement('')).toBe(false);
+    });
+
+    it('should return false for a text node', () => {
+      expect(isElement(document.createTextNode('Hello'))).toBe(false);
+    });
+  });
+
   describe(`isFunction`, () => {
     it(`should return true for Function`, () => {
       expect(isFunction(_ => _)).toBe(true);
@@ -40,6 +58,20 @@ describe('Library: is', () => {
 
     it(`should return false for anything not a Function`, () => {
       expect(isFunction({})).toBe(false);
+    });
+  });
+
+  describe(`isNode`, () => {
+    it('should return true for a text node', () => {
+      expect(isNode(document.createTextNode('Hello'))).toBe(true);
+    });
+
+    it('should return false for a string', () => {
+      expect(isNode('')).toBe(false);
+    });
+
+    it('should return true for a DOM element', () => {
+      expect(isNode(document.createElement('div'))).toBe(true);
     });
   });
 

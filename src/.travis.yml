@@ -1,0 +1,7 @@
+install:
+  - npm install
+language: node_js
+node_js:
+  - "6.9.0"
+script:
+  - npm run test

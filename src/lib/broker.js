@@ -39,8 +39,8 @@ const options = {
  * import broker from './broker';
  *
  * const appConfig = broker({
- *   api: 'http://foo.bar',
- *   dom: '#renderRoot',
+ *   apiRoot: 'http://foo.bar',
+ *   renderRoot: document.getElementById('root'),
  * });
  *
  * console.log(appConfig.api); // 'http://foo.bar'
