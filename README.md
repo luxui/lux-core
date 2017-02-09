@@ -83,8 +83,8 @@ browse the open Pull Requests and Issues for ideas on where to focus.
 
 ## Useful Links
 
-  - [Module Documentation](http://git/pages/luxui/lux-core/docs/)
-  - [Code Coverage Report](http://git/pages/luxui/lux-core/coverage/lcov-report/)
+  - [Module Documentation](https://luxui.github.io/lux-core/docs/)
+  - [Code Coverage Report](https://luxui.github.io/lux-core/coverage/lcov-report/)
 
 ---
 
