@@ -35,7 +35,7 @@ function luxPath(loc) {
   const path = url.pathname
     .replace(/\/+$/, ''); // remove trailing slashes
 
-  return `${path}${url.search}`;
+  return `${path}${url.search}` || '/';
 }
 
 export default luxPath;

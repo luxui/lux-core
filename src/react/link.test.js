@@ -1,9 +1,8 @@
-jest.mock('./render');
-
 jest.mock('../lib/luxPath');
 import luxPath from '../lib/luxPath';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import renderer from 'react-test-renderer';
 
@@ -13,6 +12,11 @@ const behavior = ReactTestUtils.createRenderer();
 const { Simulate } = ReactTestUtils;
 
 describe('Link', function () {
+  Object.defineProperty(window, 'onpopstate', {
+    writable: true,
+    value: () => {},
+  });
+
   beforeEach(function () {
     spyOn(history, 'pushState');
     luxPath.mockReset();
@@ -26,7 +30,7 @@ describe('Link', function () {
     it('should throw an error if no `title` is accessible', function () {
       expect(function () {
         renderer.create(<Link href="/hello"><img /></Link>);
-      }).toThrow('Links should always have a title attribute.');
+      }).toThrow('Links must always have a title attribute.');
     });
 
     it('should match the snapshot; with child content', function () {
@@ -58,25 +62,23 @@ describe('Link', function () {
 
     it('should fire the clickHandler; with `noClickHandler=false`', function () {
       luxPath
-        .mockReturnValueOnce('/always')
-        .mockReturnValueOnce('/once');
+        .mockReturnValueOnce('/second')
+        .mockReturnValueOnce('/first');
 
-      behavior.render(
-        <Link href="/hello" noClickHandler="false">Hello</Link>
-      );
-
+      const context = {
+        visit(path) {
+          expect(path).toBe('/second');
+        }
+      };
       const count = history.pushState.calls.count();
       const event = {
         button: 0,
         preventDefault() {},
-        target: {
-          href: '/link',
-          nodeName: 'A',
-        }
+        target: { href: '/link', nodeName: 'A' }
       };
 
-      const component = behavior.getRenderOutput();
-      component.props.onClick(event);
+      Link({ children: 'Hello' }, context).props.onClick(event);
+
       expect(history.pushState.calls.count()).toBe(count + 1);
     });
 
@@ -165,19 +167,16 @@ describe('Link', function () {
 
     it('should navigate if the link is different than the current page', function () {
       luxPath
-        .mockReturnValueOnce('/once')
-        .mockReturnValueOnce('/twice');
+        .mockReturnValueOnce('/second')
+        .mockReturnValueOnce('/first');
 
       const event = {
         button: 0,
         preventDefault() {},
-        target: {
-          href: '/something-else',
-          nodeName: 'A',
-        }
+        target: { href: '/third', nodeName: 'A' }
       };
 
-      clickHandler(event);
+      clickHandler.call({ visit() {} }, event);
       expect(history.pushState.calls.count()).toBe(1);
       expect(history.pushState).toHaveBeenCalled();
     });
@@ -192,15 +191,10 @@ describe('Link', function () {
       const event = {
         button: 0,
         preventDefault() {},
-        target: {
-          parentNode: {
-            href: href,
-            nodeName: 'A',
-          }
-        }
+        target: { parentNode: { href: href, nodeName: 'A' } }
       };
 
-      clickHandler(event);
+      clickHandler.call({ visit() {} }, event);
       expect(history.pushState).lastCalledWith(null, '', href);
     });
   });

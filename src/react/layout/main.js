@@ -27,7 +27,7 @@ function mainComponent(props) {
     if (pageComponent) {
       Component = pageComponent;
     } else {
-      const type = props.data.class
+      const type = (props.data.class || [])
         .filter(item => /^(?:collection|item)$/.test(item))[0];
 
       switch (type) {
@@ -38,11 +38,12 @@ function mainComponent(props) {
           Component = registry('Rest.Item');
           break;
         default:
-          // eslint-disable-next-line max-len
-          throw new Error(`No appropriate Component for "${props.path}", returning "${props.data.class}" Siren \`class\`.`);
+          throw new Error(`No appropriate Component for "${props.path}".`);
       }
     }
   } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
     Component = registry('Error');
   }
 

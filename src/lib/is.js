@@ -38,11 +38,51 @@ const isNull = q => q === null || q === undefined;
 const isObject = q => isType('Object', q);
 const isString = q => isType('String', q);
 
+/**
+ * Test `obj` to determine if it is a DOM node. A node is any DOM node which
+ * could be anything including: document, text, comment, or element. A node is
+ * not necessarily an element
+ *
+ * @param  {*}  obj - The test subject.
+ *
+ * @return {Boolean} - Result of the test.
+ */
+const isNode = obj =>
+  (typeof Node === 'object'
+    // istanbul ignore next line
+    ? obj instanceof Node
+    : !!obj &&
+      typeof obj === 'object' &&
+      typeof obj.nodeType === 'number' &&
+      typeof obj.nodeName === 'string');
+
+/**
+ * Test `obj` to determine if it is a DOM element. An element is a specific
+ * tag within the document. An element is a node.
+ *
+ * @param  {*}  obj - The test subject.
+ *
+ * @return {Boolean} - Result of the test.
+ */
+const isElement = obj =>
+  (typeof HTMLElement === 'object'
+    // istanbul ignore next line
+    ? obj instanceof HTMLElement
+    : !!obj &&
+      typeof obj === 'object' &&
+      obj !== null &&
+      obj.nodeType === 1 &&
+      typeof obj.nodeName === 'string');
+
 export {
   /** @type {IsFunction} */
   isArray,
   /** @type {IsFunction} */
+  isElement,
+  /** @type {IsFunction} */
   isFunction,
+  /** @type {IsFunction} */
+  isNode,
   /** @type {IsFunction} */
   isNull,
   /** @type {IsFunction} */

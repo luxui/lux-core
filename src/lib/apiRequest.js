@@ -8,6 +8,38 @@ import herald from './herald';
 import { handler as responseModelRequestHandler } from './responseModel';
 import storage from './storage';
 
+const responseProperties = [
+  'bodyUsed',
+  'headers',
+  'ok',
+  'redirected',
+  'status',
+  'statusText',
+  'type',
+  'url',
+];
+
+// Make Response properties available beyond Promise-chain; after .json().
+function resolvedResponse(response) {
+  function format(body) {
+
+    return {
+      body,
+      ...responseProperties
+        .reduce(props, {}),
+    };
+  }
+
+  function props(acc, prop) {
+    acc[prop] = response[prop];
+
+    return acc;
+  }
+
+  return response.json()
+    .then(format);
+}
+
 /**
  * The API Client (`apiRequest`) provides a simple and consistent interface for
  * making requests to the API. All arguments are optional and will use "sane"
@@ -71,27 +103,33 @@ function apiRequest(URI = '/', options = {}) {
 
   return fetch(URI, options)
     .then(retryFactory(URI, options))
-    .then(response => response.json())
+    .then(resolvedResponse)
     .then(responseModelRequestHandler);
 }
 
 function retryFactory(URI, options) {
-  function retry(resp) {
-    // the request returned with "unauthorized" and an authToken is stored;
-    // try again without the authToken to try and show a non-error-page
-    if (resp && +resp.status === 403 && options.headers.authorization) {
+  function retry(firstResponse) {
+    const retryConditions =
+      // the request returned with 403 "unauthorized"
+      +firstResponse.status === 403 &&
+      // and an authToken was included in the request
+      options.headers.authorization;
+
+    // try again without the authorization header;
+    // to try and render a non-error-page
+    if (retryConditions) {
       delete options.headers.authorization;
 
       return fetch(URI, options)
-        .then((response) => {
+        .then((secondResponse) => {
           herald('logout');
 
-          return response;
+          return secondResponse;
         });
     }
 
-    // return the "error" resp
-    return resp;
+    // return the "error" response
+    return firstResponse;
   }
 
   return retry;

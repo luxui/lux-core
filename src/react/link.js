@@ -5,17 +5,9 @@
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import herald from '../lib/herald';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
-
-function attributeValue(name, attrs, defaultValue) {
-  const isPresent = Object.keys(attrs).indexOf(name) > -1;
-  const isFalse = `${attrs[name]}` === 'false';
-
-  return isPresent ? isFalse : defaultValue;
-}
 
 function clickHandler(event) {
   /* istanbul ignore else */
@@ -30,8 +22,8 @@ function clickHandler(event) {
     const newPath = luxPath(clickedLink.href);
 
     if (newPath !== luxPath(window.location)) {
-      herald('render', newPath);
-      history.pushState(null, '', newPath);
+      window.history.pushState(null, '', newPath);
+      this.visit(newPath);
     }
   }
 }
@@ -57,6 +49,8 @@ function isModifiedClick(event) {
  * @param {object} props - All React properties for the instance of the
  * component.
  *
+ * @param {object} context - React component `context` object.
+ *
  * @return {ReactComponent} - the Link React component
  *
  * @example
@@ -71,7 +65,7 @@ function isModifiedClick(event) {
  *
  * // will result in: <a class="auth-link" href="/sign-in">Sign-in</a>
  */
-function Link(props) {
+function Link(props, context) {
   const attrs = { ...props };
   const { children, title } = props;
 
@@ -79,22 +73,23 @@ function Link(props) {
   if (title || isString(children)) {
     attrs.title = title || children;
   } else {
-    throw new Error('Links should always have a title attribute.');
+    throw new Error('Links must always have a title attribute.');
   }
 
-  const handleClick = attributeValue('noClickHandler', attrs, true);
+  const handleClick = (x => (x ? x === 'false' : true))(attrs.noClickHandler);
   delete attrs.noClickHandler;
 
   if (handleClick) {
     attrs.onClick = attrs.onClick
-      ? series(attrs.onClick, clickHandler)
-      : clickHandler;
+      ? series(attrs.onClick, clickHandler.bind(context))
+      : clickHandler.bind(context);
   }
 
   return (
     <a {...attrs}>{children || title}</a>
   );
 }
+Link.contextTypes = { visit: React.PropTypes.func };
 Link.propTypes = {
   children: React.PropTypes.node,
   // eslint-disable-next-line react/no-unused-prop-types

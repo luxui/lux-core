@@ -15,7 +15,7 @@ const shape = {
   // eslint-disable-next-line react/no-unused-prop-types
   path: React.PropTypes.string.isRequired,
   // eslint-disable-next-line react/no-unused-prop-types
-  status: React.PropTypes.number,
+  status: React.PropTypes.number.isRequired,
 };
 
 export default shape;

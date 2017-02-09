@@ -63,7 +63,7 @@ describe('Lux - apiRequest', function () {
     );
 
     return apiRequest('/retry')
-      .then(response => expect(response.retry).toBe('successful'));
+      .then(response => expect(response.body.retry).toBe('successful'));
   });
 
   it('should call `responseModel#handler()`', function () {
