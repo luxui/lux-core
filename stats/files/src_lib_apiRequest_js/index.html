@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">74.43</p>
+      <p class="stat">74.61</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">100</p>
+      <p class="stat">138</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">24.52</p>
+      <p class="stat">22.97</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.28</p>
+      <p class="stat">0.40</p>
     </div>
   </div>
 </div>
@@ -98,6 +98,38 @@ import herald from &#039;./herald&#039;;
 
 import { handler as responseModelRequestHandler } from &#039;./responseModel&#039;;
 import storage from &#039;./storage&#039;;
+
+const responseProperties = [
+  &#039;bodyUsed&#039;,
+  &#039;headers&#039;,
+  &#039;ok&#039;,
+  &#039;redirected&#039;,
+  &#039;status&#039;,
+  &#039;statusText&#039;,
+  &#039;type&#039;,
+  &#039;url&#039;,
+];
+
+// Make Response properties available beyond Promise-chain; after .json().
+function resolvedResponse(response) {
+  function format(body) {
+
+    return {
+      body,
+      ...responseProperties
+        .reduce(props, {}),
+    };
+  }
+
+  function props(acc, prop) {
+    acc[prop] = response[prop];
+
+    return acc;
+  }
+
+  return response.json()
+    .then(format);
+}
 
 /**
  * The API Client (`apiRequest`) provides a simple and consistent interface for
@@ -162,27 +194,33 @@ function apiRequest(URI = &#039;/&#039;, options = {}) {
 
   return fetch(URI, options)
     .then(retryFactory(URI, options))
-    .then(response =&gt; response.json())
+    .then(resolvedResponse)
     .then(responseModelRequestHandler);
 }
 
 function retryFactory(URI, options) {
-  function retry(resp) {
-    // the request returned with &quot;unauthorized&quot; and an authToken is stored;
-    // try again without the authToken to try and show a non-error-page
-    if (resp &amp;&amp; +resp.status === 403 &amp;&amp; options.headers.authorization) {
+  function retry(firstResponse) {
+    const retryConditions =
+      // the request returned with 403 &quot;unauthorized&quot;
+      +firstResponse.status === 403 &amp;&amp;
+      // and an authToken was included in the request
+      options.headers.authorization;
+
+    // try again without the authorization header;
+    // to try and render a non-error-page
+    if (retryConditions) {
       delete options.headers.authorization;
 
       return fetch(URI, options)
-        .then((response) =&gt; {
+        .then((secondResponse) =&gt; {
           herald(&#039;logout&#039;);
 
-          return response;
+          return secondResponse;
         });
     }
 
-    // return the &quot;error&quot; resp
-    return resp;
+    // return the &quot;error&quot; response
+    return firstResponse;
   }
 
   return retry;

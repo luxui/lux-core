@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">57.51</p>
+      <p class="stat">56.69</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">39</p>
+      <p class="stat">58</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">17.52</p>
+      <p class="stat">18.93</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.16</p>
+      <p class="stat">0.17</p>
     </div>
   </div>
 </div>
@@ -95,12 +95,29 @@
  */
 
 import broker from &#039;../lib/broker&#039;;
-import { isString } from &#039;../lib/is&#039;;
+import { isString, isElement } from &#039;../lib/is&#039;;
 
 import herald from &#039;../lib/herald&#039;;
 
 const settings = {};
 
+/**
+ * @typedef {BrokeredObject} LuxConfig
+ * @global
+ *
+ * @property {String} apiRoot - The URI for the &quot;root&quot; API resource.
+ * @property {HTMLElement} renderRoot - The DOM element to host the application.
+ */
+
+/**
+ * Configuration validation function.
+ *
+ * @param {LuxConfig} object - Destructured into:
+ * @param {String} object.apiRoot - See {@see LuxConfig}
+ * @param {HTMLElement} object.renderRoot - See {@see LuxConfig}
+ *
+ * @return {LuxConfig} - A BrokeredObject instance of LuxConfig.
+ */
 function configure({ apiRoot, renderRoot }) {
   if (!apiRoot) {
     throw new Error(&#039;Config property `apiRoot` not provided.&#039;);
@@ -111,9 +128,9 @@ function configure({ apiRoot, renderRoot }) {
 
   if (!renderRoot) {
     throw new Error(&#039;Config property `renderRoot` not provided.&#039;);
-  } else if (!isString(renderRoot)) {
+  } else if (!isElement(renderRoot)) {
     // eslint-disable-next-line max-len
-    throw new Error(`Config property \`renderRoot\` must be a string; ${typeof renderRoot} provided.`);
+    throw new Error(`Config property \`renderRoot\` must be a DOM element; ${typeof renderRoot} provided.`);
   }
 
   // listen for history changes and re-render; don&#039;t &quot;break&quot; back button
@@ -123,6 +140,8 @@ function configure({ apiRoot, renderRoot }) {
     apiRoot,
     renderRoot,
   }, settings);
+
+  return settings;
 }
 
 export default configure;

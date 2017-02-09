@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>26/26</span>
+        <span class='fraction'>25/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>26/26</span>
+        <span class='fraction'>24/24</span>
       </div>
     </div>
   </div>
@@ -149,12 +149,7 @@
 104
 105
 106
-107
-108
-109
-110
-111
-112</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+107</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,14 +158,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,6 +215,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -251,7 +240,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,17 +262,9 @@
 &nbsp;
 import React from 'react'; // `React` must be in scope when using JSX
 &nbsp;
-import herald from '../lib/herald';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
-&nbsp;
-function attributeValue(name, attrs, defaultValue) {
-  const isPresent = Object.keys(attrs).indexOf(name) &gt; -1;
-  const isFalse = `${attrs[name]}` === 'false';
-&nbsp;
-  return isPresent ? isFalse : defaultValue;
-}
 &nbsp;
 function clickHandler(event) {
   /* istanbul ignore else */
@@ -297,8 +279,8 @@ function clickHandler(event) {
     const newPath = luxPath(clickedLink.href);
 &nbsp;
     if (newPath !== luxPath(window.location)) {
-      herald('render', newPath);
-      history.pushState(null, '', newPath);
+      window.history.pushState(null, '', newPath);
+      this.visit(newPath);
     }
   }
 }
@@ -324,6 +306,8 @@ function isModifiedClick(event) {
  * @param {object} props - All React properties for the instance of the
  * component.
  *
+ * @param {object} context - React component `context` object.
+ *
  * @return {ReactComponent} - the Link React component
  *
  * @example
@@ -338,7 +322,7 @@ function isModifiedClick(event) {
  *
  * // will result in: &lt;a class="auth-link" href="/sign-in"&gt;Sign-in&lt;/a&gt;
  */
-function Link(props) {
+function Link(props, context) {
   const attrs = { ...props };
   const { children, title } = props;
 &nbsp;
@@ -346,22 +330,23 @@ function Link(props) {
   if (title || isString(children)) {
     attrs.title = title || children;
   } else {
-    throw new Error('Links should always have a title attribute.');
+    throw new Error('Links must always have a title attribute.');
   }
 &nbsp;
-  const handleClick = attributeValue('noClickHandler', attrs, true);
+  const handleClick = (x =&gt; (x ? x === 'false' : true))(attrs.noClickHandler);
   delete attrs.noClickHandler;
 &nbsp;
   if (handleClick) {
     attrs.onClick = attrs.onClick
-      ? series(attrs.onClick, clickHandler)
-      : clickHandler;
+      ? series(attrs.onClick, clickHandler.bind(context))
+      : clickHandler.bind(context);
   }
 &nbsp;
   return (
     &lt;a {...attrs}&gt;{children || title}&lt;/a&gt;
   );
 }
+Link.contextTypes = { visit: React.PropTypes.func };
 Link.propTypes = {
   children: React.PropTypes.node,
   // eslint-disable-next-line react/no-unused-prop-types
@@ -382,7 +367,7 @@ export {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 12 2017 11:57:45 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 09 2017 09:11:19 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

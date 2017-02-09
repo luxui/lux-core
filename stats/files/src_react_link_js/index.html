@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.41</p>
+      <p class="stat">69.18</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">111</p>
+      <p class="stat">106</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">30.64</p>
+      <p class="stat">31.47</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.57</p>
+      <p class="stat">0.54</p>
     </div>
   </div>
 </div>
@@ -96,17 +96,9 @@
 
 import React from &#039;react&#039;; // `React` must be in scope when using JSX
 
-import herald from &#039;../lib/herald&#039;;
 import { isString } from &#039;../lib/is&#039;;
 import luxPath from &#039;../lib/luxPath&#039;;
 import series from &#039;../lib/series&#039;;
-
-function attributeValue(name, attrs, defaultValue) {
-  const isPresent = Object.keys(attrs).indexOf(name) &gt; -1;
-  const isFalse = `${attrs[name]}` === &#039;false&#039;;
-
-  return isPresent ? isFalse : defaultValue;
-}
 
 function clickHandler(event) {
   /* istanbul ignore else */
@@ -121,8 +113,8 @@ function clickHandler(event) {
     const newPath = luxPath(clickedLink.href);
 
     if (newPath !== luxPath(window.location)) {
-      herald(&#039;render&#039;, newPath);
-      history.pushState(null, &#039;&#039;, newPath);
+      window.history.pushState(null, &#039;&#039;, newPath);
+      this.visit(newPath);
     }
   }
 }
@@ -148,6 +140,8 @@ function isModifiedClick(event) {
  * @param {object} props - All React properties for the instance of the
  * component.
  *
+ * @param {object} context - React component `context` object.
+ *
  * @return {ReactComponent} - the Link React component
  *
  * @example
@@ -162,7 +156,7 @@ function isModifiedClick(event) {
  *
  * // will result in: &lt;a class=&quot;auth-link&quot; href=&quot;/sign-in&quot;&gt;Sign-in&lt;/a&gt;
  */
-function Link(props) {
+function Link(props, context) {
   const attrs = { ...props };
   const { children, title } = props;
 
@@ -170,22 +164,23 @@ function Link(props) {
   if (title || isString(children)) {
     attrs.title = title || children;
   } else {
-    throw new Error(&#039;Links should always have a title attribute.&#039;);
+    throw new Error(&#039;Links must always have a title attribute.&#039;);
   }
 
-  const handleClick = attributeValue(&#039;noClickHandler&#039;, attrs, true);
+  const handleClick = (x =&gt; (x ? x === &#039;false&#039; : true))(attrs.noClickHandler);
   delete attrs.noClickHandler;
 
   if (handleClick) {
     attrs.onClick = attrs.onClick
-      ? series(attrs.onClick, clickHandler)
-      : clickHandler;
+      ? series(attrs.onClick, clickHandler.bind(context))
+      : clickHandler.bind(context);
   }
 
   return (
     &lt;a {...attrs}&gt;{children || title}&lt;/a&gt;
   );
 }
+Link.contextTypes = { visit: React.PropTypes.func };
 Link.propTypes = {
   children: React.PropTypes.node,
   // eslint-disable-next-line react/no-unused-prop-types
