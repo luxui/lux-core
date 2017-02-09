@@ -33,17 +33,9 @@
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import herald from '../lib/herald';
 import { isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import series from '../lib/series';
-
-function attributeValue(name, attrs, defaultValue) {
-  const isPresent = Object.keys(attrs).indexOf(name) > -1;
-  const isFalse = `${attrs[name]}` === 'false';
-
-  return isPresent ? isFalse : defaultValue;
-}
 
 function clickHandler(event) {
   /* istanbul ignore else */
@@ -58,8 +50,8 @@ function clickHandler(event) {
     const newPath = luxPath(clickedLink.href);
 
     if (newPath !== luxPath(window.location)) {
-      herald('render', newPath);
-      history.pushState(null, '', newPath);
+      window.history.pushState(null, '', newPath);
+      this.visit(newPath);
     }
   }
 }
@@ -85,6 +77,8 @@ function isModifiedClick(event) {
  * @param {object} props - All React properties for the instance of the
  * component.
  *
+ * @param {object} context - React component `context` object.
+ *
  * @return {ReactComponent} - the Link React component
  *
  * @example
@@ -99,7 +93,7 @@ function isModifiedClick(event) {
  *
  * // will result in: &lt;a class="auth-link" href="/sign-in">Sign-in&lt;/a>
  */
-function Link(props) {
+function Link(props, context) {
   const attrs = { ...props };
   const { children, title } = props;
 
@@ -107,22 +101,23 @@ function Link(props) {
   if (title || isString(children)) {
     attrs.title = title || children;
   } else {
-    throw new Error('Links should always have a title attribute.');
+    throw new Error('Links must always have a title attribute.');
   }
 
-  const handleClick = attributeValue('noClickHandler', attrs, true);
+  const handleClick = (x => (x ? x === 'false' : true))(attrs.noClickHandler);
   delete attrs.noClickHandler;
 
   if (handleClick) {
     attrs.onClick = attrs.onClick
-      ? series(attrs.onClick, clickHandler)
-      : clickHandler;
+      ? series(attrs.onClick, clickHandler.bind(context))
+      : clickHandler.bind(context);
   }
 
   return (
     &lt;a {...attrs}>{children || title}&lt;/a>
   );
 }
+Link.contextTypes = { visit: React.PropTypes.func };
 Link.propTypes = {
   children: React.PropTypes.node,
   // eslint-disable-next-line react/no-unused-prop-types
@@ -147,7 +142,7 @@ export {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react.module_react_render.html">react/render</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="lux-lib.module_lib_apiRequest.html">lib/apiRequest</a></li><li><a href="lux-lib.module_lib_broker.html">lib/broker</a></li><li><a href="lux-lib.module_lib_componentRegistry.html">lib/componentRegistry</a></li><li><a href="lux-lib.module_lib_debounce.html">lib/debounce</a></li><li><a href="lux-lib.module_lib_flattenArray.html">lib/flattenArray</a></li><li><a href="lux-lib.module_lib_has.html">lib/has</a></li><li><a href="lux-lib.module_lib_herald.html">lib/herald</a></li><li><a href="lux-lib.module_lib_is.html">lib/is</a></li><li><a href="lux-lib.module_lib_luxPath.html">lib/luxPath</a></li><li><a href="lux-lib.module_lib_responseModel.html">lib/responseModel</a></li><li><a href="lux-lib.module_lib_routing.html">lib/routing</a></li><li><a href="lux-lib.module_lib_series.html">lib/series</a></li><li><a href="lux-lib.module_lib_storage.html">lib/storage</a></li><li><a href="lux-lib.module_lib_urlParse.html">lib/urlParse</a></li><li><a href="module-react.html">react</a></li><li><a href="react.module_react_appContext.html">react/appContext</a></li><li><a href="react.module_react_configure.html">react/configure</a></li><li><a href="react.module_react_error.html">react/error</a></li><li><a href="react.module_react_fatal.html">react/fatal</a></li><li><a href="react.module_react_layout.html">react/layout</a></li><li><a href="react.module_react_link.html">react/link</a></li><li><a href="react.module_react_randomKey.html">react/randomKey</a></li><li><a href="react_layout.module_react_layout_auth.html">react/layout/auth</a></li><li><a href="react_layout.module_react_layout_footer.html">react/layout/footer</a></li><li><a href="react_layout.module_react_layout_header.html">react/layout/header</a></li><li><a href="react_layout.module_react_layout_main.html">react/layout/main</a></li><li><a href="react_layout.module_react_layout_navigation.html">react/layout/navigation</a></li><li><a href="react_rest.module_react_rest_collection.html">react/rest/collection</a></li><li><a href="react_rest.module_react_rest_item.html">react/rest/item</a></li><li><a href="react_rest_collection.module_react_rest_collection_createButton.html">react/rest/collection/createButton</a></li><li><a href="react_rest_collection.module_react_rest_collection_list.html">react/rest/collection/list</a></li><li><a href="react_rest_collection.module_react_rest_collection_paging.html">react/rest/collection/paging</a></li><li><a href="react_rest_collection_list.module_react_rest_collection_list_item.html">react/rest/collection/list/item</a></li><li><a href="react_rest_item.module_react_rest_item_formModel.html">react/rest/item/formModel</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">

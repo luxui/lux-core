@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>3/3</span>
       </div>
     </div>
   </div>
@@ -83,36 +83,78 @@
 38
 39
 40
-41</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,36 +167,56 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'; // `React` must be in scope when using JSX
 &nbsp;
-const siren = {};
+const siren = {
+  // non-dependent definitions
+  entity: React.PropTypes.shape({
+    properties: React.PropTypes.isRequired,
+  }),
+  field: React.PropTypes.shape({
+    cacheable: React.PropTypes.bool,
+    columns: React.PropTypes.arrayOf(React.PropTypes.string),
+    features: React.PropTypes.arrayOf(React.PropTypes.string),
+    href: React.PropTypes.string,
+    max: React.PropTypes.number,
+    maxlength: React.PropTypes.number,
+    min: React.PropTypes.number,
+    minlength: React.PropTypes.number,
+    multiple: React.PropTypes.bool,
+    name: React.PropTypes.string.isRequired,
+    options: React.PropTypes.arrayOf(React.PropTypes.string),
+    pattern: React.PropTypes.string,
+    placeholder: React.PropTypes.string,
+    readonly: React.PropTypes.bool,
+    required: React.PropTypes.bool,
+    size: React.PropTypes.number,
+    step: React.PropTypes.number,
+    title: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string,
+    value: React.PropTypes.isRequired,
+  }),
+  link: React.PropTypes.shape({
+    href: React.PropTypes.string.isRequired,
+    rel: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    title: React.PropTypes.string,
+  }),
+};
 &nbsp;
+// siren.action is dependent on siren.field; it must be defined after the non-
+// dependent definitions
 siren.action = React.PropTypes.shape({
+  class: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   fields: React.PropTypes.arrayOf(siren.field),
-  href: React.PropTypes.string.isRequired,
+  href: React.PropTypes.string,
   method: React.PropTypes.string,
   name: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string,
+  title: React.PropTypes.string.isRequired,
   type: React.PropTypes.string,
 });
 &nbsp;
-siren.entity = React.PropTypes.shape({
-  properties: React.PropTypes.isRequired,
-});
-&nbsp;
-siren.field = React.PropTypes.shape({
-  name: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  value: React.PropTypes.isRequired,
-});
-&nbsp;
-siren.link = React.PropTypes.shape({
-  href: React.PropTypes.string.isRequired,
-  rel: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  title: React.PropTypes.string,
-});
-&nbsp;
+// aggregrate shape of Siren response
 const shape = {
   actions: React.PropTypes.arrayOf(siren.action),
-  class: React.PropTypes.array,
+  class: React.PropTypes.arrayOf(React.PropTypes.string),
   entities: React.PropTypes.arrayOf(siren.entity),
   links: React.PropTypes.arrayOf(siren.link).isRequired,
   properties: React.PropTypes.object.isRequired,
@@ -162,6 +224,7 @@ const shape = {
 };
 &nbsp;
 export default shape;
+&nbsp;
 export { siren };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -169,7 +232,7 @@ export { siren };
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 12 2017 11:57:45 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 09 2017 09:11:19 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

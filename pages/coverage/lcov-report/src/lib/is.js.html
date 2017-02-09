@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>13/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>9/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/7</span>
+        <span class='fraction'>11/11</span>
       </div>
     </div>
   </div>
@@ -97,7 +97,47 @@
 52
 53
 54
-55</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,14 +168,54 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">402x</span>
+<span class="cline-any cline-yes">451x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">138x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">34x</span>
-<span class="cline-any cline-yes">240x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">155x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">272x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,11 +271,51 @@ const isNull = q =&gt; q === null || q === undefined;
 const isObject = q =&gt; isType('Object', q);
 const isString = q =&gt; isType('String', q);
 &nbsp;
+/**
+ * Test `obj` to determine if it is a DOM node. A node is any DOM node which
+ * could be anything including: document, text, comment, or element. A node is
+ * not necessarily an element
+ *
+ * @param  {*}  obj - The test subject.
+ *
+ * @return {Boolean} - Result of the test.
+ */
+const isNode = obj =&gt;
+  (typeof Node === 'object'
+    // istanbul ignore next line
+    ? obj instanceof Node
+    : !!obj &amp;&amp;
+      typeof obj === 'object' &amp;&amp;
+      typeof obj.nodeType === 'number' &amp;&amp;
+      typeof obj.nodeName === 'string');
+&nbsp;
+/**
+ * Test `obj` to determine if it is a DOM element. An element is a specific
+ * tag within the document. An element is a node.
+ *
+ * @param  {*}  obj - The test subject.
+ *
+ * @return {Boolean} - Result of the test.
+ */
+const isElement = obj =&gt;
+  (typeof HTMLElement === 'object'
+    // istanbul ignore next line
+    ? obj instanceof HTMLElement
+    : !!obj &amp;&amp;
+      typeof obj === 'object' &amp;&amp;
+      obj !== null &amp;&amp;
+      obj.nodeType === 1 &amp;&amp;
+      typeof obj.nodeName === 'string');
+&nbsp;
 export {
   /** @type {IsFunction} */
   isArray,
   /** @type {IsFunction} */
+  isElement,
+  /** @type {IsFunction} */
   isFunction,
+  /** @type {IsFunction} */
+  isNode,
   /** @type {IsFunction} */
   isNull,
   /** @type {IsFunction} */
@@ -211,7 +331,7 @@ export {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 12 2017 11:57:45 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 09 2017 09:11:19 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../prettify.js"></script>
