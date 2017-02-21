@@ -5,8 +5,6 @@
 
 import React from 'react'; // `React` must be in scope when using JSX
 
-import debounce from '../lib/debounce';
-
 class AppContextContainer extends React.Component {
   getChildContext() {
     /**
@@ -41,7 +39,7 @@ class AppContextContainer extends React.Component {
      */
     const context = {
       request: this.props.app.request,
-      setState: debounce(this.props.setState),
+      setState: this.props.setState,
       state: this.props.app.state,
       visit: this.props.app.visit,
     };

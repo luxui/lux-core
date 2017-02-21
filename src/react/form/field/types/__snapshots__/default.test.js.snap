@@ -1,0 +1,47 @@
+exports[`DefaultComponent should provide a value - substitution - to visually show the \`value\` in the representation 1`] = `
+<div
+  className="form-field"
+  style={
+    Object {
+      "background": "darkRed",
+      "color": "white",
+      "padding": "1ex 3ex",
+    }
+  }>
+  <pre>
+    No field type component for: 
+    no-title
+  </pre>
+  <pre>
+    {
+        \"name\": \"no-name\",
+        \"title\": \"no-title\",
+        \"value\": \"no value\"
+    }
+  </pre>
+</div>
+`;
+
+exports[`DefaultComponent should render the default (non-existent) component 1`] = `
+<div
+  className="form-field"
+  style={
+    Object {
+      "background": "darkRed",
+      "color": "white",
+      "padding": "1ex 3ex",
+    }
+  }>
+  <pre>
+    No field type component for: 
+    no-title
+  </pre>
+  <pre>
+    {
+        \"name\": \"no-name\",
+        \"title\": \"no-title\",
+        \"value\": \"no-value\"
+    }
+  </pre>
+</div>
+`;
