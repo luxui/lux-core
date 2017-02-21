@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">65.68</p>
+      <p class="stat">61.06</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">77</p>
+      <p class="stat">55</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">33.86</p>
+      <p class="stat">21.50</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.30</p>
+      <p class="stat">0.15</p>
     </div>
   </div>
 </div>
@@ -98,25 +98,6 @@ import { isFunction, isString } from &#039;../lib/is&#039;;
 
 const registry = {};
 
-function addToRegistry(obj, ...tail) {
-  if (tail.length === 2) {
-    obj[tail[0]] = tail[1];
-  } else {
-    const head = tail.shift();
-
-    obj[head] = obj[head] || {};
-    addToRegistry(obj[head], ...tail);
-  }
-}
-
-function findInRegistry(obj, ...tail) {
-  const head = tail.shift();
-
-  return tail.length
-    ? findInRegistry(obj[head], ...tail)
-    : obj[head];
-}
-
 /**
  * Store a new component in the registry for later retrieval.
  *
@@ -141,28 +122,25 @@ function findInRegistry(obj, ...tail) {
  * registry(&#039;Footer&#039;, FooterComponent, false);
  */
 function componentRegistry(path, fn, overwrite = true) {
-  if (!isString(path)) {
+  if (!isString(path) || path === &#039;&#039;) {
     throw new Error(&#039;Component identifiers are required and must be strings.&#039;);
   }
 
   if (fn &amp;&amp; !isFunction(fn)) {
-    throw new Error(&#039;React components must be functions.&#039;);
+    throw new Error(&#039;Components must be functions.&#039;);
   }
 
-  const parts = path.split(/[./]/);
-
-  switch (arguments.length) {
-    case 1:
-      return findInRegistry(registry, ...parts);
-    case 2:
-      // intentional switch case &quot;fallthrough&quot; because of default arg value
-    case 3:
-      return !overwrite &amp;&amp; findInRegistry(registry, ...parts)
-        ? undefined
-        : addToRegistry(registry, ...parts, fn);
-    default:
-      throw new Error(&#039;Too many arguments provided to componentRegistry.&#039;);
+  if (arguments.length &gt; 3) {
+    throw new Error(&#039;Too many arguments provided to componentRegistry.&#039;);
   }
+
+  const saveToRegistry = registry[path] ? overwrite : true;
+
+  if (arguments.length &gt; 1 &amp;&amp; saveToRegistry) {
+    registry[path] = fn;
+  }
+
+  return registry[path] || undefined;
 }
 
 export default componentRegistry;</textarea>
