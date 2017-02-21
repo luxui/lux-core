@@ -7,25 +7,6 @@ import { isFunction, isString } from '../lib/is';
 
 const registry = {};
 
-function addToRegistry(obj, ...tail) {
-  if (tail.length === 2) {
-    obj[tail[0]] = tail[1];
-  } else {
-    const head = tail.shift();
-
-    obj[head] = obj[head] || {};
-    addToRegistry(obj[head], ...tail);
-  }
-}
-
-function findInRegistry(obj, ...tail) {
-  const head = tail.shift();
-
-  return tail.length
-    ? findInRegistry(obj[head], ...tail)
-    : obj[head];
-}
-
 /**
  * Store a new component in the registry for later retrieval.
  *
@@ -50,28 +31,25 @@ function findInRegistry(obj, ...tail) {
  * registry('Footer', FooterComponent, false);
  */
 function componentRegistry(path, fn, overwrite = true) {
-  if (!isString(path)) {
+  if (!isString(path) || path === '') {
     throw new Error('Component identifiers are required and must be strings.');
   }
 
   if (fn && !isFunction(fn)) {
-    throw new Error('React components must be functions.');
+    throw new Error('Components must be functions.');
   }
 
-  const parts = path.split(/[./]/);
-
-  switch (arguments.length) {
-    case 1:
-      return findInRegistry(registry, ...parts);
-    case 2:
-      // intentional switch case "fallthrough" because of default arg value
-    case 3:
-      return !overwrite && findInRegistry(registry, ...parts)
-        ? undefined
-        : addToRegistry(registry, ...parts, fn);
-    default:
-      throw new Error('Too many arguments provided to componentRegistry.');
+  if (arguments.length > 3) {
+    throw new Error('Too many arguments provided to componentRegistry.');
   }
+
+  const saveToRegistry = registry[path] ? overwrite : true;
+
+  if (arguments.length > 1 && saveToRegistry) {
+    registry[path] = () => fn;
+  }
+
+  return (registry[path] || (() => undefined))();
 }
 
 export default componentRegistry;

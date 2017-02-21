@@ -7,7 +7,7 @@ describe('componentRegistry', function () {
 
   it('should store a component', function () {
     const key = 'myApp.component';
-    const random = Math.random().toString().slice(2);
+    const random = 1234567890;
 
     registry(key, () => random);
     const tempComponent = registry(key);
@@ -15,16 +15,28 @@ describe('componentRegistry', function () {
     expect(tempComponent()).toBe(random);
   });
 
-  it('should throw an error if no component identifier is not a string', function () {
+  it('should throw an error if no component identifier is provided', function () {
+    expect(function () {
+      registry();
+    }).toThrow(new Error('Component identifiers are required and must be strings.'));
+  });
+
+  it('should throw an error if no component identifier is provided', function () {
+    expect(function () {
+      registry('');
+    }).toThrow(new Error('Component identifiers are required and must be strings.'));
+  });
+
+  it('should throw an error if component identifier is not a string', function () {
     expect(function () {
       registry(1234);
     }).toThrow(new Error('Component identifiers are required and must be strings.'));
   });
 
-  it('should throw an error if ReactJS component is not a function', function () {
+  it('should throw an error if component is not a function', function () {
     expect(function () {
-      registry('', 1234);
-    }).toThrow(new Error('React components must be functions.'));
+      registry('myComponent', 1234);
+    }).toThrow(new Error('Components must be functions.'));
   });
 
   it('should overwrite an existing component by default', function () {
@@ -32,6 +44,10 @@ describe('componentRegistry', function () {
     registry('Hello', () => 'Hello');
 
     expect(registry('Hello')()).toBe('Hello');
+  });
+
+  it('should return `undefined` for undefined components', function () {
+    expect(registry('This is an undefined component')).toBe(undefined);
   });
 
   it('should NOT overwrite an existing component when indicating not to', function () {
@@ -43,7 +59,21 @@ describe('componentRegistry', function () {
 
   it('should throw an error if too many arguments are provided', function () {
     expect(function () {
-      registry('', () => {}, true, 234);
+      registry('myComponent', () => {}, true, 234);
     }).toThrow(new Error('Too many arguments provided to componentRegistry.'));
+  });
+
+  it('should allow "registering" in any order', function () {
+    registry('FirstParent', () => 'Parent');
+    registry('FirstParent.Child', () => 'Child');
+
+    expect(registry('FirstParent')()).toBe('Parent');
+    expect(registry('FirstParent.Child')()).toBe('Child');
+
+    registry('SecondParent.Child', () => 'Child');
+    registry('SecondParent', () => 'Parent');
+
+    expect(registry('SecondParent')()).toBe('Parent');
+    expect(registry('SecondParent.Child')()).toBe('Child');
   });
 });
