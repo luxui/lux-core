@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1486649479757" clover="3.2.0">
-  <project timestamp="1486649479757" name="All files">
-    <metrics statements="406" coveredstatements="405" conditionals="254" coveredconditionals="254" methods="113" coveredmethods="112" elements="773" coveredelements="771" complexity="0" loc="406" ncloc="406" packages="7" files="38" classes="38">
+<coverage generated="1487687660924" clover="3.2.0">
+  <project timestamp="1487687660925" name="All files">
+    <metrics statements="400" coveredstatements="399" conditionals="252" coveredconditionals="252" methods="111" coveredmethods="110" elements="763" coveredelements="761" complexity="0" loc="400" ncloc="400" packages="7" files="38" classes="38">
       <package name="jest">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <file name="setup.js" path="/Users/jkalis/Pro/QL/WebCore/luxui/lux-core/jest/setup.js">
@@ -10,7 +10,7 @@
         </file>
       </package>
       <package name="src.lib">
-        <metrics statements="177" coveredstatements="177" conditionals="136" coveredconditionals="136" methods="56" coveredmethods="56"/>
+        <metrics statements="171" coveredstatements="171" conditionals="134" coveredconditionals="134" methods="54" coveredmethods="54"/>
         <file name="apiRequest.js" path="/Users/jkalis/Pro/QL/WebCore/luxui/lux-core/src/lib/apiRequest.js">
           <metrics statements="22" coveredstatements="22" conditionals="13" coveredconditionals="13" methods="7" coveredmethods="7"/>
           <line num="11" count="2" type="stmt"/>
@@ -47,24 +47,18 @@
           <line num="64" count="3" type="stmt"/>
         </file>
         <file name="componentRegistry.js" path="/Users/jkalis/Pro/QL/WebCore/luxui/lux-core/src/lib/componentRegistry.js">
-          <metrics statements="17" coveredstatements="17" conditionals="21" coveredconditionals="21" methods="3" coveredmethods="3"/>
+          <metrics statements="11" coveredstatements="11" conditionals="19" coveredconditionals="19" methods="1" coveredmethods="1"/>
           <line num="8" count="15" type="stmt"/>
-          <line num="11" count="226" type="stmt"/>
-          <line num="12" count="129" type="stmt"/>
-          <line num="14" count="97" type="stmt"/>
-          <line num="16" count="97" type="stmt"/>
-          <line num="17" count="97" type="stmt"/>
-          <line num="22" count="158" type="stmt"/>
-          <line num="24" count="158" type="stmt"/>
-          <line num="53" count="212" type="stmt"/>
-          <line num="54" count="1" type="stmt"/>
-          <line num="57" count="211" type="stmt"/>
-          <line num="58" count="1" type="stmt"/>
-          <line num="61" count="210" type="stmt"/>
-          <line num="63" count="210" type="stmt"/>
-          <line num="65" count="79" type="stmt"/>
-          <line num="69" count="130" type="stmt"/>
-          <line num="73" count="1" type="stmt"/>
+          <line num="34" count="223" type="stmt"/>
+          <line num="35" count="3" type="stmt"/>
+          <line num="38" count="220" type="stmt"/>
+          <line num="39" count="1" type="stmt"/>
+          <line num="42" count="219" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="46" count="218" type="stmt"/>
+          <line num="48" count="218" type="stmt"/>
+          <line num="49" count="133" type="stmt"/>
+          <line num="52" count="218" type="stmt"/>
         </file>
         <file name="debounce.js" path="/Users/jkalis/Pro/QL/WebCore/luxui/lux-core/src/lib/debounce.js">
           <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
@@ -108,13 +102,13 @@
         </file>
         <file name="is.js" path="/Users/jkalis/Pro/QL/WebCore/luxui/lux-core/src/lib/is.js">
           <metrics statements="11" coveredstatements="11" conditionals="13" coveredconditionals="13" methods="9" coveredmethods="9"/>
-          <line num="32" count="451" type="stmt"/>
+          <line num="32" count="474" type="stmt"/>
           <line num="34" count="32" type="stmt"/>
-          <line num="35" count="155" type="stmt"/>
+          <line num="35" count="167" type="stmt"/>
           <line num="36" count="32" type="stmt"/>
           <line num="37" count="32" type="stmt"/>
           <line num="38" count="32" type="stmt"/>
-          <line num="39" count="272" type="stmt"/>
+          <line num="39" count="283" type="stmt"/>
           <line num="50" count="32" type="stmt"/>
           <line num="51" count="3" type="stmt"/>
           <line num="67" count="32" type="stmt"/>
