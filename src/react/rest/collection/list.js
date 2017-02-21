@@ -36,4 +36,4 @@ RestCollectionList.propTypes = {
   title: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Collection.List', RestCollectionList);
+registry('Rest.Collection.List', RestCollectionList, false);

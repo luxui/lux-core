@@ -61,4 +61,4 @@ restCollectionComponent.propTypes = {
   ...shapeOfSiren,
 };
 
-registry('Rest.Collection', restCollectionComponent);
+registry('Rest.Collection', restCollectionComponent, false);

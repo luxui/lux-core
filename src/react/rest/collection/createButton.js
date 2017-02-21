@@ -22,4 +22,4 @@ RestCollectionCreateButton.propTypes = {
   title: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Collection.CreateButton', RestCollectionCreateButton);
+registry('Rest.Collection.CreateButton', RestCollectionCreateButton, false);

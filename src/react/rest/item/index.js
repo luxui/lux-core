@@ -22,4 +22,4 @@ restItemComponent.propTypes = {
   path: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Item', restItemComponent);
+registry('Rest.Item', restItemComponent, false);
