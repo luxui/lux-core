@@ -46,10 +46,10 @@ function componentRegistry(path, fn, overwrite = true) {
   const saveToRegistry = registry[path] ? overwrite : true;
 
   if (arguments.length > 1 && saveToRegistry) {
-    registry[path] = () => fn;
+    registry[path] = fn;
   }
 
-  return (registry[path] || (() => undefined))();
+  return registry[path] || undefined;
 }
 
 export default componentRegistry;
