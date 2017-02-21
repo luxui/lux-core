@@ -46,11 +46,11 @@ function linksReduce(acc, link) {
 function navigationComponent(props) {
 
   return (
-    <navigation id="mainnavigation" role="navigation">
+    <nav id="mainnavigation" role="navigation">
       <ul>
         {(props.links).reduce(linksReduce, [])}
       </ul>
-    </navigation>
+    </nav>
   );
 }
 navigationComponent.propTypes = {

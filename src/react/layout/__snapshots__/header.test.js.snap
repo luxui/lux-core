@@ -9,11 +9,11 @@ exports[`Header (supplied Layout) should match the (default) snapshot 1`] = `
       Home
     </a>
   </h1>
-  <navigation
+  <nav
     id="mainnavigation"
     role="navigation">
     <ul />
-  </navigation>
+  </nav>
   <noscript />
 </header>
 `;
@@ -29,11 +29,11 @@ exports[`Header (supplied Layout) should pull the link with "index" for a rel as
       root
     </a>
   </h1>
-  <navigation
+  <nav
     id="mainnavigation"
     role="navigation">
     <ul />
-  </navigation>
+  </nav>
   <noscript />
 </header>
 `;
