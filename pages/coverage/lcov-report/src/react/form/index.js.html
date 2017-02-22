@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>2/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,16 +32,16 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>2/5</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -74,7 +74,13 @@
 29
 30
 31
-32</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+32
+33
+34
+35
+36
+37</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -84,43 +90,53 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'; // `React` must be in scope when using JSX
 &nbsp;
 import registry from '../../lib/componentRegistry';
 &nbsp;
 import { siren } from '../siren.propType';
 &nbsp;
+import './field';
+&nbsp;
 function <span class="fstat-no" title="function not covered" >FormComponent(</span>props) {
+  const Field = <span class="cstat-no" title="statement not covered" >registry('Form.Field');</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;pre&gt;{JSON.stringify(props, null, ' ')}&lt;/pre&gt;
+    &lt;form className="limit-width"&gt;
+&nbsp;
+      {/* &lt;!-- notification --&gt; */}
+&nbsp;
+      {props.schema.map(<span class="fstat-no" title="function not covered" >(f</span>ield, indx) =&gt; <span class="cstat-no" title="statement not covered" >&lt;Field key={indx} {...field} /&gt;)</span>}
+&nbsp;
+      {/* &lt;!-- buttons --&gt; */}
+    &lt;/form&gt;
   );
 }
-FormComponent.contextTypes = {
-  setState: React.PropTypes.func,
-  state: React.PropTypes.object,
-};
 FormComponent.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   create: siren.action,
@@ -129,20 +145,19 @@ FormComponent.propTypes = {
   // eslint-disable-next-line max-len
   // eslint-disable-next-line react/forbid-prop-types, react/no-unused-prop-types
   properties: React.PropTypes.object.isRequired,
-  // eslint-disable-next-line react/no-unused-prop-types
   schema: React.PropTypes.arrayOf(siren.field),
   // eslint-disable-next-line react/no-unused-prop-types
   view: siren.action,
 };
 &nbsp;
-registry('Form', FormComponent);
+registry('Form', FormComponent, false);
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 21 2017 09:34:20 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 22 2017 13:55:57 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

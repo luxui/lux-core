@@ -1,0 +1,29 @@
+exports[`WrapperComponent should add \`className\`s 1`] = `
+<div
+  className="form-field hello world more classNames" />
+`;
+
+exports[`WrapperComponent should add \`style\`s 1`] = `
+<div
+  className="form-field"
+  style={
+    Object {
+      "background": "darkRed",
+      "color": "white",
+    }
+  } />
+`;
+
+exports[`WrapperComponent should render a form-field with "Hello, World!" 1`] = `
+<div
+  className="form-field">
+  <p>
+    Hello, World!
+  </p>
+</div>
+`;
+
+exports[`WrapperComponent should render an empty form-field 1`] = `
+<div
+  className="form-field" />
+`;

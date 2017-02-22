@@ -48,6 +48,8 @@ function luxReact(config) {
   const app = {
     config: configure(config),
   };
+  // TODO: future optimization to prevent DOM "thrashing" due to state changes
+  // const debouncedRender = debounce(render, 200);
   let state = {};
 
   function setState(newState) {

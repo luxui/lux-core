@@ -1,0 +1,14 @@
+exports[`TextComponent should render a text form field 1`] = `
+<div
+  className="form-field">
+  <label
+    htmlFor="name">
+    Name
+  </label>
+  <input
+    defaultValue="LuxUI"
+    id="name"
+    name="name"
+    onChange={[Function]} />
+</div>
+`;
