@@ -83,6 +83,13 @@ describe('luxReact', function () {
   });
 
   describe('.request()', function () {
+    const testingURL = '/window-dot-location';
+
+    Object.defineProperty(window.location, 'toString', {
+      writable: true,
+      value: () => testingURL,
+    });
+
     it('should enable making API requests', function () {
       const path = '/test-path';
       apiRequest.mockReturnValueOnce(new Promise(res => res({})));
@@ -101,18 +108,11 @@ describe('luxReact', function () {
     });
 
     it('should use `window.location` as a default when no path is provided', function () {
-      const url = '/url-change-in-test';
-
-      Object.defineProperty(window.location, 'href', {
-        writable: true,
-        value: url,
-      });
-
       apiRequest.mockReturnValueOnce(new Promise(res => res({})));
 
       return app.request()
         .then(function () {
-          expect(apiRequest).lastCalledWith(`${config.apiRoot}${url}`);
+          expect(apiRequest).lastCalledWith(`${config.apiRoot}${testingURL}`);
         });
     });
   });
