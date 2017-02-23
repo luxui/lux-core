@@ -4,6 +4,8 @@ import registry from '../../../../lib/componentRegistry';
 
 import '../wrapper';
 
+import { addType } from './';
+
 function textFieldComponent(props, context) {
   const Wrapper = registry('Form.FieldWrapper');
   const { name, title, value } = props;
@@ -38,4 +40,7 @@ textFieldComponent.propTypes = {
   value: React.PropTypes.string,
 };
 
-registry('Form.Field.Text', textFieldComponent, false);
+const name = 'Form.Field.Text';
+
+addType('text', name);
+registry(name, textFieldComponent, false);

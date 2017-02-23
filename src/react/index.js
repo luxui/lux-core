@@ -5,7 +5,9 @@
 import React from 'react'; // `React` must be in scope when using JSX
 import ReactDOM from 'react-dom';
 
+import { addType } from './form/field/types';
 import apiRequest from '../lib/apiRequest';
+import { isFunction, isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import registry from '../lib/componentRegistry';
 import { format as responseModelFormat } from '../lib/responseModel';
@@ -101,9 +103,43 @@ luxReact.luxPath = path => luxPath(path);
  *   .visit();
  */
 
-// Wrapper function only to enable "method chaining" in applications.
-function component(...args) {
-  registry(...args);
+/**
+ * API for adding additional, or custom, components to the application.
+ *
+ * @param  {String}   [type] - The form field type (if applicable): text,
+ *   password, or anything else custom that an application chooses to use.
+ * @param  {String}   key  - The "identifier" string for the component in
+ *   componentRegistry.
+ * @param  {Function} fn - The "implementation" of the component as a ReactJS
+ *   component.
+ *
+ * @return {Object} - the application object.
+ */
+function component(type, key, fn) {
+  if (arguments.length < 2) {
+    // eslint-disable-next-line max-len
+    throw new Error('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+  }
+
+  if (!fn) {
+    [type, key, fn] = [undefined, type, key];
+  }
+
+  if (!isString(key)) {
+    // eslint-disable-next-line max-len
+    throw new Error(`Component "identifiers" must be strings; ${typeof key} provided (${key})`);
+  }
+
+  if (!isFunction(fn)) {
+    // eslint-disable-next-line max-len
+    throw new Error(`Component "implementations" must be functions; ${typeof fn} provided (${fn}).`);
+  }
+
+  registry(key, fn);
+
+  if (type) {
+    addType(type, key);
+  }
 
   return this;
 }

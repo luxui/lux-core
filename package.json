@@ -1,6 +1,6 @@
 {
   "name": "@luxui/lux",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "description": "LuxUI is a web UI rendering framework that translates Siren APIs into fully interactive web applications.",
   "main": "dist/reactLux.js",
   "files": [
