@@ -1,13 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Paging should find and display "current" links 1`] = `
 <ul
-  className="paging-links">
+  className="paging-links"
+>
   <li
-    className="paging-links__item">
+    className="paging-links__item"
+  >
     <a
       className="paging-link__current"
       href="http://example.com/foo-bar"
       onClick={[Function]}
-      title="Foo Bar">
+      title="Foo Bar"
+    >
       Foo Bar
     </a>
   </li>
@@ -16,14 +21,17 @@ exports[`Paging should find and display "current" links 1`] = `
 
 exports[`Paging should find and display "first" links 1`] = `
 <ul
-  className="paging-links">
+  className="paging-links"
+>
   <li
-    className="paging-links__item">
+    className="paging-links__item"
+  >
     <a
       className="paging-link__first"
       href="http://example.com/foo-bar"
       onClick={[Function]}
-      title="Foo Bar">
+      title="Foo Bar"
+    >
       Foo Bar
     </a>
   </li>
@@ -32,14 +40,17 @@ exports[`Paging should find and display "first" links 1`] = `
 
 exports[`Paging should find and display "last" links 1`] = `
 <ul
-  className="paging-links">
+  className="paging-links"
+>
   <li
-    className="paging-links__item">
+    className="paging-links__item"
+  >
     <a
       className="paging-link__last"
       href="http://example.com/foo-bar"
       onClick={[Function]}
-      title="Foo Bar">
+      title="Foo Bar"
+    >
       Foo Bar
     </a>
   </li>
@@ -48,14 +59,17 @@ exports[`Paging should find and display "last" links 1`] = `
 
 exports[`Paging should find and display "next" links 1`] = `
 <ul
-  className="paging-links">
+  className="paging-links"
+>
   <li
-    className="paging-links__item">
+    className="paging-links__item"
+  >
     <a
       className="paging-link__next"
       href="http://example.com/foo-bar"
       onClick={[Function]}
-      title="Foo Bar">
+      title="Foo Bar"
+    >
       Foo Bar
     </a>
   </li>
@@ -64,14 +78,17 @@ exports[`Paging should find and display "next" links 1`] = `
 
 exports[`Paging should find and display "prev" links 1`] = `
 <ul
-  className="paging-links">
+  className="paging-links"
+>
   <li
-    className="paging-links__item">
+    className="paging-links__item"
+  >
     <a
       className="paging-link__prev"
       href="http://example.com/foo-bar"
       onClick={[Function]}
-      title="Foo Bar">
+      title="Foo Bar"
+    >
       Foo Bar
     </a>
   </li>

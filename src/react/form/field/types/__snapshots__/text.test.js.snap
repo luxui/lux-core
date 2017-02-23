@@ -1,14 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`TextComponent should render a text form field 1`] = `
 <div
-  className="form-field">
+  className="form-field"
+>
   <label
-    htmlFor="name">
+    htmlFor="name"
+  >
     Name
   </label>
   <input
     defaultValue="LuxUI"
     id="name"
     name="name"
-    onChange={[Function]} />
+    onChange={[Function]}
+  />
 </div>
 `;

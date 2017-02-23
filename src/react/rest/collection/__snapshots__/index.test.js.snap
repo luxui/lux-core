@@ -1,8 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Collection should render a collection page; even if the \`actions\` are missing 1`] = `
 <div
-  className="collection-display">
+  className="collection-display"
+>
   <h2
-    className="heading--primary">
+    className="heading--primary"
+  >
     Resources
   </h2>
   <p>
@@ -16,16 +20,19 @@ exports[`Collection should render a collection page; even if the \`actions\` are
 
 exports[`Collection should render a collection page; with no errors 1`] = `
 <div
-  className="collection-display">
+  className="collection-display"
+>
   <h2
-    className="heading--primary">
+    className="heading--primary"
+  >
     Resources
   </h2>
   <a
     className="btn btn--primary mrl"
     href="http://foo.bar/baz/new"
     onClick={[Function]}
-    title="Foo Bar Baz">
+    title="Foo Bar Baz"
+  >
     Foo Bar Baz
   </a>
   <p>

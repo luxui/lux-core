@@ -1,8 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Link component should match the snapshot; with alternate title attribute 1`] = `
 <a
   href="/hello"
   onClick={[Function]}
-  title="welcome">
+  title="welcome"
+>
   Hello
 </a>
 `;
@@ -11,7 +14,8 @@ exports[`Link component should match the snapshot; with child content 1`] = `
 <a
   href="/hello"
   onClick={[Function]}
-  title="Hello">
+  title="Hello"
+>
   Hello
 </a>
 `;
@@ -20,7 +24,8 @@ exports[`Link component should match the snapshot; with title 1`] = `
 <a
   href="/hello"
   onClick={[Function]}
-  title="Hello">
+  title="Hello"
+>
   Hello
 </a>
 `;
