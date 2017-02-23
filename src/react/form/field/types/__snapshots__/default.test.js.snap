@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`DefaultComponent should provide a value - substitution - to visually show the \`value\` in the representation 1`] = `
 <div
   className="form-field"
@@ -7,16 +9,17 @@ exports[`DefaultComponent should provide a value - substitution - to visually sh
       "color": "white",
       "padding": "1ex 3ex",
     }
-  }>
+  }
+>
   <pre>
     No field type component for: 
     no-title
   </pre>
   <pre>
     {
-        \"name\": \"no-name\",
-        \"title\": \"no-title\",
-        \"value\": \"no value\"
+        "name": "no-name",
+        "title": "no-title",
+        "value": "no value"
     }
   </pre>
 </div>
@@ -31,16 +34,17 @@ exports[`DefaultComponent should render the default (non-existent) component 1`]
       "color": "white",
       "padding": "1ex 3ex",
     }
-  }>
+  }
+>
   <pre>
     No field type component for: 
     no-title
   </pre>
   <pre>
     {
-        \"name\": \"no-name\",
-        \"title\": \"no-title\",
-        \"value\": \"no-value\"
+        "name": "no-name",
+        "title": "no-title",
+        "value": "no-value"
     }
   </pre>
 </div>

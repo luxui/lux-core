@@ -1,9 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Rest.Collection.List.Item should render a \`span\` tag 1`] = `
 <span>
   Home
    
   <span
-    className="collection-items__icon" />
+    className="collection-items__icon"
+  />
 </span>
 `;
 
@@ -11,10 +14,12 @@ exports[`Rest.Collection.List.Item should render an \`a\` (anchor, or "link") ta
 <a
   href="/home"
   onClick={[Function]}
-  title="Home">
+  title="Home"
+>
   Home
    
   <span
-    className="collection-items__icon" />
+    className="collection-items__icon"
+  />
 </a>
 `;

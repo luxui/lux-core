@@ -1,17 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Header (supplied Layout) should match the (default) snapshot 1`] = `
 <header
   className="main-header"
-  role="banner">
+  role="banner"
+>
   <h1>
     <a
       className="link--heroOrSomething"
-      href="/">
+      href="/"
+    >
       Home
     </a>
   </h1>
   <nav
     id="mainnavigation"
-    role="navigation">
+    role="navigation"
+  >
     <ul />
   </nav>
   <noscript />
@@ -21,17 +26,20 @@ exports[`Header (supplied Layout) should match the (default) snapshot 1`] = `
 exports[`Header (supplied Layout) should pull the link with "index" for a rel as main link 1`] = `
 <header
   className="main-header"
-  role="banner">
+  role="banner"
+>
   <h1>
     <a
       className="link--heroOrSomething"
-      href="/">
+      href="/"
+    >
       root
     </a>
   </h1>
   <nav
     id="mainnavigation"
-    role="navigation">
+    role="navigation"
+  >
     <ul />
   </nav>
   <noscript />

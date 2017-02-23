@@ -1,25 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Navigation (supplied Layout) should identify the currently selected (self) menu item 1`] = `
 <nav
   id="mainnavigation"
-  role="navigation">
+  role="navigation"
+>
   <ul>
     <li
-      className="active">
+      className="active"
+    >
       <a
         className="active"
         href="/"
         onClick={[Function]}
-        title="root">
+        title="root"
+      >
         root
       </a>
     </li>
     <li
-      className="">
+      className=""
+    >
       <a
         className=""
         href="/another"
         onClick={[Function]}
-        title="another">
+        title="another"
+      >
         another
       </a>
     </li>

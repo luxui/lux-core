@@ -1,31 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Main (supplied Layout) should render a page from the \`routing\` module 1`] = `
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"class\": [
-       \"collection\"
+     "data": {
+      "actions": [],
+      "class": [
+       "collection"
       ],
-      \"entities\": [],
-      \"links\": [
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": false,
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": false,
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>
@@ -35,27 +38,28 @@ exports[`Main (supplied Layout) should render the Error component; when the \`cl
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"entities\": [],
-      \"links\": [
+     "data": {
+      "actions": [],
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": false,
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": false,
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>
@@ -65,30 +69,31 @@ exports[`Main (supplied Layout) should render the Error component; when the clas
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"class\": [
-       \"something-else\"
+     "data": {
+      "actions": [],
+      "class": [
+       "something-else"
       ],
-      \"entities\": [],
-      \"links\": [
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": false,
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": false,
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>
@@ -98,30 +103,31 @@ exports[`Main (supplied Layout) should render the Error component; when the resp
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"class\": [
-       \"collection\"
+     "data": {
+      "actions": [],
+      "class": [
+       "collection"
       ],
-      \"entities\": [],
-      \"links\": [
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": {},
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": {},
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>
@@ -131,30 +137,31 @@ exports[`Main (supplied Layout) should render the Rest.Collection component 1`] 
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"class\": [
-       \"collection\"
+     "data": {
+      "actions": [],
+      "class": [
+       "collection"
       ],
-      \"entities\": [],
-      \"links\": [
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": false,
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": false,
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>
@@ -164,30 +171,31 @@ exports[`Main (supplied Layout) should render the Rest.Item component 1`] = `
 <main
   className="body-divider pbl"
   id="maincontent"
-  role="main">
+  role="main"
+>
   <pre>
     {
-     \"data\": {
-      \"actions\": [],
-      \"class\": [
-       \"item\"
+     "data": {
+      "actions": [],
+      "class": [
+       "item"
       ],
-      \"entities\": [],
-      \"links\": [
+      "entities": [],
+      "links": [
        {
-        \"href\": \"/\",
-        \"rel\": [
-         \"self\"
+        "href": "/",
+        "rel": [
+         "self"
         ],
-        \"title\": \"Something Savvy\"
+        "title": "Something Savvy"
        }
       ],
-      \"properties\": {},
-      \"title\": \"Testing Main Component\"
+      "properties": {},
+      "title": "Testing Main Component"
      },
-     \"error\": false,
-     \"path\": \"/home\",
-     \"status\": 200
+     "error": false,
+     "path": "/home",
+     "status": 200
     }
   </pre>
 </main>

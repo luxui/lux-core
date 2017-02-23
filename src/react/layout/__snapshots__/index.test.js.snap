@@ -1,13 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Layout (supplied Layout) should match snapshot 1`] = `
 <div
-  className="page">
+  className="page"
+>
   <div
-    id="skip-to-content">
+    id="skip-to-content"
+  >
     <p>
       <a
         className="link--plain"
         href="#maincontent"
-        title="Skip to main content">
+        title="Skip to main content"
+      >
         Skip to main content
       </a>
     </p>
