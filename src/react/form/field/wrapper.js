@@ -28,4 +28,4 @@ FormFieldWrapperComponent.propTypes = {
   style: React.PropTypes.object,
 };
 
-registry('Form.FieldWrapper', FormFieldWrapperComponent, false);
+registry('Lux.Form.FieldWrapper', FormFieldWrapperComponent, false);

@@ -4,19 +4,19 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './index';
-const Layout = registry('Layout');
-const Header = registry('Header');
-const Main = registry('Main');
-const Footer = registry('Footer');
+const Layout = registry('Lux.Layout.Layout');
+const Header = registry('Lux.Layout.Header');
+const Main = registry('Lux.Layout.Main');
+const Footer = registry('Lux.Layout.Footer');
 
 describe('Layout (supplied Layout)', function () {
   let response;
 
   afterEach(function () {
     // set these back to original values
-    registry('Header', Header);
-    registry('Main', Main);
-    registry('Footer', Footer);
+    registry('Lux.Layout.Header', Header);
+    registry('Lux.Layout.Main', Main);
+    registry('Lux.Layout.Footer', Footer);
   });
 
   beforeEach(function () {
@@ -39,7 +39,7 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should pass responseModel.data to Header', function () {
-    registry('Header', (model) => {
+    registry('Lux.Layout.Header', (model) => {
       expect(model).toEqual(response.data);
 
       return (<p />);
@@ -48,7 +48,7 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should pass responseModel.data to Footer', function () {
-    registry('Footer', (model) => {
+    registry('Lux.Layout.Footer', (model) => {
       expect(model).toEqual(response.data);
 
       return (<p />);
@@ -57,7 +57,7 @@ describe('Layout (supplied Layout)', function () {
   });
 
   it('should pass responseModel to Main', function () {
-    registry('Main', (model) => {
+    registry('Lux.Layout.Main', (model) => {
       expect(model).toEqual(response);
 
       return (<p />);
@@ -68,9 +68,9 @@ describe('Layout (supplied Layout)', function () {
   it('should match snapshot', function () {
     const noComponent = () => (<noscript />);
 
-    registry('Header', noComponent);
-    registry('Main', noComponent);
-    registry('Footer', noComponent);
+    registry('Lux.Layout.Header', noComponent);
+    registry('Lux.Layout.Main', noComponent);
+    registry('Lux.Layout.Footer', noComponent);
 
     const component = renderer.create(
       <Layout {...response}/>

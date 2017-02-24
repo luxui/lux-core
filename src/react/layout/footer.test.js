@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './footer';
-const Footer = registry('Footer');
+const Footer = registry('Lux.Layout.Footer');
 
 describe('Footer (supplied Layout)', function () {
   it('should exist; and should be a function', function () {

@@ -5,9 +5,9 @@
 import React from 'react'; // `React` must be in scope when using JSX
 import ReactDOM from 'react-dom';
 
-import { addType } from './form/field/types';
+// import { addType } from './form/field/types';
 import apiRequest from '../lib/apiRequest';
-import { isFunction, isString } from '../lib/is';
+// import { isFunction, isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import registry from '../lib/componentRegistry';
 import { format as responseModelFormat } from '../lib/responseModel';
@@ -19,7 +19,7 @@ import Context from './appContext';
 import Fatal from './fatal';
 import './layout';
 
-const Layout = registry('Layout');
+const Layout = registry('Lux.Layout.Layout');
 
 /**
  * @typedef {Object} LuxUIApp

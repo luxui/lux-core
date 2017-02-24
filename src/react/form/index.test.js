@@ -5,7 +5,7 @@ import registry from '../../lib/componentRegistry';
 
 import './index';
 
-const FormComponent = registry('Form');
+const FormComponent = registry('Lux.Form');
 
 describe('FormComponent', function () {
   it('should exist; and should be a function', function () {

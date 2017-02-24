@@ -25,4 +25,4 @@ RestCollectionListItem.propTypes = {
   title: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Collection.List.Item', RestCollectionListItem, false);
+registry('Lux.Rest.Collection.ListItem', RestCollectionListItem, false);

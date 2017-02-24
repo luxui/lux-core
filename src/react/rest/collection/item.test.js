@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './item';
-const Item = registry('Rest.Collection.List.Item');
+const Item = registry('Lux.Rest.Collection.ListItem');
 
 describe('Rest.Collection.List.Item', function () {
   it('should exist; and should be a function', function () {

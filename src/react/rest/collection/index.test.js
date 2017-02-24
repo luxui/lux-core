@@ -4,11 +4,11 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './index';
-const Collection = registry('Rest.Collection');
+const Collection = registry('Lux.Rest.Collection');
 
-const CreateButton = registry('Rest.Collection.CreateButton');
-const Paging = registry('Paging');
-const RestCollectionList = registry('Rest.Collection.List');
+const CreateButton = registry('Lux.Rest.Collection.CreateButton');
+const Paging = registry('Lux.Rest.Collection.Paging');
+const RestCollectionList = registry('Lux.Rest.Collection.List');
 
 const props = {
   actions: [
@@ -32,9 +32,9 @@ const props = {
 
 describe('Collection', function () {
   afterEach(function () {
-    registry('Rest.Collection.CreateButton', CreateButton);
-    registry('Rest.Collection.List', RestCollectionList);
-    registry('Paging', Paging);
+    registry('Lux.Rest.Collection.CreateButton', CreateButton);
+    registry('Lux.Rest.Collection.List', RestCollectionList);
+    registry('Lux.Rest.Collection.Paging', Paging);
   });
 
   beforeEach(function () {
@@ -58,9 +58,9 @@ describe('Collection', function () {
   });
 
   it('should render a collection page; with no errors', function () {
-    registry('Rest.Collection.CreateButton', () => (<p />));
-    registry('Rest.Collection.List', () => (<p />));
-    registry('Paging', () => (<p />));
+    registry('Lux.Rest.Collection.CreateButton', () => (<p />));
+    registry('Lux.Rest.Collection.List', () => (<p />));
+    registry('Lux.Rest.Collection.Paging', () => (<p />));
 
     const attrs = {
       ...props,
@@ -75,9 +75,9 @@ describe('Collection', function () {
   });
 
   it('should render a collection page; even if the `actions` are missing', function () {
-    registry('Rest.Collection.CreateButton', () => (<p />));
-    registry('Rest.Collection.List', () => (<p />));
-    registry('Paging', () => (<p />));
+    registry('Lux.Rest.Collection.CreateButton', () => (<p />));
+    registry('Lux.Rest.Collection.List', () => (<p />));
+    registry('Lux.Rest.Collection.Paging', () => (<p />));
 
     const attrs = {
       ...props,

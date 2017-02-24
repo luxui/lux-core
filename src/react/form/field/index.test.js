@@ -9,9 +9,9 @@ import { addType } from './types';
 
 const shallow = ReactTestUtils.createRenderer();
 
-const FormField = registry('Form.Field');
+const FormField = registry('Lux.Form.Field');
 
-const defaultField = registry('Form.Field.Default');
+const defaultField = registry('Lux.Form.Field.Default');
 const fieldTypes = [
   // ['checkbox', 'Form.Field.Checkbox'],
   // ['color', 'Form.Field.Color'],
@@ -29,7 +29,7 @@ const fieldTypes = [
   // ['select', 'Form.Field.Select'],
   // ['search', 'Form.Field.Search'],
   // ['tel', 'Form.Field.Tel'],
-  ['text', 'Form.Field.Text'],
+  ['text', 'Lux.Form.Field.Text'],
   // ['textarea', 'Form.Field.Textarea'],
   // ['time', 'Form.Field.Time'],
   // ['url', 'Form.Field.Url'],

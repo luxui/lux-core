@@ -46,4 +46,4 @@ authComponent.propTypes = {
   ...shapeOfSiren.links,
 };
 
-registry('Auth', authComponent, false);
+registry('Lux.Layout.Auth', authComponent, false);

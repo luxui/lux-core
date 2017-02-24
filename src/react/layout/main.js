@@ -32,10 +32,10 @@ function mainComponent(props) {
 
       switch (type) {
         case 'collection':
-          Component = registry('Rest.Collection');
+          Component = registry('Lux.Rest.Collection');
           break;
         case 'item':
-          Component = registry('Rest.Item');
+          Component = registry('Lux.Rest.Item');
           break;
         default:
           throw new Error(`No appropriate Component for "${props.path}".`);
@@ -44,7 +44,7 @@ function mainComponent(props) {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
-    Component = registry('Error');
+    Component = registry('Lux.Error');
   }
 
   return (
@@ -55,4 +55,4 @@ function mainComponent(props) {
 }
 mainComponent.propTypes = responseModelShape;
 
-registry('Main', mainComponent, false);
+registry('Lux.Layout.Main', mainComponent, false);

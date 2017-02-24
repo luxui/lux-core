@@ -9,7 +9,7 @@ import './text';
 
 const behavior = ReactTestUtils.createRenderer();
 
-const TextComponent = registry('Form.Field.Text');
+const TextComponent = registry('Lux.Form.Field.Text');
 
 describe('TextComponent', function () {
   it('should exist; and should be a function', function () {

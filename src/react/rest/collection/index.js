@@ -15,9 +15,9 @@ import './createButton';
 import './list';
 import './paging';
 
-const CreateButton = registry('Rest.Collection.CreateButton');
-const Paging = registry('Rest.Collection.Paging');
-const RestCollectionList = registry('Rest.Collection.List');
+const CreateButton = registry('Lux.Rest.Collection.CreateButton');
+const Paging = registry('Lux.Rest.Collection.Paging');
+const RestCollectionList = registry('Lux.Rest.Collection.List');
 
 function createLinks(links) {
 
@@ -61,4 +61,4 @@ restCollectionComponent.propTypes = {
   ...shapeOfSiren,
 };
 
-registry('Rest.Collection', restCollectionComponent, false);
+registry('Lux.Rest.Collection', restCollectionComponent, false);

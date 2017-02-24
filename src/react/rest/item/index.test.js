@@ -7,9 +7,9 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './index';
-const Item = registry('Rest.Item');
+const Item = registry('Lux.Rest.Item');
 
-const Form = registry('Form');
+const Form = registry('Lux.Form');
 
 formModel.mockImplementation(() => {});
 
@@ -19,7 +19,7 @@ describe('Rest.Item', function () {
   });
 
   afterEach(function () {
-    registry('Form', Form);
+    registry('Lux.Form', Form);
   });
 
   beforeEach(function () {
@@ -28,7 +28,7 @@ describe('Rest.Item', function () {
   });
 
   it('should render a Form component', function () {
-    registry('Form', () => (<p />));
+    registry('Lux.Form', () => (<p />));
     const attrs = {
       links: [],
       properties: {},

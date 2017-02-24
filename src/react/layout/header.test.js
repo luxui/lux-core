@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './header';
-const Header = registry('Header');
+const Header = registry('Lux.Layout.Header');
 
 describe('Header (supplied Layout)', function () {
   it('should exist; and should be a function', function () {

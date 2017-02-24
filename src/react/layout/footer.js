@@ -23,4 +23,4 @@ function footerComponent() {
 footerComponent.propTypes = {
 };
 
-registry('Footer', footerComponent, false);
+registry('Lux.Layout.Footer', footerComponent, false);

@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './navigation';
-const Navigation = registry('Navigation');
+const Navigation = registry('Lux.Layout.Navigation');
 
 fdescribe('Navigation (supplied Layout)', function () {
   it('should exist; and should be a function', function () {

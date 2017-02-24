@@ -59,4 +59,4 @@ pagingComponent.propTypes = {
   links: shapeOfSiren.links,
 };
 
-registry('Rest.Collection.Paging', pagingComponent, false);
+registry('Lux.Rest.Collection.Paging', pagingComponent, false);

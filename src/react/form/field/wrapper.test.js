@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './wrapper';
-const WrapperComponent = registry('Form.FieldWrapper');
+const WrapperComponent = registry('Lux.Form.FieldWrapper');
 
 describe('WrapperComponent', function () {
   it('should exist; and should be a function', function () {

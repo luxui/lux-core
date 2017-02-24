@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../lib/componentRegistry';
 
 import './error';
-const Component = registry('Error');
+const Component = registry('Lux.Error');
 
 describe('Error - main - Component', function () {
   it('should exist; and should be a function', function () {

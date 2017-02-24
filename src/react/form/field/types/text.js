@@ -7,7 +7,7 @@ import '../wrapper';
 import { addType } from './';
 
 function textFieldComponent(props, context) {
-  const Wrapper = registry('Form.FieldWrapper');
+  const Wrapper = registry('Lux.Form.FieldWrapper');
   const { name, title, value } = props;
 
   const inputAttrs = {
@@ -40,7 +40,7 @@ textFieldComponent.propTypes = {
   value: React.PropTypes.string,
 };
 
-const name = 'Form.Field.Text';
+const name = 'Lux.Form.Field.Text';
 
 addType('text', name);
 registry(name, textFieldComponent, false);
