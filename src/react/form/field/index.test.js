@@ -4,7 +4,8 @@ import renderer from 'react-test-renderer';
 
 import registry from '../../../lib/componentRegistry';
 
-import './index';
+import './';
+import { addType } from './types';
 
 const shallow = ReactTestUtils.createRenderer();
 
@@ -61,5 +62,20 @@ describe('Form.Field', function () {
 
       expect(componentName(component)).toBe(Component.name);
     });
+  });
+
+  it('should render custom form field types when registered', function () {
+    const name = 'customFieldType';
+
+    registry(name, () => (
+      <div>Custom Form Field</div>
+    ))
+    addType(name, name);
+
+    const result = renderer.create(
+      <FormField type={name} />
+    );
+    const tree = result.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

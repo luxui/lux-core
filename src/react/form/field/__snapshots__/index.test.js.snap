@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form.Field should render custom form field types when registered 1`] = `
+<div>
+  Custom Form Field
+</div>
+`;

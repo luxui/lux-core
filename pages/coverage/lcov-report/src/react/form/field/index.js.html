@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>4/4</span>
       </div>
     </div>
   </div>
@@ -84,31 +84,7 @@
 39
 40
 41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+42</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,36 +113,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,7 +131,8 @@ import registry from '../../../lib/componentRegistry';
 &nbsp;
 import './wrapper';
 &nbsp;
-import './types/default';
+import { getType } from './types';
+&nbsp;
 // import './types/checkbox';
 // import './types/color';
 // import './types/date';
@@ -202,34 +155,9 @@ import './types/text';
 // import './types/url';
 // import './types/week';
 &nbsp;
-const defaultType = registry('Form.Field.Default');
-const types = {
-  // checkbox: registry('Form.Field.Checkbox'),
-  // color: registry('Form.Field.Color'),
-  // date: registry('Form.Field.Date'),
-  // datetime: registry('Form.Field.Datetime'),
-  // 'datetime-local': registry('Form.Field.DatetimeLocal'),
-  // email: registry('Form.Field.Email'),
-  // file: registry('Form.Field.File'),
-  // hidden: registry('Form.Field.Hidden'),
-  // month: registry('Form.Field.Month'),
-  // number: registry('Form.Field.Number'),
-  // password: registry('Form.Field.Password'),
-  // radio: registry('Form.Field.Radio'),
-  // range: registry('Form.Field.Range'),
-  // select: registry('Form.Field.Select'),
-  // search: registry('Form.Field.Search'),
-  // tel: registry('Form.Field.Tel'),
-  text: registry('Form.Field.Text'),
-  // textarea: registry('Form.Field.Textarea'),
-  // time: registry('Form.Field.Time'),
-  // url: registry('Form.Field.Url'),
-  // week: registry('Form.Field.Week'),
-};
-&nbsp;
 function FormFieldComponent(props) {
   // TODO: add checking for meta-types: list, and table
-  const Field = types[props.type] || defaultType;
+  const Field = registry(getType(props.type));
 &nbsp;
   return (&lt;Field {...props} /&gt;);
 }
@@ -244,7 +172,7 @@ registry('Form.Field', FormFieldComponent, false);
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 23 2017 08:55:16 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 24 2017 11:21:10 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

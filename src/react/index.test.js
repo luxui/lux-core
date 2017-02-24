@@ -58,9 +58,34 @@ describe('luxReact', function () {
   });
 
   describe('.component()', function () {
+    it('should throw an error if too few arguments are provided', function () {
+      expect(function () {
+        app.component('abc');
+      }).toThrow('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+    });
+
+    it('should throw an error if the "identifier" is not a string', function () {
+      expect(function () {
+        app.component(1, 'abc');
+      }).toThrow('Component "identifiers" must be strings; number provided (1)');
+    });
+
+    it('should throw an error if the "implementation" is not a function', function () {
+      expect(function () {
+        app.component('abc', 1);
+      }).toThrow('Component "implementations" must be functions; number provided (1).');
+    });
+
     it('should enable registering/replacing components', function () {
       const component = () => <div />;
       app.component('Testing', component);
+
+      expect(registry('Testing')).toBe(component);
+    });
+
+    it('should enable registering/replacing Form Field components', function () {
+      const component = () => <div />;
+      app.component('testing', 'Testing', component);
 
       expect(registry('Testing')).toBe(component);
     });
