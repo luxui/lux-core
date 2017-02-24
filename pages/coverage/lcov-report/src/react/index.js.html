@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>35/35</span>
+        <span class='fraction'>45/45</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>31/31</span>
+        <span class='fraction'>41/41</span>
       </div>
     </div>
   </div>
@@ -213,7 +213,45 @@
 168
 169
 170
-171</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,9 +356,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -390,7 +462,9 @@
 import React from 'react'; // `React` must be in scope when using JSX
 import ReactDOM from 'react-dom';
 &nbsp;
+import { addType } from './form/field/types';
 import apiRequest from '../lib/apiRequest';
+import { isFunction, isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
 import registry from '../lib/componentRegistry';
 import { format as responseModelFormat } from '../lib/responseModel';
@@ -486,9 +560,43 @@ luxReact.luxPath = path =&gt; luxPath(path);
  *   .visit();
  */
 &nbsp;
-// Wrapper function only to enable "method chaining" in applications.
-function component(...args) {
-  registry(...args);
+/**
+ * API for adding additional, or custom, components to the application.
+ *
+ * @param  {String}   [type] - The form field type (if applicable): text,
+ *   password, or anything else custom that an application chooses to use.
+ * @param  {String}   key  - The "identifier" string for the component in
+ *   componentRegistry.
+ * @param  {Function} fn - The "implementation" of the component as a ReactJS
+ *   component.
+ *
+ * @return {Object} - the application object.
+ */
+function component(type, key, fn) {
+  if (arguments.length &lt; 2) {
+    // eslint-disable-next-line max-len
+    throw new Error('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+  }
+&nbsp;
+  if (!fn) {
+    [type, key, fn] = [undefined, type, key];
+  }
+&nbsp;
+  if (!isString(key)) {
+    // eslint-disable-next-line max-len
+    throw new Error(`Component "identifiers" must be strings; ${typeof key} provided (${key})`);
+  }
+&nbsp;
+  if (!isFunction(fn)) {
+    // eslint-disable-next-line max-len
+    throw new Error(`Component "implementations" must be functions; ${typeof fn} provided (${fn}).`);
+  }
+&nbsp;
+  registry(key, fn);
+&nbsp;
+  if (type) {
+    addType(type, key);
+  }
 &nbsp;
   return this;
 }
@@ -559,7 +667,7 @@ export default luxReact;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Feb 23 2017 08:55:16 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 24 2017 11:21:10 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../prettify.js"></script>
