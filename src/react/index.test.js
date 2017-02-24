@@ -60,34 +60,72 @@ describe('luxReact', function () {
   describe('.component()', function () {
     it('should throw an error if too few arguments are provided', function () {
       expect(function () {
-        app.component('abc');
-      }).toThrow('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+        app.component();
+      }).toThrow('No argument(s) provided to `#component()`.');
     });
 
     it('should throw an error if the "identifier" is not a string', function () {
       expect(function () {
-        app.component(1, 'abc');
-      }).toThrow('Component "identifiers" must be strings; number provided (1)');
+        app.component(1);
+      }).toThrow('Component *identifier* must be a string; number provided (1).');
     });
 
     it('should throw an error if the "implementation" is not a function', function () {
       expect(function () {
         app.component('abc', 1);
-      }).toThrow('Component "implementations" must be functions; number provided (1).');
+      }).toThrow('Component *implementation* must be a function; number provided (1).');
     });
 
-    it('should enable registering/replacing components', function () {
-      const component = () => <div />;
-      app.component('Testing', component);
+    it('should enable registering new components', function () {
+      function testCustomComponent() {
 
-      expect(registry('Testing')).toBe(component);
+        return (
+          <div>
+            <p>Testing custom component registration.</p>
+          </div>
+        );
+      }
+      app.component(testCustomComponent.name, testCustomComponent);
+
+      expect(registry(testCustomComponent.name)).toBe(testCustomComponent);
     });
 
-    it('should enable registering/replacing Form Field components', function () {
-      const component = () => <div />;
-      app.component('testing', 'Testing', component);
+    it('should enable replacing existing (application) components', function () {
+      const layoutComponent = 'Lux.Layout.Layout';
+      const original = app.component(layoutComponent);
 
-      expect(registry('Testing')).toBe(component);
+      function layout() {
+
+        return (
+          <div>
+            <p>A very boring site.</p>
+          </div>
+        );
+      }
+      app.component(layoutComponent, layout);
+
+      expect(registry(layoutComponent)).toBe(layout);
+
+      app.component(layoutComponent, original);
+    });
+
+    it('should enable replacing existing (form) components', function () {
+      const layoutComponent = 'text';
+      const original = app.component(layoutComponent);
+
+      function layout() {
+
+        return (
+          <div>
+            An alternative text input <input />
+          </div>
+        );
+      }
+      app.component(layoutComponent, layout);
+
+      expect(registry(layoutComponent)).toBe(layout);
+
+      app.component(layoutComponent, original);
     });
   });
 
