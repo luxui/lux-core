@@ -7,20 +7,23 @@ import React from 'react'; // `React` must be in scope when using JSX
 
 import registry from '../lib/componentRegistry';
 
-// import Link from './link';
-import responseModelShape from './responseModel.propType';
-
 function errorComponent(props) {
+  // eslint-disable-next-line no-console
+  console.log(props);
 
   return (
     <section>
       <h1>Error</h1>
       <p>Luxui encountered an error.</p>
-      <p>{`${props.error}`}</p>
-      <pre><code>{JSON.stringify(props.error, null, ' ')}</code></pre>
+      <p><strong>{`${props.error}`}</strong></p>
     </section>
   );
 }
-errorComponent.propTypes = responseModelShape;
+errorComponent.propTypes = {
+  error: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.instanceOf(Error),
+  ]),
+};
 
 registry('Lux.Error', errorComponent, false);

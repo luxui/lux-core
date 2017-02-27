@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Fatal should match the snapshot 1`] = `
-<div>
+<div
+  className="page"
+>
   <h1>
     Fatal Application Error
   </h1>

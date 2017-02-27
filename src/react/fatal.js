@@ -14,7 +14,7 @@ function FatalErrorComponent(props) {
   console.error(error); // eslint-disable-line no-console
 
   return (
-    <div>
+    <div className="page">
       <h1>Fatal Application Error</h1>
 
       <h2>Path</h2>

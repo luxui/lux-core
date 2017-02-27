@@ -20,7 +20,7 @@ describe('Layout (supplied Layout)', function () {
   });
 
   beforeEach(function () {
-    spyOn(console, 'error');
+    spyOn(console, 'log');
 
     response = {
       data: {
@@ -34,6 +34,7 @@ describe('Layout (supplied Layout)', function () {
 
   it('should not throw errors if nothing is provided', function () {
     expect(function () {
+      spyOn(console, 'error');
       renderer.create(<Layout />);
     }).not.toThrow();
   });

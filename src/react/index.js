@@ -157,7 +157,6 @@ function render(app, setState, state) {
   const renderRoot = app.config.renderRoot;
 
   try {
-    // ReactDOM.render(<Layout {...state} />, renderRoot);
     ReactDOM.render(
       <Context app={app} setState={setState}>
         <Layout {...state} />
