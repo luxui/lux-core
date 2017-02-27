@@ -20,9 +20,9 @@ const skip = {
 };
 
 function LayoutComponent(props) {
-  const Footer = registry('Footer');
-  const Header = registry('Header');
-  const Main = registry('Main');
+  const Footer = registry('Lux.Layout.Footer');
+  const Header = registry('Lux.Layout.Header');
+  const Main = registry('Lux.Layout.Main');
 
   return (
     <div className="page">
@@ -35,4 +35,4 @@ function LayoutComponent(props) {
 }
 LayoutComponent.propTypes = responseModelShape;
 
-registry('Layout', LayoutComponent, false);
+registry('Lux.Layout.Layout', LayoutComponent, false);

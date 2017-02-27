@@ -23,4 +23,4 @@ function errorComponent(props) {
 }
 errorComponent.propTypes = responseModelShape;
 
-registry('Error', errorComponent, false);
+registry('Lux.Error', errorComponent, false);

@@ -12,7 +12,7 @@ import shapeOfSiren from '../../siren.propType';
 
 import './item';
 
-const RestCollectionListItem = registry('Rest.Collection.List.Item');
+const RestCollectionListItem = registry('Lux.Rest.Collection.ListItem');
 
 function RestCollectionList(props) {
   /* istanbul ignore else */
@@ -36,4 +36,4 @@ RestCollectionList.propTypes = {
   title: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Collection.List', RestCollectionList, false);
+registry('Lux.Rest.Collection.List', RestCollectionList, false);

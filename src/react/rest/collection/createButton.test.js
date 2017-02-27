@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './createButton';
-const Button = registry('Rest.Collection.CreateButton');
+const Button = registry('Lux.Rest.Collection.CreateButton');
 
 describe('Rest.Collection.CreateButton', function () {
   it('should exist; and should be a function', function () {

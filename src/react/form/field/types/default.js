@@ -5,7 +5,7 @@ import registry from '../../../../lib/componentRegistry';
 import '../wrapper';
 
 function defaultFieldComponent(props) {
-  const Wrapper = registry('Form.FieldWrapper');
+  const Wrapper = registry('Lux.Form.FieldWrapper');
   const { name, title, value = 'no value' } = props;
   const style = {
     background: 'darkRed',
@@ -27,4 +27,4 @@ defaultFieldComponent.propTypes = {
   value: React.PropTypes.string,
 };
 
-registry('Form.Field.Default', defaultFieldComponent, false);
+registry('Lux.Form.Field.Default', defaultFieldComponent, false);

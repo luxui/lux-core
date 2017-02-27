@@ -7,18 +7,18 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './main';
-const Collection = registry('Rest.Collection');
-const ErrorComponent = registry('Error');
-const Item = registry('Rest.Item');
-const Main = registry('Main');
+const Collection = registry('Lux.Rest.Collection');
+const ErrorComponent = registry('Lux.Lux.Error');
+const Item = registry('Lux.Rest.Item');
+const Main = registry('Lux.Layout.Main');
 
 let response;
 
 describe('Main (supplied Layout)', function () {
   afterEach(function () {
-    registry('Rest.Collection', Collection);
-    registry('Rest.Item', Item);
-    registry('Error', ErrorComponent);
+    registry('Lux.Rest.Collection', Collection);
+    registry('Lux.Rest.Item', Item);
+    registry('Lux.Error', ErrorComponent);
   });
 
   beforeEach(function () {
@@ -68,7 +68,7 @@ describe('Main (supplied Layout)', function () {
   });
 
   it('should render the Rest.Collection component', function () {
-    registry('Rest.Collection', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+    registry('Lux.Rest.Collection', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 
     const component = renderer.create(
       <Main {...response} />
@@ -81,7 +81,7 @@ describe('Main (supplied Layout)', function () {
   it('should render the Rest.Item component', function () {
     response.data.class = ['item'];
 
-    registry('Rest.Item', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+    registry('Lux.Rest.Item', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 
     const component = renderer.create(
       <Main {...response} />
@@ -94,7 +94,7 @@ describe('Main (supplied Layout)', function () {
   it('should render the Error component; when the response is an error', function () {
     response.error = new Error('API response error.');
 
-    registry('Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+    registry('Lux.Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 
     const component = renderer.create(
       <Main {...response} />
@@ -107,7 +107,7 @@ describe('Main (supplied Layout)', function () {
   it('should render the Error component; when the class type is not: collection or item', function () {
     response.data.class = ['something-else'];
 
-    registry('Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+    registry('Lux.Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 
     const component = renderer.create(
       <Main {...response} />
@@ -120,7 +120,7 @@ describe('Main (supplied Layout)', function () {
   it('should render the Error component; when the `class` property is absent', function () {
     delete response.data.class;
 
-    registry('Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
+    registry('Lux.Error', () => (<pre>{JSON.stringify(response, null, ' ')}</pre>));
 
     const component = renderer.create(
       <Main {...response} />

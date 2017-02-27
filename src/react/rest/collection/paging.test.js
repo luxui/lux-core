@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../../lib/componentRegistry';
 
 import './paging';
-const Paging = registry('Rest.Collection.Paging');
+const Paging = registry('Lux.Rest.Collection.Paging');
 
 describe('Paging', function () {
   it('should exist; and should be a function', function () {

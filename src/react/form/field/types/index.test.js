@@ -22,7 +22,7 @@ describe('Form Field Types', function () {
   });
 
   it('should return default field type', function () {
-    expect(getType('undefined')).toBe('Form.Field.Default');
+    expect(getType('undefined')).toBe('Lux.Form.Field.Default');
   });
 
   it('should allow for adding a type', function () {

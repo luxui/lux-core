@@ -7,7 +7,7 @@ import { siren } from '../siren.propType';
 import './field';
 
 function FormComponent(props) {
-  const Field = registry('Form.Field');
+  const Field = registry('Lux.Form.Field');
 
   return (
     <form className="limit-width">
@@ -33,4 +33,4 @@ FormComponent.propTypes = {
   view: siren.action,
 };
 
-registry('Form', FormComponent, false);
+registry('Lux.Form', FormComponent, false);

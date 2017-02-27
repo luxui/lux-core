@@ -61,4 +61,4 @@ navigationComponent.propTypes = {
   })).isRequired,
 };
 
-registry('Navigation', navigationComponent, false);
+registry('Lux.Layout.Navigation', navigationComponent, false);

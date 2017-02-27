@@ -8,7 +8,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../lib/componentRegistry';
 
 import './auth';
-const Auth = registry('Auth');
+const Auth = registry('Lux.Layout.Auth');
 
 const behavior = ReactTestUtils.createRenderer();
 const { Simulate } = ReactTestUtils;

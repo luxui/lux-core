@@ -13,7 +13,7 @@ import shapeOfSiren from '../../siren.propType';
 import formModel from './formModel';
 
 function restItemComponent(props) {
-  const Form = registry('Form');
+  const Form = registry('Lux.Form');
 
   return (<Form {...formModel(props)} />);
 }
@@ -22,4 +22,4 @@ restItemComponent.propTypes = {
   path: React.PropTypes.string.isRequired,
 };
 
-registry('Rest.Item', restItemComponent, false);
+registry('Lux.Rest.Item', restItemComponent, false);

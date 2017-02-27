@@ -20,7 +20,7 @@ function addType(type, id) {
 
 function getType(type) {
 
-  return types[type] || 'Form.Field.Default';
+  return types[type] || 'Lux.Form.Field.Default';
 }
 
 export {

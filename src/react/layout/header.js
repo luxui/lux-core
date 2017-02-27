@@ -51,8 +51,8 @@ function headerComponent(props) {
 
   const { href, title } = fallbackLink;
 
-  const Auth = registry('Auth');
-  const Navigation = registry('Navigation');
+  const Auth = registry('Lux.Layout.Auth');
+  const Navigation = registry('Lux.Layout.Navigation');
 
   return (
     <header className="main-header" role="banner">
@@ -68,4 +68,4 @@ headerComponent.propTypes = {
   ...shapeOfSiren.links,
 };
 
-registry('Header', headerComponent, false);
+registry('Lux.Layout.Header', headerComponent, false);

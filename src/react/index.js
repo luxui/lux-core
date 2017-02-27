@@ -5,7 +5,7 @@
 import React from 'react'; // `React` must be in scope when using JSX
 import ReactDOM from 'react-dom';
 
-import { addType } from './form/field/types';
+import { addType, getType } from './form/field/types';
 import apiRequest from '../lib/apiRequest';
 import { isFunction, isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
@@ -19,7 +19,7 @@ import Context from './appContext';
 import Fatal from './fatal';
 import './layout';
 
-const Layout = registry('Layout');
+const Layout = registry('Lux.Layout.Layout');
 
 /**
  * @typedef {Object} LuxUIApp
@@ -104,41 +104,42 @@ luxReact.luxPath = path => luxPath(path);
  */
 
 /**
- * API for adding additional, or custom, components to the application.
+ * Application API for adding/replacing components within the application. Most
+ * of the application is build through nesting of components, so customization
+ * is as available as possible.
  *
- * @param  {String}   [type] - The form field type (if applicable): text,
- *   password, or anything else custom that an application chooses to use.
- * @param  {String}   key  - The "identifier" string for the component in
- *   componentRegistry.
- * @param  {Function} fn - The "implementation" of the component as a ReactJS
- *   component.
+ * @param  {String}   str - The identifier or the field-type of the component to
+ *   change or replace.
+ * @param  {Function} fn - The implementation function for the component.
  *
- * @return {Object} - the application object.
+ * @return {LuxUIApp|Component} - Either the application itself - (to enable
+ *   method-chaining) when replacing or registering a new component - or the
+ *   component in the registry if no implementation is provided.
  */
-function component(type, key, fn) {
-  if (arguments.length < 2) {
+function component(str, fn) {
+  if (!str) {
+    throw new Error('No argument(s) provided to `#component()`.');
+  }
+
+  if (!isString(str)) {
     // eslint-disable-next-line max-len
-    throw new Error('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+    throw new Error(`Component *identifier* must be a string; ${typeof str} provided (${str}).`);
   }
 
-  if (!fn) {
-    [type, key, fn] = [undefined, type, key];
-  }
-
-  if (!isString(key)) {
+  if (fn && !isFunction(fn)) {
     // eslint-disable-next-line max-len
-    throw new Error(`Component "identifiers" must be strings; ${typeof key} provided (${key})`);
+    throw new Error(`Component *implementation* must be a function; ${typeof fn} provided (${fn}).`);
   }
 
-  if (!isFunction(fn)) {
-    // eslint-disable-next-line max-len
-    throw new Error(`Component "implementations" must be functions; ${typeof fn} provided (${fn}).`);
-  }
+  if (fn) {
+    if (!registry(str)) {
+      addType(str, str);
+    }
 
-  registry(key, fn);
+    registry(str, fn);
+  } else {
 
-  if (type) {
-    addType(type, key);
+    return registry(str) || registry(getType(str));
   }
 
   return this;

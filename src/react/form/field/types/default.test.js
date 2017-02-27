@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import registry from '../../../../lib/componentRegistry';
 
 import './default';
-const DefaultComponent = registry('Form.Field.Default');
+const DefaultComponent = registry('Lux.Form.Field.Default');
 
 describe('DefaultComponent', function () {
   it('should exist; and should be a function', function () {

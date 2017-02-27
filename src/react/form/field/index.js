@@ -38,4 +38,4 @@ FormFieldComponent.propTypes = {
   type: React.PropTypes.string,
 };
 
-registry('Form.Field', FormFieldComponent, false);
+registry('Lux.Form.Field', FormFieldComponent, false);
