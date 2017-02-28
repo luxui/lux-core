@@ -27,7 +27,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>14/14</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -367,32 +367,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,7 +408,6 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -462,7 +462,7 @@
 import React from 'react'; // `React` must be in scope when using JSX
 import ReactDOM from 'react-dom';
 &nbsp;
-import { addType } from './form/field/types';
+import { addType, getType } from './form/field/types';
 import apiRequest from '../lib/apiRequest';
 import { isFunction, isString } from '../lib/is';
 import luxPath from '../lib/luxPath';
@@ -476,7 +476,7 @@ import Context from './appContext';
 import Fatal from './fatal';
 import './layout';
 &nbsp;
-const Layout = registry('Layout');
+const Layout = registry('Lux.Layout.Layout');
 &nbsp;
 /**
  * @typedef {Object} LuxUIApp
@@ -561,41 +561,42 @@ luxReact.luxPath = path =&gt; luxPath(path);
  */
 &nbsp;
 /**
- * API for adding additional, or custom, components to the application.
+ * Application API for adding/replacing components within the application. Most
+ * of the application is build through nesting of components, so customization
+ * is as available as possible.
  *
- * @param  {String}   [type] - The form field type (if applicable): text,
- *   password, or anything else custom that an application chooses to use.
- * @param  {String}   key  - The "identifier" string for the component in
- *   componentRegistry.
- * @param  {Function} fn - The "implementation" of the component as a ReactJS
- *   component.
+ * @param  {String}   str - The identifier or the field-type of the component to
+ *   change or replace.
+ * @param  {Function} fn - The implementation function for the component.
  *
- * @return {Object} - the application object.
+ * @return {LuxUIApp|Component} - Either the application itself - (to enable
+ *   method-chaining) when replacing or registering a new component - or the
+ *   component in the registry if no implementation is provided.
  */
-function component(type, key, fn) {
-  if (arguments.length &lt; 2) {
+function component(str, fn) {
+  if (!str) {
+    throw new Error('No argument(s) provided to `#component()`.');
+  }
+&nbsp;
+  if (!isString(str)) {
     // eslint-disable-next-line max-len
-    throw new Error('Registering a component requires at least an "identifier" (string) and an "implementation" (function).');
+    throw new Error(`Component *identifier* must be a string; ${typeof str} provided (${str}).`);
   }
 &nbsp;
-  if (!fn) {
-    [type, key, fn] = [undefined, type, key];
-  }
-&nbsp;
-  if (!isString(key)) {
+  if (fn &amp;&amp; !isFunction(fn)) {
     // eslint-disable-next-line max-len
-    throw new Error(`Component "identifiers" must be strings; ${typeof key} provided (${key})`);
+    throw new Error(`Component *implementation* must be a function; ${typeof fn} provided (${fn}).`);
   }
 &nbsp;
-  if (!isFunction(fn)) {
-    // eslint-disable-next-line max-len
-    throw new Error(`Component "implementations" must be functions; ${typeof fn} provided (${fn}).`);
-  }
+  if (fn) {
+    if (!registry(str)) {
+      addType(str, str);
+    }
 &nbsp;
-  registry(key, fn);
+    registry(str, fn);
+  } else {
 &nbsp;
-  if (type) {
-    addType(type, key);
+    return registry(str) || registry(getType(str));
   }
 &nbsp;
   return this;
@@ -613,7 +614,6 @@ function render(app, setState, state) {
   const renderRoot = app.config.renderRoot;
 &nbsp;
   try {
-    // ReactDOM.render(&lt;Layout {...state} /&gt;, renderRoot);
     ReactDOM.render(
       &lt;Context app={app} setState={setState}&gt;
         &lt;Layout {...state} /&gt;
@@ -667,7 +667,7 @@ export default luxReact;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Feb 24 2017 11:21:10 GMT-0500 (EST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Feb 28 2017 08:27:25 GMT-0500 (EST)
 </div>
 </div>
 <script src="../../prettify.js"></script>
