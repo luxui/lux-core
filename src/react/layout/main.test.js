@@ -22,8 +22,6 @@ describe('Main (supplied Layout)', function () {
   });
 
   beforeEach(function () {
-    spyOn(console, 'error');
-
     response = {
       data: {
         actions: [],

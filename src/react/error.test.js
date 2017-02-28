@@ -12,6 +12,8 @@ describe('Error - main - Component', function () {
   });
 
   it('should match the snapshot', function () {
+    spyOn(console, 'log');
+
     const response = {
       data: {},
       error: new Error('Unforseen error.'),

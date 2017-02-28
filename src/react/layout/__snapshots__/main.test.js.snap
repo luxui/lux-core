@@ -2,7 +2,6 @@
 
 exports[`Main (supplied Layout) should render a page from the \`routing\` module 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
@@ -36,7 +35,6 @@ exports[`Main (supplied Layout) should render a page from the \`routing\` module
 
 exports[`Main (supplied Layout) should render the Error component; when the \`class\` property is absent 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
@@ -67,7 +65,6 @@ exports[`Main (supplied Layout) should render the Error component; when the \`cl
 
 exports[`Main (supplied Layout) should render the Error component; when the class type is not: collection or item 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
@@ -101,7 +98,6 @@ exports[`Main (supplied Layout) should render the Error component; when the clas
 
 exports[`Main (supplied Layout) should render the Error component; when the response is an error 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
@@ -135,7 +131,6 @@ exports[`Main (supplied Layout) should render the Error component; when the resp
 
 exports[`Main (supplied Layout) should render the Rest.Collection component 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
@@ -169,7 +164,6 @@ exports[`Main (supplied Layout) should render the Rest.Collection component 1`] 
 
 exports[`Main (supplied Layout) should render the Rest.Item component 1`] = `
 <main
-  className="body-divider pbl"
   id="maincontent"
   role="main"
 >
