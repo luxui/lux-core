@@ -12,13 +12,6 @@ exports[`Footer (supplied Layout) should match the (default) snapshot 1`] = `
     >
       Luxui
     </a>
-    ENGINEERED to Amaze, by
-    <a
-      className="link--plain"
-      href="http://quickenloans.com"
-    >
-      Quicken Loans
-    </a>
   </p>
 </footer>
 `;
