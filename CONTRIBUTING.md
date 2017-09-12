@@ -23,6 +23,15 @@ The basics of getting your own working development version of LuxUI.
 
       `npm install`
 
+      * Additionally install dependencies for [AirBnB's ESLint config]
+
+      ```bash
+      (
+        export PKG=eslint-config-airbnb;
+        npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest"
+      )
+      ```
+
   5. Install "peerDependencies"; *check the `package.json` "peerDependencies"
       listing to be sure that only package versions are identified and not
       anything that could be harmful scripts, as the following command executes
@@ -218,6 +227,7 @@ Some future implementation possibilities are:
 ![LuxUI Application Lifecycle](pages/lifecycle-sequence-diagram.png)
 
 [airbnb]: https://github.com/airbnb/javascript
+[AirBnB's ESLint config]: https://www.npmjs.com/package/eslint-config-airbnb
 [Babel]: https://babeljs.io/
 [Conduct]: CODE_OF_CONDUCT.md
 [Contribute]: CONTRIBUTING.md

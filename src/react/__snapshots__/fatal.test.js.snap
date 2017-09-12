@@ -18,16 +18,16 @@ exports[`Fatal should match the snapshot 1`] = `
   </h2>
   <pre>
     {
-     "props": "might not actually exist"
-    }
+ "props": "might not actually exist"
+}
   </pre>
   <h2>
     Others
   </h2>
   <pre>
     {
-     "error": {}
-    }
+ "error": {}
+}
   </pre>
 </div>
 `;

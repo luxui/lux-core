@@ -17,10 +17,10 @@ exports[`DefaultComponent should provide a value - substitution - to visually sh
   </pre>
   <pre>
     {
-        "name": "no-name",
-        "title": "no-title",
-        "value": "no value"
-    }
+    "name": "no-name",
+    "title": "no-title",
+    "value": "no value"
+}
   </pre>
 </div>
 `;
@@ -42,10 +42,10 @@ exports[`DefaultComponent should render the default (non-existent) component 1`]
   </pre>
   <pre>
     {
-        "name": "no-name",
-        "title": "no-title",
-        "value": "no-value"
-    }
+    "name": "no-name",
+    "title": "no-title",
+    "value": "no-value"
+}
   </pre>
 </div>
 `;

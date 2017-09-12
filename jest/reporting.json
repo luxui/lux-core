@@ -1,6 +1,0 @@
-{
-  "automock": false,
-  "collectCoverage": true,
-  "coverageDirectory": "./pages/coverage",
-  "setupFiles": [ "./jest/setup.js" ]
-}
