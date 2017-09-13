@@ -10,46 +10,42 @@ The basics of getting your own working development version of LuxUI.
 
   1. [Fork](https://help.github.com/articles/fork-a-repo/) the LuxUI repository
       on GitHub
-  2. Clone your fork of LuxUI; named "origin" to follow convention
+  2. Clone your fork of LuxUI; named "origin" to follow convention.
 
       `git clone -o origin <your_repository_url>`
 
   3. Add the "upstream" repository so you can pull in the newest changes in the
-      future; named "upstream" to follow convention
+      future; named "upstream" to follow convention.
 
       `get remote add upstream <repo_url_here>`
 
-  4. Install package dependencies
+  4. Install package dependencies.
 
       `npm install`
 
-      * Additionally install dependencies for [AirBnB's ESLint config]
+  5. Install all peer dependencies
+      a. [AirBnB ESLint dependencies](https://www.npmjs.com/package/eslint-config-airbnb)
+      b. Peer dependencies (`peers.js`) *check the `package.json`
+        "peerDependencies" listing to be sure that only package versions are
+        identified and not anything that could be harmful scripts, as the
+        following command executes the following command `npm install
+        ${package_name}@{package_version}`.*
 
-      ```bash
-      (
-        export PKG=eslint-config-airbnb;
-        npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest"
-      )
-      ```
+  6. *After a successful install, it is recomended to, restore the previous
+    version of the package lock file (`package-lock.json`) by executing:
+    `git checkout -- package-lock.json`.*
 
-  5. Install "peerDependencies"; *check the `package.json` "peerDependencies"
-      listing to be sure that only package versions are identified and not
-      anything that could be harmful scripts, as the following command executes
-      the following command `npm install ${package_name}@{package_version}`.*
-
-      `npm run peers`
-
-  6. Run all tests to make sure everything is installed correctly and that your
-      new changes will be starting with all tests passing
+  7. Run all tests to make sure everything is installed correctly and that your
+      new changes will be starting with all tests passing.
 
       `npm test`
 
-  7. (OPTIONAL) Run linter to be sure that all code is "Lint-free"
+  8. (OPTIONAL) Run linter to be sure that all code is "Lint-free".
 
       `npm run lint`
 
-  8. Always develop changes on a development branch so they can be easily
-      updated from "upstream"; [Atlassian Tutorial on `rebase`](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
+  9. Always develop changes on a development branch so they can be easily
+      updated from "upstream"; [Atlassian Tutorial on `rebase`](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase).
 
       `git checkout -b <your_development_branchname>`
 
@@ -227,7 +223,6 @@ Some future implementation possibilities are:
 ![LuxUI Application Lifecycle](pages/lifecycle-sequence-diagram.png)
 
 [airbnb]: https://github.com/airbnb/javascript
-[AirBnB's ESLint config]: https://www.npmjs.com/package/eslint-config-airbnb
 [Babel]: https://babeljs.io/
 [Conduct]: CODE_OF_CONDUCT.md
 [Contribute]: CONTRIBUTING.md

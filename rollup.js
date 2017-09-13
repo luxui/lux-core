@@ -6,7 +6,6 @@ import path from 'path';
 /* eslint import/no-extraneous-dependencies: ["off", {"devDependencies": false}] */
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
-import eslint from 'rollup-plugin-eslint';
 import json from 'rollup-plugin-json';
 import builtins from 'rollup-plugin-node-builtins';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -61,10 +60,6 @@ export default {
       ],
     }),
     json(),
-    eslint({
-      include: './src/**/*.js',
-      throwError: true,
-    }),
     nodeResolve({
       browser: true,
       skip: [
